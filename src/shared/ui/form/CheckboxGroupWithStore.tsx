@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { CheckboxGroup } from 'src/shared/ui/form/CheckboxGroup';
+import { CheckboxGroup } from './CheckboxGroup';
 
 /**
  * CheckboxGroup component connected to the form store

@@ -1,106 +1,241 @@
-import { useEffect } from 'react'
-import { Section } from '@/components/ui/Section'
-import { Grid } from '@/components/ui/Grid'
-import { Card } from '@/components/ui/cards/Card'
-import { List } from '@/components/ui/List'
-import { useExerciseStore, useFilteredExercises } from '@/store/exerciseStore'
-import type { Exercise } from '@/lib/supabase/types'
+import { useState } from 'react'
+import { Section } from '@/shared/ui/Section'
+import { Card } from '@/shared/ui/Card'
+import { Button } from '@/shared/ui/Button'
+import { SearchInput } from '@/shared/ui/form/SearchInput'
+import { cn } from '@/shared/lib/utils'
+
+// Mock Pilates exercises data following your domain
+const mockExercises = [
+  { 
+    id: 1, 
+    name: 'Hundred', 
+    category: 'Core', 
+    description: 'Classic Pilates breathing exercise to warm up the core',
+    duration: '60s',
+    difficulty: 'Beginner'
+  },
+  { 
+    id: 2, 
+    name: 'Roll Up', 
+    category: 'Core', 
+    description: 'Spinal articulation exercise for core strength and flexibility',
+    duration: '45s',
+    difficulty: 'Intermediate'
+  },
+  { 
+    id: 3, 
+    name: 'Single Leg Circle', 
+    category: 'Legs', 
+    description: 'Hip mobility and core stability exercise',
+    duration: '30s each leg',
+    difficulty: 'Beginner'
+  },
+  { 
+    id: 4, 
+    name: 'Teaser', 
+    category: 'Core', 
+    description: 'Advanced core exercise requiring balance and control',
+    duration: '30s',
+    difficulty: 'Advanced'
+  },
+  { 
+    id: 5, 
+    name: 'Swan Dive', 
+    category: 'Back', 
+    description: 'Back extension exercise for spinal mobility',
+    duration: '45s',
+    difficulty: 'Intermediate'
+  },
+  { 
+    id: 6, 
+    name: 'Side Kick Series', 
+    category: 'Legs', 
+    description: 'Lateral leg strengthening and hip stability',
+    duration: '60s each side',
+    difficulty: 'Beginner'
+  }
+]
+
+const categories = ['All', 'Core', 'Legs', 'Back', 'Arms', 'Full Body']
+const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced']
 
 export const ExerciseLibrary = () => {
-  // Use Zustand store instead of local state
-  const { 
-    categories, 
-    loading, 
-    searchQuery, 
-    selectedCategory,
-    fetchExercises,
-    fetchCategories,
-    setSearchQuery,
-    setSelectedCategory
-  } = useExerciseStore()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedDifficulty, setSelectedDifficulty] = useState('All')
   
-  // Get filtered exercises using the selector
-  const filteredExercises = useFilteredExercises()
+  // Filter exercises based on search, category, and difficulty
+  const filteredExercises = mockExercises.filter(exercise => {
+    const matchesSearch = exercise.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         exercise.description.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesCategory = selectedCategory === 'All' || exercise.category === selectedCategory
+    const matchesDifficulty = selectedDifficulty === 'All' || exercise.difficulty === selectedDifficulty
+    return matchesSearch && matchesCategory && matchesDifficulty
+  })
 
-  useEffect(() => {
-    // Fetch data on component mount
-    fetchCategories()
-    fetchExercises()
-  }, [fetchCategories, fetchExercises])
-
-  const renderExerciseCard = (exercise: Exercise) => (
-    <Card
-      key={exercise.id}
-      title={exercise.exercise_name}
-      className="h-full"
-    >
-      <div className="space-y-2 text-sm">
-        {exercise.setup_instructions && (
-          <p className="text-foreground/80">{exercise.setup_instructions}</p>
-        )}
-        <div className="flex items-center gap-2 text-xs">
-          <span className="font-medium">Springs:</span>
-          {exercise.spring_setup && typeof exercise.spring_setup === 'object' && (
-            <>
-              <span>{(exercise.spring_setup as any).light_springs || 0} Light</span>
-              <span>{(exercise.spring_setup as any).heavy_springs || 0} Heavy</span>
-            </>
-          )}
-        </div>
-        {exercise.vimeo_id && (
-          <div className="aspect-video rounded-md bg-muted">
-            {/* Video player will be implemented here */}
-          </div>
-        )}
-      </div>
-    </Card>
-  )
+  const handleSearch = (value: string) => {
+    setSearchQuery(value)
+  }
 
   return (
-    <Section className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Exercise Library</h1>
-        <div className="flex items-center gap-4">
-          <input
-            type="search"
-            placeholder="Search exercises..."
-            className="rounded-md border px-3 py-1.5"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <select
-            value={selectedCategory || ''}
-            onChange={(e) => setSelectedCategory(e.target.value || null)}
-            className="rounded-md border px-3 py-1.5"
+    <Section 
+      variant="default" 
+      padding="large"
+      className="min-h-screen"
+    >
+      <div className="max-w-7xl mx-auto space-y-[var(--spacing-8)]">
+        {/* Header */}
+        <div className="space-y-[var(--spacing-2)]">
+          <h1 
+            className="text-[var(--text-2xl)] font-[var(--brand-text-weight)] tracking-[var(--brand-text-tracking)] text-[rgb(var(--core-white))]"
           >
-            <option value="">All Categories</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+            Exercise Library
+          </h1>
+          <p className="text-[var(--text-base)] font-[var(--font-thin)] text-[rgba(var(--core-white),0.7)]">
+            Discover and explore Pilates exercises for your routines
+          </p>
         </div>
-      </div>
-
-      <Grid className="grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {loading ? (
-          <div className="col-span-full">
-            <List 
-              items={[]} 
-              loading={true} 
-              renderItem={() => null}
-              keyExtractor={(item) => item.id}
+        
+        {/* Search and Filter Controls */}
+        <Section variant="raised" padding="default" radius="large">
+          <div className="space-y-[var(--spacing-6)]">
+            {/* Search Input */}
+            <SearchInput
+              placeholder="Search exercises..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onSearch={handleSearch}
+              className="w-full"
             />
+            
+            {/* Category Filter */}
+            <div className="space-y-[var(--spacing-3)]">
+              <h3 className="text-[var(--text-sm)] font-[var(--font-thin)] text-[rgba(var(--core-white),0.8)] uppercase tracking-wider">
+                Category
+              </h3>
+              <div className="flex flex-wrap gap-[var(--spacing-2)]">
+                {categories.map(category => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className={cn(
+                      "transition-all duration-[var(--motion-natural)]",
+                      selectedCategory === category
+                        ? "bg-[rgb(var(--core-teal))] text-[rgb(var(--core-black))] hover:bg-[rgb(var(--core-teal-light))]"
+                        : "bg-[var(--surface-base)] text-[rgb(var(--core-white))] hover:bg-[var(--state-hover)] border-[rgba(var(--core-white),var(--border-opacity-medium))]"
+                    )}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Difficulty Filter */}
+            <div className="space-y-[var(--spacing-3)]">
+              <h3 className="text-[var(--text-sm)] font-[var(--font-thin)] text-[rgba(var(--core-white),0.8)] uppercase tracking-wider">
+                Difficulty
+              </h3>
+              <div className="flex flex-wrap gap-[var(--spacing-2)]">
+                {difficulties.map(difficulty => (
+                  <Button
+                    key={difficulty}
+                    variant={selectedDifficulty === difficulty ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedDifficulty(difficulty)}
+                    className={cn(
+                      "transition-all duration-[var(--motion-natural)]",
+                      selectedDifficulty === difficulty
+                        ? "bg-[rgb(var(--core-teal))] text-[rgb(var(--core-black))] hover:bg-[rgb(var(--core-teal-light))]"
+                        : "bg-[var(--surface-base)] text-[rgb(var(--core-white))] hover:bg-[var(--state-hover)] border-[rgba(var(--core-white),var(--border-opacity-medium))]"
+                    )}
+                  >
+                    {difficulty}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
-        ) : filteredExercises.length === 0 ? (
-          <div className="col-span-full text-center text-foreground/60">
-            No exercises found
-          </div>
-        ) : (
-          filteredExercises.map(renderExerciseCard)
+        </Section>
+
+        {/* Exercise Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[var(--spacing-6)]">
+          {filteredExercises.map(exercise => (
+            <Card 
+              key={exercise.id} 
+              variant="default"
+              size="default"
+              className="bg-[var(--exercise-card-bg)] border-[rgba(var(--core-white),var(--border-opacity-subtle))] hover:bg-[var(--exercise-card-active)] transition-all duration-[var(--motion-natural)] group"
+            >
+              <div className="space-y-[var(--spacing-4)]">
+                {/* Exercise Header */}
+                <div className="space-y-[var(--spacing-2)]">
+                  <h3 className="text-[var(--exercise-text-size)] font-[var(--exercise-text-weight)] tracking-[var(--exercise-text-tracking)] text-[rgb(var(--core-white))] group-hover:text-[rgb(var(--core-teal-light))] transition-colors">
+                    {exercise.name}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[var(--text-sm)] text-[rgb(var(--core-teal))] font-[var(--font-thin)]">
+                      {exercise.category}
+                    </span>
+                    <span className={cn(
+                      "text-[var(--text-xs)] px-[var(--spacing-2)] py-[var(--spacing-1)] rounded-full font-[var(--font-thin)]",
+                      exercise.difficulty === 'Beginner' && "bg-[rgba(var(--feedback-success),0.2)] text-[rgb(var(--feedback-success))]",
+                      exercise.difficulty === 'Intermediate' && "bg-[rgba(var(--feedback-warning),0.2)] text-[rgb(var(--feedback-warning))]",
+                      exercise.difficulty === 'Advanced' && "bg-[rgba(var(--feedback-error),0.2)] text-[rgb(var(--feedback-error))]"
+                    )}>
+                      {exercise.difficulty}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Exercise Details */}
+                <div className="space-y-[var(--spacing-3)]">
+                  <p className="text-[var(--text-sm)] text-[rgba(var(--core-white),0.7)] font-[var(--font-thin)] leading-relaxed">
+                    {exercise.description}
+                  </p>
+                  <div className="text-[var(--text-xs)] text-[rgba(var(--core-white),0.6)] font-[var(--font-thin)]">
+                    Duration: {exercise.duration}
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <Button
+                  variant="default"
+                  size="default"
+                  className="w-full bg-[rgb(var(--core-teal))] text-[rgb(var(--core-black))] hover:bg-[rgb(var(--core-teal-light))] font-[var(--font-thin)] min-h-[var(--touch-target-min)] transition-all duration-[var(--motion-natural)]"
+                >
+                  Add to Routine
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* No Results Message */}
+        {filteredExercises.length === 0 && (
+          <Section variant="raised" padding="large" className="text-center">
+            <div className="space-y-[var(--spacing-4)]">
+              <p className="text-[var(--text-lg)] text-[rgba(var(--core-white),0.6)] font-[var(--font-thin)]">
+                No exercises found matching your criteria
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategory('All')
+                  setSelectedDifficulty('All')
+                }}
+                className="bg-[var(--surface-base)] text-[rgb(var(--core-white))] hover:bg-[var(--state-hover)] border-[rgba(var(--core-white),var(--border-opacity-medium))]"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          </Section>
         )}
-      </Grid>
+      </div>
     </Section>
   )
 }

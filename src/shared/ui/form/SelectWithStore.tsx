@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { Select } from 'src/shared/ui/form/Select'
+import { Select } from './Select'
 
 /**
  * Select component connected to the form store

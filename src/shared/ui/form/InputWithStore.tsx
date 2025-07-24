@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { Input } from 'src/shared/ui/form/Input';
+import { Input } from './Input';
 
 /**
  * Input component connected to the form store

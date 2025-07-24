@@ -39,13 +39,7 @@
 }
 
 /* ===== Font Loading ===== */
-@font-face {
-  font-family: 'Inter';
-  font-display: swap;
-  src: url('/fonts/Inter-var.woff2') format('woff2-variations');
-  font-weight: 100 300;  /* Loading only our three weights */
-  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
 
 /* ===== iOS Optimizations ===== */
 @supports (-webkit-touch-callout: none) {

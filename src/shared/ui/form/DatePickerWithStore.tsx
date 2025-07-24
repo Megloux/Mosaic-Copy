@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { DatePicker } from 'src/shared/ui/form/DatePicker';
+import { DatePicker } from './DatePicker';
 
 /**
  * DatePicker component connected to the form store

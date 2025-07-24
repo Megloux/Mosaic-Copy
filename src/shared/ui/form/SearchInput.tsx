@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@/shared/lib/utils'
-import { Input, type InputProps } from 'src/shared/ui/form/Input'
+import { Input, type InputProps } from './Input'
 import { Search } from 'lucide-react'
 
 export interface SearchInputProps extends Omit<InputProps, 'type' | 'clearButtonContent'> {

@@ -1,15 +1,27 @@
+/* Import Design Tokens */
+@import './styles/tokens/colors.css';
+@import './styles/tokens/typography.css';
+@import './styles/tokens/spacing.css';
+@import './styles/tokens/layout.css';
+@import './styles/tokens/motion.css';
+@import './styles/tokens/animations.css';
+@import './styles/platform/ios/safe-areas.css';
+
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-primary);
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: var(--font-thin);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: rgb(var(--core-black));
+  color: rgb(var(--core-white));
 }

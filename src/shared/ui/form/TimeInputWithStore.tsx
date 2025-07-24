@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { TimeInput } from 'src/shared/ui/form/TimeInput'
+import { TimeInput } from './TimeInput'
 
 /**
  * TimeInput component connected to the form store

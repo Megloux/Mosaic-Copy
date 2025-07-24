@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { SearchInput } from 'src/shared/ui/form/SearchInput'
+import { SearchInput } from './SearchInput'
 
 /**
  * SearchInput component connected to the form store

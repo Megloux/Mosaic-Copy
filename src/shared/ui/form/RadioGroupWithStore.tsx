@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { RadioGroup } from 'src/shared/ui/form/RadioGroup'
+import { RadioGroup } from './RadioGroup'
 
 /**
  * RadioGroup component connected to the form store

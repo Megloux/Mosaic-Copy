@@ -1,77 +1,226 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ExerciseLibrary } from './pages/ExerciseLibrary'
-import { RoutineBuilder } from './components/routines/RoutineBuilder'
 import { Navigation } from './components/Navigation'
-import SupabaseTest from './components/SupabaseTest'
 import ErrorBoundary from './ErrorBoundary'
 
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 2,
-      refetchOnWindowFocus: false,
-    },
-  },
-})
+// Import pages - ExerciseLibrary has runtime errors, commenting out
+// import { ExerciseLibrary } from './pages/ExerciseLibrary'
+// import { RoutineBuilder } from './components/routines/RoutineBuilder'
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <ErrorBoundary>
+    <Router>
+      <ErrorBoundary>
+        <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--core-black))', color: 'rgb(var(--core-white))' }}>
           <Navigation />
           <Routes>
-            <Route path="/exercises" element={
-              <ErrorBoundary>
-                <ExerciseLibrary />
-              </ErrorBoundary>
-            } />
-            <Route path="/builder" element={
-              <ErrorBoundary>
-                <RoutineBuilder />
-              </ErrorBoundary>
-            } />
-            <Route path="/routines" element={
-              <ErrorBoundary>
-                <div className="min-h-screen bg-gray-50 p-6">
-                  <h1 className="text-2xl font-bold mb-4">Routines</h1>
-                  <p>Routines page component not found in the codebase.</p>
-                </div>
-              </ErrorBoundary>
-            } />
             <Route path="/" element={
-              <div className="min-h-screen bg-gray-50">
-                <div className="max-w-7xl mx-auto py-12 px-4">
-                  <h1 className="text-4xl font-bold text-gray-900 mb-8">MosaicWindsurf</h1>
-                  <div className="space-y-6">
-                    <SupabaseTest />
-                    <div className="p-4 bg-blue-100 rounded">
-                      <h2 className="font-bold mb-2">Available Routes:</h2>
-                      <p className="mb-4">Click on the navigation links above to access the different sections of the app.</p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="p-4 bg-white shadow rounded">
-                          <h3 className="font-bold text-lg mb-2">Exercise Library</h3>
-                          <p className="text-gray-600 mb-3">Browse and search through the exercise collection.</p>
-                        </div>
-                        <div className="p-4 bg-white shadow rounded">
-                          <h3 className="font-bold text-lg mb-2">Routine Builder</h3>
-                          <p className="text-gray-600 mb-3">Create and customize workout routines.</p>
-                        </div>
-                        <div className="p-4 bg-white shadow rounded">
-                          <h3 className="font-bold text-lg mb-2">Routines</h3>
-                          <p className="text-gray-600 mb-3">View saved workout routines.</p>
-                        </div>
-                      </div>
+              <div className="p-8" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
+                <h1 
+                  className="mb-8" 
+                  style={{ 
+                    fontSize: 'var(--text-4xl)',
+                    fontWeight: 'var(--font-brand)',
+                    letterSpacing: 'var(--tracking-default)',
+                    color: 'rgb(var(--core-teal))'
+                  }}
+                >
+                  MOSAIC
+                </h1>
+                <div className="space-y-6">
+                  <div 
+                    className="p-6 rounded-lg" 
+                    style={{ backgroundColor: 'var(--surface-raised)' }}
+                  >
+                    <h2 
+                      className="mb-3" 
+                      style={{ 
+                        fontSize: 'var(--text-xl)',
+                        fontWeight: 'var(--font-timer)',
+                        color: 'rgb(var(--core-teal-light))'
+                      }}
+                    >
+                      Welcome to Your Pilates Platform
+                    </h2>
+                    <p style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--font-thin)' }}>
+                      The Spotify of Pilates Programming. Discover, create, and execute your perfect routine.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div 
+                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
+                      style={{ backgroundColor: 'var(--surface-base)' }}
+                    >
+                      <h3 
+                        className="mb-3" 
+                        style={{ 
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 'var(--font-timer)',
+                          color: 'rgb(var(--core-white))'
+                        }}
+                      >
+                        Exercise Library
+                      </h3>
+                      <p 
+                        className="mb-4" 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgba(255, 255, 255, 0.7)'
+                        }}
+                      >
+                        Browse and discover exercises with advanced filtering
+                      </p>
+                      <p 
+                        style={{ 
+                          fontSize: 'var(--text-xs)',
+                          color: 'rgb(var(--core-teal))'
+                        }}
+                      >
+                        Navigate → Exercises
+                      </p>
                     </div>
+                    <div 
+                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
+                      style={{ backgroundColor: 'var(--surface-base)' }}
+                    >
+                      <h3 
+                        className="mb-3" 
+                        style={{ 
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 'var(--font-timer)',
+                          color: 'rgb(var(--core-white))'
+                        }}
+                      >
+                        Routine Builder
+                      </h3>
+                      <p 
+                        className="mb-4" 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgba(255, 255, 255, 0.7)'
+                        }}
+                      >
+                        Create custom routines from templates or scratch
+                      </p>
+                      <p 
+                        style={{ 
+                          fontSize: 'var(--text-xs)',
+                          color: 'rgb(var(--core-teal))'
+                        }}
+                      >
+                        Navigate → Builder
+                      </p>
+                    </div>
+                    <div 
+                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
+                      style={{ backgroundColor: 'var(--surface-base)' }}
+                    >
+                      <h3 
+                        className="mb-3" 
+                        style={{ 
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 'var(--font-timer)',
+                          color: 'rgb(var(--core-white))'
+                        }}
+                      >
+                        Routine Player
+                      </h3>
+                      <p 
+                        className="mb-4" 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgba(255, 255, 255, 0.7)'
+                        }}
+                      >
+                        Execute routines with guided timer and instructions
+                      </p>
+                      <p 
+                        style={{ 
+                          fontSize: 'var(--text-xs)',
+                          color: 'rgb(var(--core-teal))'
+                        }}
+                      >
+                        Navigate → Player
+                      </p>
+                    </div>
+                  </div>
+                  <div 
+                    className="p-6 rounded-lg" 
+                    style={{ backgroundColor: 'var(--surface-accent)' }}
+                  >
+                    <h3 
+                      className="mb-4" 
+                      style={{ 
+                        fontSize: 'var(--text-lg)',
+                        fontWeight: 'var(--font-timer)',
+                        color: 'rgb(var(--core-black))'
+                      }}
+                    >
+                      Platform Features
+                    </h3>
+                    <ul className="space-y-2">
+                      <li 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgb(var(--core-black))'
+                        }}
+                      >
+                        • Offline-first design with PWA capabilities
+                      </li>
+                      <li 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgb(var(--core-black))'
+                        }}
+                      >
+                        • iOS-native feel with Capacitor integration
+                      </li>
+                      <li 
+                        style={{ 
+                          fontSize: 'var(--text-sm)',
+                          fontWeight: 'var(--font-thin)',
+                          color: 'rgb(var(--core-black))'
+                        }}
+                      >
+                        • Advanced exercise discovery and routine creation
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
             } />
+            <Route path="/exercises" element={
+              <div className="p-8">
+                <h1 className="text-2xl font-bold mb-4">Exercise Library</h1>
+                <div className="p-4 bg-red-100 rounded">
+                  <p>❌ ExerciseLibrary component has runtime errors</p>
+                  <p className="text-sm mt-2">Need to debug the component dependencies</p>
+                </div>
+              </div>
+            } />
+            <Route path="/builder" element={
+              <div className="p-8">
+                <h1 className="text-2xl font-bold mb-4">Routine Builder</h1>
+                <div className="p-4 bg-yellow-100 rounded">
+                  <p>🚧 Routine Builder component coming next...</p>
+                </div>
+              </div>
+            } />
+            <Route path="/routines" element={
+              <div className="p-8">
+                <h1 className="text-2xl font-bold mb-4">Routines</h1>
+                <div className="p-4 bg-yellow-100 rounded">
+                  <p>🚧 Routines component coming next...</p>
+                </div>
+              </div>
+            } />
           </Routes>
-        </ErrorBoundary>
-      </Router>
-    </QueryClientProvider>
-  );
+        </div>
+      </ErrorBoundary>
+    </Router>
+  )
 }

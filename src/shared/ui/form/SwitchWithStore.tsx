@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { Switch } from 'src/shared/ui/form/Switch'
+import { Switch } from './Switch'
 
 /**
  * Switch component connected to the form store

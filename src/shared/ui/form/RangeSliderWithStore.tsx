@@ -1,5 +1,5 @@
 import { withFormStore } from '@/shared/lib'
-import { RangeSlider } from 'src/shared/ui/form/RangeSlider'
+import { RangeSlider } from './RangeSlider'
 
 /**
  * RangeSlider component connected to the form store
