@@ -1,0 +1,120 @@
+/* src/styles/tokens/spacing.css */
+:root {
+  /* ===== Core Spacing Scale (8pt Grid) ===== */
+  --spacing-0: 0;
+  --spacing-px: 1px;
+  --spacing-0-5: 0.125rem;  /* 2px - Hairline borders */
+  --spacing-1: 0.25rem;     /* 4px - Minimum spacing */
+  --spacing-2: 0.5rem;      /* 8px - Extra Small */
+  --spacing-3: 0.75rem;     /* 12px - Small */
+  --spacing-4: 1rem;        /* 16px - Base */
+  --spacing-5: 1.25rem;     /* 20px - Medium */
+  --spacing-6: 1.5rem;      /* 24px - Large */
+  --spacing-8: 2rem;        /* 32px - Extra Large */
+  --spacing-10: 2.5rem;     /* 40px - 2x Large */
+  --spacing-12: 3rem;       /* 48px - 3x Large */
+  --spacing-16: 4rem;       /* 64px - 4x Large */
+  --spacing-20: 5rem;       /* 80px - Massive */
+  --spacing-24: 6rem;       /* 96px - Hero */
+
+  /* ===== iOS-Specific Spacing ===== */
+  --ios-safe-area-top: env(safe-area-inset-top, 47px);      /* Notch & status bar */
+  --ios-safe-area-bottom: env(safe-area-inset-bottom, 34px); /* Home indicator */
+  --ios-safe-area-left: env(safe-area-inset-left, 0px);
+  --ios-safe-area-right: env(safe-area-inset-right, 0px);
+  --ios-nav-bar: 44px;        /* iOS standard nav height */
+  --ios-status-bar: 20px;     /* Status bar height */
+  --ios-tab-bar: 49px;        /* Tab bar height */
+  --ios-keyboard-spacing: 8px; /* Keyboard buffer */
+
+  /* ===== Touch Targets (iOS HIG) ===== */
+  --touch-target-min: 44px;          /* iOS minimum */
+  --touch-target-comfortable: 48px;   /* Comfortable */
+  --touch-target-large: 64px;        /* Large elements */
+  --touch-target-inline: 36px;       /* Inline elements */
+
+  /* ===== Interactive States ===== */
+  --touch-feedback-area: 44px;    /* Minimum touch feedback */
+  --press-target: 40px;           /* Press animation area */
+  --scroll-snap-margin: 24px;     /* Scroll snap points */
+  --spring-spacing: 8px;          /* Spring animation buffer */
+
+  /* ===== Container Spacing ===== */
+  --container-padding-sm: var(--spacing-4);    /* Mobile: 16px */
+  --container-padding-md: var(--spacing-6);    /* Tablet: 24px */
+  --container-padding-lg: var(--spacing-8);    /* Desktop: 32px */
+  --container-padding-xl: var(--spacing-12);   /* Wide: 48px */
+
+  /* ===== Exercise Builder Specific ===== */
+  --exercise-card-padding: var(--spacing-4);
+  --exercise-grid-gap: var(--spacing-4);
+  --exercise-form-group: var(--spacing-6);
+  --exercise-input-spacing: var(--spacing-2);
+
+  /* ===== Routine Builder Specific ===== */
+  --routine-block-padding: var(--spacing-3);
+  --routine-timeline-gap: var(--spacing-2);
+  --routine-section-spacing: var(--spacing-6);
+  --routine-drag-handle: var(--spacing-4);
+
+  /* ===== Form Components ===== */
+  --form-group-spacing: var(--spacing-4);
+  --form-row-spacing: var(--spacing-3);
+  --label-spacing: var(--spacing-1);
+  --help-text-spacing: var(--spacing-1);
+  --validation-spacing: var(--spacing-2);
+
+  /* ===== Navigation ===== */
+  --nav-item-spacing: var(--spacing-1);
+  --nav-section-spacing: var(--spacing-4);
+  --nav-vertical-spacing: var(--spacing-2);
+  --tab-spacing: var(--spacing-6);
+
+  /* ===== Modal and Overlay ===== */
+  --modal-padding-sm: var(--spacing-4);
+  --modal-padding-md: var(--spacing-6);
+  --modal-padding-lg: var(--spacing-8);
+  --modal-content-spacing: var(--spacing-4);
+  --modal-actions-spacing: var(--spacing-4);
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (min-width: 768px) {
+  :root {
+    --container-padding: var(--container-padding-md);
+    --exercise-grid-gap: var(--spacing-6);
+    --routine-block-padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: var(--container-padding-lg);
+    --exercise-grid-gap: var(--spacing-8);
+    --routine-section-spacing: var(--spacing-8);
+  }
+}
+
+/* ===== Accessibility Adjustments ===== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --spring-spacing: 0;
+    --scroll-snap-margin: 0;
+  }
+}
+
+/* ===== Touch Target Adjustments ===== */
+@media (prefers-reduced-motion: no-preference) and (any-pointer: fine) {
+  :root {
+    --touch-target-min: 36px;
+    --touch-target-comfortable: 40px;
+    --touch-feedback-area: 36px;
+  }
+}
+
+/* ===== High Density Displays ===== */
+@media (min-resolution: 2dppx) {
+  :root {
+    --spacing-px: 0.5px;
+  }
+}

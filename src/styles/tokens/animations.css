@@ -1,0 +1,97 @@
+/* animations.css - Defines WHAT moves in Mosaic */
+
+/* === Drag and Drop System === */
+/* When exercise is picked up */
+@keyframes drag-lift {
+  0% {
+    transform: scale(1);
+    box-shadow: var(--shadow-sm);
+  }
+  100% {
+    transform: scale(var(--touch-scale-lift));
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* When hovering over drop zone */
+@keyframes drag-over {
+  0% {
+    transform: translateY(0);
+    border-top-color: transparent;
+  }
+  100% {
+    transform: translateY(4px);
+    border-top-color: currentColor;
+  }
+}
+
+/* When exercise is dropped */
+@keyframes drag-drop {
+  0% {
+    transform: scale(var(--touch-scale-lift));
+    box-shadow: var(--shadow-lg);
+  }
+  50% {
+    transform: scale(var(--touch-scale-drop));
+    box-shadow: var(--shadow-sm);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* === System Feedback === */
+/* Loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success state */
+@keyframes save-complete {
+  0% {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Error state */
+@keyframes save-error {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* === Animation Classes === */
+/* Drag and Drop */
+.animate-drag-lift {
+  animation: drag-lift var(--motion-natural) var(--spring-ios-bounce);
+  touch-action: none;
+  user-select: none;
+}
+
+.animate-drag-over {
+  animation: drag-over var(--motion-instant) var(--ease-standard);
+}
+
+.animate-drag-drop {
+  animation: drag-drop var(--motion-smooth) var(--spring-ios-snap);
+}
+
+/* System States */
+.animate-spin {
+  animation: spin var(--spinner-speed) linear infinite;
+}
+
+.animate-save-complete {
+  animation: save-complete var(--feedback-duration) var(--ease-standard);
+}
+
+.animate-save-error {
+  animation: save-error var(--feedback-duration) var(--spring-ios-bounce);
+}

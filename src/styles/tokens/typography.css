@@ -1,0 +1,57 @@
+/* src/styles/tokens/typography.css */
+:root {
+  /* ===== Font Family ===== */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* ===== Font Sizes ===== */
+  --text-xs: 0.75rem;      /* 12px - Small indicators */
+  --text-sm: 0.875rem;     /* 14px - Secondary text */
+  --text-base: 1rem;       /* 16px - Body text (iOS minimum) */
+  --text-lg: 1.125rem;     /* 18px - Exercise names */
+  --text-xl: 1.25rem;      /* 20px - Section headers */
+  --text-2xl: 1.5rem;      /* 24px - Brand text */
+  --text-4xl: 3rem;        /* 48px - Timer display */
+
+  /* ===== Font Weights ===== */
+  --font-thin: 100;        /* Default UI text - ultra-light */
+  --font-timer: 200;       /* Timer & emphasis - light */
+  --font-brand: 300;       /* Brand text - book */
+
+  /* ===== Letter Spacing ===== */
+  --tracking-default: 0.25em;   /* Primary UI spacing */
+  --tracking-timer: 0.20em;     /* Timer digits */
+
+  /* ===== Component-Specific ===== */
+  /* Brand */
+  --brand-text-weight: var(--font-brand);  /* 300 */
+  --brand-text-tracking: var(--tracking-default);
+  --brand-text-size: var(--text-2xl);
+
+  /* Timer */
+  --timer-text-weight: var(--font-timer);  /* 200 */
+  --timer-text-tracking: var(--tracking-timer);
+  --timer-text-size: var(--text-4xl);
+
+  /* Exercise Display */
+  --exercise-text-weight: var(--font-thin);  /* 100 */
+  --exercise-text-tracking: var(--tracking-default);
+  --exercise-text-size: var(--text-lg);
+}
+
+/* ===== Font Loading ===== */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('/fonts/Inter-var.woff2') format('woff2-variations');
+  font-weight: 100 300;  /* Loading only our three weights */
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+/* ===== iOS Optimizations ===== */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+}

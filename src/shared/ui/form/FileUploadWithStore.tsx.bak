@@ -1,0 +1,53 @@
+import React from 'react'
+import { FileUpload, type FileUploadProps } from '@/components/ui/form/FileUpload'
+import { withFormStore } from '@/components/hoc/withFormStore'
+
+/**
+ * FileUpload component connected to the Zustand form store
+ * 
+ * This component can be used in two ways:
+ * 1. Standalone with direct onFileSelect callback
+ * 2. Connected to form store with formId/name props
+ * 
+ * @example
+ * // Standalone usage
+ * <FileUploadWithStore 
+ *   label="Upload Image"
+ *   accept="image/*"
+ *   maxSize={5 * 1024 * 1024} // 5MB
+ *   onFileSelect={handleFiles} 
+ * />
+ * 
+ * // Connected to form store
+ * <FileUploadWithStore 
+ *   formId="studioForm" 
+ *   name="profileImage"
+ *   label="Upload Profile Image"
+ *   accept="image/*"
+ *   maxSize={5 * 1024 * 1024} // 5MB
+ * />
+ */
+
+// Define the wrapper component to handle the conversion between form values and FileUpload props
+const FileUploadWrapper = (props: FileUploadProps & { name?: string }) => {
+  const { onFileSelect, ...rest } = props
+
+  // Handle file selection for the FileUpload component
+  const handleFileSelect = (files: File[]) => {
+    if (onFileSelect) {
+      onFileSelect(files)
+    }
+  }
+
+  return (
+    <FileUpload
+      onFileSelect={handleFileSelect}
+      {...rest}
+    />
+  )
+}
+
+// Connect the FileUploadWrapper to the form store
+const FileUploadWithStore = withFormStore(FileUploadWrapper, 'FileUpload')
+
+export const FileUploadWithStore

@@ -1,0 +1,91 @@
+/* === iOS Safe Areas & Platform Adjustments === */
+:root {
+  /* Dynamic Safe Area Insets - iOS 15+ */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);      /* Status bar + Dynamic Island */
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px); /* Home indicator */
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);     /* Edge protection */
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);   /* Edge protection */
+
+  /* iOS-Specific Touch Targets (44px minimum) */
+  --ios-min-touch-target: 44px;
+  --ios-touch-spacing: var(--layout-base);  /* 8px from layout.css */
+
+  /* iOS Text Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+
+  /* iOS Momentum Scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* === iOS-Specific Container Adjustments === */
+.ios-safe-container {
+  /* Respect safe areas on all sides */
+  padding-top: max(var(--layout-base), var(--safe-area-inset-top));
+  padding-bottom: max(var(--layout-base), var(--safe-area-inset-bottom));
+  padding-left: max(var(--layout-base), var(--safe-area-inset-left));
+  padding-right: max(var(--layout-base), var(--safe-area-inset-right));
+}
+
+/* === iOS Touch Target Rules === */
+.ios-touch-target {
+  min-height: var(--ios-min-touch-target);
+  min-width: var(--ios-min-touch-target);
+  margin: var(--ios-touch-spacing);
+}
+
+/* === iOS-Specific Button Styles === */
+.ios-button {
+  /* Remove default iOS button styles */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  
+  /* Ensure proper touch area */
+  min-height: var(--ios-min-touch-target);
+  padding: calc(var(--ios-min-touch-target) / 4);
+  
+  /* iOS-style feedback */
+  transition: opacity var(--motion-instant);
+}
+.ios-button:active {
+  opacity: 0.5;
+}
+
+/* === iOS Form Element Adjustments === */
+.ios-input {
+  /* Prevent zoom on focus */
+  font-size: 16px;
+  
+  /* iOS-style appearance */
+  -webkit-appearance: none;
+  border-radius: 8px;
+  
+  /* Proper touch target size */
+  min-height: var(--ios-min-touch-target);
+  padding: calc(var(--ios-min-touch-target) / 4);
+}
+
+/* === iOS Scroll Container === */
+.ios-scroll {
+  /* Enable momentum scrolling */
+  -webkit-overflow-scrolling: touch;
+  
+  /* Prevent elastic bounce when at edges */
+  overscroll-behavior: none;
+  
+  /* Hide scrollbars but maintain functionality */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ios-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* === iOS Dark Mode Support === */
+@media (prefers-color-scheme: dark) {
+  .ios-ui {
+    /* Adjust text rendering for dark mode */
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}

@@ -1,0 +1,21 @@
+import React from 'react'
+import { SearchInput } from '@/components/ui/form/SearchInput'
+import { withFormStore } from '@/components/hoc/withFormStore'
+
+/**
+ * SearchInput component connected to the Zustand form store
+ * 
+ * This component can be used in two ways:
+ * 1. Standalone with direct value/onChange props
+ * 2. Connected to form store with formId/name props
+ * 
+ * @example
+ * // Standalone usage
+ * <SearchInputWithStore value="search term" onChange={handleChange} />
+ * 
+ * // Connected to form store
+ * <SearchInputWithStore formId="searchForm" name="query" />
+ */
+const SearchInputWithStore = withFormStore(SearchInput, 'SearchInput')
+
+export const SearchInputWithStore

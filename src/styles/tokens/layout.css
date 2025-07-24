@@ -1,0 +1,130 @@
+/* ===== Mosaic Layout System ===== */
+:root {
+  /* Core Layout Units */
+  --layout-base: 8px;
+  --view-height: 100vh;
+  --view-width: 100vw;
+  --dvh: 1vh;  /* Dynamic viewport height unit */
+  --app-height: var(--view-height);
+
+  /* Breakpoints */
+  --screen-sm: 640px;     /* Mobile landscape */
+  --screen-md: 768px;     /* Tablets */
+  --screen-lg: 1024px;    /* Laptops */
+  --screen-xl: 1280px;    /* Desktops */
+  --screen-2xl: 1536px;   /* Large displays */
+
+  /* Container System */
+  --container-width-sm: min(100%, 640px);
+  --container-width-md: min(100%, 768px);
+  --container-width-lg: min(100%, 1024px);
+  --container-width-xl: min(100%, 1280px);
+  --container-max: min(100%, 1536px);
+  --content-width: min(100%, var(--container-max));
+
+  /* Grid Architecture */
+  --grid-columns-sm: 4;      /* Mobile: 4-column grid */
+  --grid-columns-md: 8;      /* Tablet: 8-column grid */
+  --grid-columns-lg: 12;     /* Desktop: 12-column grid */
+  --grid-gutter-sm: var(--spacing-4);   /* 16px */
+  --grid-gutter-md: var(--spacing-6);   /* 24px */
+  --grid-gutter-lg: var(--spacing-8);   /* 32px */
+
+  /* Component Architecture */
+  --sidebar-width: clamp(320px, 25vw, 400px);
+  --main-content-width: calc(100% - var(--sidebar-width));
+  --modal-width: clamp(320px, 90vw, 600px);
+  --drawer-width: clamp(280px, 80vw, 400px);
+  --popover-width: clamp(200px, 90vw, 280px);
+
+  /* Exercise System */
+  --exercise-card-width: clamp(280px, 30vw, 320px);
+  --exercise-grid-columns: var(--grid-columns-sm);
+  --exercise-preview-height: clamp(180px, 30vh, 240px);
+  --exercise-sidebar-width: var(--sidebar-width);
+
+  /* Routine System */
+  --routine-sidebar-width: var(--sidebar-width);
+  --routine-timeline-height: clamp(400px, 60vh, 800px);
+  --routine-block-height: clamp(80px, 10vh, 120px);
+  --routine-content-width: clamp(400px, 80vw, 960px);
+
+  /* Fixed Heights */
+  --header-height: 44px;      /* iOS standard */
+  --footer-height: 49px;      /* iOS standard */
+  --toolbar-height: 48px;     /* Material standard */
+  --bottom-sheet-height: 24px;
+
+  /* Component Dimensions */
+  --touch-min-size: 44px;     /* iOS HIG minimum */
+  --input-height: var(--touch-min-size);
+  --button-height: var(--touch-min-size);
+  --icon-size-sm: 16px;
+  --icon-size-md: 24px;
+  --icon-size-lg: 32px;
+
+  /* Layer System */
+  --layer-ground: 0;          /* Base elements */
+  --layer-raised: 1;          /* Elevated components */
+  --layer-dropdown: 100;      /* Dropdowns, popovers */
+  --layer-sticky: 200;        /* Sticky elements */
+  --layer-overlay: 300;       /* Overlays, modals */
+  --layer-toast: 400;         /* Notifications */
+  --layer-system: 999;        /* System UI */
+
+  /* Aspect Ratios */
+  --ratio-square: 1;
+  --ratio-video: 1.7778;      /* 16:9 */
+  --ratio-portrait: 1.3333;   /* 4:3 */
+  --ratio-ultra: 2.3333;      /* 21:9 */
+}
+
+/* Responsive Adaptations */
+@container (min-width: 768px) {
+  :root {
+    --exercise-grid-columns: var(--grid-columns-md);
+    --grid-gutter: var(--grid-gutter-md);
+  }
+}
+
+@container (min-width: 1024px) {
+  :root {
+    --exercise-grid-columns: var(--grid-columns-lg);
+    --grid-gutter: var(--grid-gutter-lg);
+  }
+}
+
+/* ===== iOS Support ===== */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    /* Core iOS Adjustments */
+    --app-height: -webkit-fill-available;
+    --safe-top: env(safe-area-inset-top, 20px);
+    --safe-bottom: env(safe-area-inset-bottom, 34px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    
+    /* Enhanced Safe Areas with Fallbacks */
+    --total-header-height: calc(var(--header-height) + max(var(--safe-top), var(--ios-status-bar, 20px)));
+    --total-footer-height: calc(var(--footer-height) + var(--safe-bottom));
+    --safe-content-height: calc(
+      var(--app-height) - 
+      var(--total-header-height) - 
+      var(--total-footer-height)
+    );
+    
+    /* Horizontal Safe Areas */
+    --content-padding-x: max(var(--spacing-4), var(--safe-left));
+    --safe-width: calc(100vw - var(--safe-left) - var(--safe-right));
+  }
+}
+
+/* Print Optimizations */
+@media print {
+  :root {
+    --container-max: 100%;
+    --sidebar-width: 0;
+    --main-content-width: 100%;
+    --routine-content-width: 100%;
+  }
+}

@@ -1,0 +1,392 @@
+src//App.tsx:import RoutinePlayerWrapper from './components/routines/player/RoutinePlayerWrapper'
+src//App.tsx:import SupabaseTest from './components/SupabaseTest'
+src//App.tsx:import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+src//App.tsx:import { ExerciseDemo } from './pages/ExerciseDemo'
+src//App.tsx:import { ExerciseLibrary } from './pages/ExerciseLibrary'
+src//App.tsx:import { NetworkStatusIndicator } from './components/ui/NetworkStatusIndicator'
+src//App.tsx:import { NetworkToast } from './components/ui/NetworkToast'
+src//App.tsx:import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+src//App.tsx:import { SaveButton } from './components/ui/buttons/SaveButton'
+src//api/routines/relationships.ts:import { PostgrestError } from '@supabase/supabase-js';
+src//api/routines/relationships.ts:import { supabase } from '../supabase';
+src//api/routines/routines.test.ts:import { describe, it, expect, vi } from 'vitest';
+src//api/routines/routines.test.ts:import { saveRoutine } from './routines';
+src//api/routines/routines.test.ts:import { supabase } from '../supabase';
+src//api/routines/routines.ts:import { supabase } from '../supabase';
+src//api/supabase.ts:import { createClient } from '@supabase/supabase-js'
+src//api/variations/variations.ts:import { Variation, VariationCategory } from '../../types/variations';
+src//api/variations/variations.ts:import { supabase } from '../supabase';
+src//app/__tests__/TimeInputHarness.tsx:import { TimeInput } from '@/components/ui/form/TimeInput';
+src//app/component-test/page.tsx:import { CheckboxGroup } from '@/components/ui/form/CheckboxGroup';
+src//app/component-test/page.tsx:import { Input } from '@/components/ui/form/Input';
+src//app/component-test/page.tsx:import { RadioGroup } from '@/components/ui/form/RadioGroup';
+src//app/component-test/page.tsx:import { Select } from '@/components/ui/form/Select';
+src//app/component-test/page.tsx:import { TimeInput } from '@/components/ui/form/TimeInput';
+src//app/component-test/page.tsx:import { exercisesMock } from '@/data/core/exercises';
+src//app/component-test/page.tsx:import { timeToSeconds, secondsToTime } from '@/lib/utils/timeFormat';
+src//components/SupabaseTest.tsx:import { supabase } from '../config/supabase'
+src//components/__tests__/SaveButton.test.tsx:import { SaveButton } from '../ui/buttons/SaveButton';
+src//components/demos/DatePickerDemo.tsx:import { Button } from '@/components/ui/Button'
+src//components/demos/DatePickerDemo.tsx:import { DatePicker, DatePickerWithStore } from '@/components/ui'
+src//components/demos/DatePickerDemo.tsx:import { addDays, format, startOfDay } from 'date-fns'
+src//components/demos/ExerciseStoreDemo.tsx:import type { Exercise } from '@/lib/supabase/types'
+src//components/demos/ExerciseStoreDemo.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/demos/ExerciseStoreDemo.tsx:import { Section } from '@/components/ui/Section'
+src//components/demos/ExerciseStoreDemo.tsx:import { useExerciseStore, useFilteredExercises } from '@/store/exerciseStore'
+src//components/demos/FormComponentsDemo.tsx:import { useFormStore } from '@/store/formStore'
+src//components/demos/FormStoreDemo.tsx:import InputWithStore from '@/components/ui/form/InputWithStore'
+src//components/demos/FormStoreDemo.tsx:import RangeSliderWithStore from '@/components/ui/form/RangeSliderWithStore'
+src//components/demos/FormStoreDemo.tsx:import SelectWithStore from '@/components/ui/form/SelectWithStore'
+src//components/demos/FormStoreDemo.tsx:import TimeInputWithStore from '@/components/ui/form/TimeInputWithStore'
+src//components/demos/FormStoreDemo.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/demos/FormStoreDemo.tsx:import { Section } from '@/components/ui/Section'
+src//components/demos/FormStoreDemo.tsx:import { useForm } from '@/store/formStore'
+src//components/demos/OfflineExerciseDemo.tsx:import type { Exercise } from '@/lib/supabase/types'
+src//components/demos/OfflineExerciseDemo.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/demos/OfflineExerciseDemo.tsx:import { NetworkStatus } from '@/components/ui/NetworkStatus'
+src//components/demos/OfflineExerciseDemo.tsx:import { Section } from '@/components/ui/Section'
+src//components/demos/OfflineExerciseDemo.tsx:import { getOrFetchMedia } from '@/lib/storage/mediaCache'
+src//components/demos/OfflineExerciseDemo.tsx:import { useExerciseStore, useFilteredExercises } from '@/store/exerciseStore'
+src//components/demos/OfflineExerciseDemo.tsx:import { useNetworkStatus } from '@/lib/network/networkService'
+src//components/demos/UIComponentsDemo.tsx:import StandardButton from '@/components/ui/buttons/StandardButton'
+src//components/demos/UIComponentsDemo.tsx:import TabsWithStore from '@/components/ui/TabsWithStore'
+src//components/demos/UIComponentsDemo.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/demos/UIComponentsDemo.tsx:import { SaveButton } from '@/components/ui/buttons/SaveButton'
+src//components/demos/UIComponentsDemo.tsx:import { Section } from '@/components/ui/Section'
+src//components/demos/UIComponentsDemo.tsx:import { useToasts, useUIStore } from '@/store/uiStore'
+src//components/exercises/ExerciseCard.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/exercises/ExerciseCard.tsx:import { Exercise } from '@/data/core/exercises'
+src//components/exercises/ExerciseDetail.tsx:import Modal from '@/components/ui/Modal'
+src//components/exercises/ExerciseDetail.tsx:import StandardButton from '@/components/ui/buttons/StandardButton'
+src//components/exercises/ExerciseDetail.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/exercises/ExerciseDetail.tsx:import { Exercise } from '@/data/core/exercises'
+src//components/exercises/ExerciseLibrary.tsx:import ExerciseCard from './ExerciseCard'
+src//components/exercises/ExerciseLibrary.tsx:import ExerciseDetail from './ExerciseDetail'
+src//components/exercises/ExerciseLibrary.tsx:import { Exercise } from '@/data/core/exercises'
+src//components/exercises/ExerciseLibrary.tsx:import { Grid } from '@/components/ui/Grid'
+src//components/exercises/ExerciseLibrary.tsx:import { SearchInput } from '@/components/ui/form/SearchInput'
+src//components/exercises/ExerciseLibrary.tsx:import { useExerciseLibraryStore } from '@/store/exerciseLibraryStore'
+src//components/exercises/ExerciseSection.tsx:import StandardButton from '../ui/buttons/StandardButton'
+src//components/exercises/ExerciseSection.tsx:import type { Exercise } from '@/lib/supabase/types'
+src//components/exercises/ExerciseSection.tsx:import { Section } from '../ui/Section'
+src//components/exercises/ExerciseSection.tsx:import { useExerciseStore, useFilteredExercises } from '@/store/exerciseStore'
+src//components/exercises/__tests__/ExerciseLibrary.test.tsx:import ExerciseLibrary from '../ExerciseLibrary'
+src//components/hoc/withFormStore.tsx:import { useFormField, useForm } from '@/store/formStore'
+src//components/routines/ExerciseSelection.tsx:import React, { useState, useEffect } from "react";
+src//components/routines/ExerciseSelection.tsx:import StandardButton from "@/components/ui/buttons/StandardButton";
+src//components/routines/ExerciseSelection.tsx:import { Exercise } from "@/types/exercises";
+src//components/routines/ExerciseSelection.tsx:import { Modal } from "@/components/ui/Modal";
+src//components/routines/ExerciseSelection.tsx:import { Search, Plus, Tag } from "lucide-react";
+src//components/routines/ExerciseSelection.tsx:import { SearchInput } from "@/components/ui/form";
+src//components/routines/ExerciseSelection.tsx:import { TemplateBlock } from "@/types/templates";
+src//components/routines/ExerciseSelection.tsx:import { cn } from "@/lib/utils";
+src//components/routines/ExerciseSelection.tsx:import { exerciseService } from "@/services/ExerciseService";
+src//components/routines/ExerciseSelection.tsx:import { motion, AnimatePresence } from "framer-motion";
+src//components/routines/RoutineBuilder.old.tsx:import ExerciseSelection from "./ExerciseSelection";
+src//components/routines/RoutineBuilder.old.tsx:import MobileLayout from "@/components/layouts/MobileLayout";
+src//components/routines/RoutineBuilder.old.tsx:import React, { useState, useEffect, useCallback, useMemo } from "react";
+src//components/routines/RoutineBuilder.old.tsx:import RoutineTypeModal from "./RoutineTypeModal";
+src//components/routines/RoutineBuilder.old.tsx:import StandardButton from "@/components/ui/buttons/StandardButton";
+src//components/routines/RoutineBuilder.old.tsx:import { Accordion } from "@/components/ui/Accordion";
+src//components/routines/RoutineBuilder.old.tsx:import { Exercise } from "@/types/exercises";
+src//components/routines/RoutineBuilder.old.tsx:import { SearchInput } from "@/components/ui/form";
+src//components/routines/RoutineBuilder.old.tsx:import { Template, TemplateBlock, RoutineBlock, RoutineExercise } from "@/types/templates";
+src//components/routines/RoutineBuilder.old.tsx:import { cn } from "@/lib/utils";
+src//components/routines/RoutineBuilder.old.tsx:import { motion, AnimatePresence, Reorder } from "framer-motion";
+src//components/routines/RoutineBuilder.old.tsx:import { useRoutineStore } from "@/store/routineStore";
+src//components/routines/RoutineTypeModal.tsx:import { Modal } from '@/components/ui/Modal';
+src//components/routines/RoutineTypeModal.tsx:import { PlusCircle, BookOpen } from 'lucide-react';
+src//components/routines/RoutineTypeModal.tsx:import { cn } from '@/lib/utils';
+src//components/routines/TemplateSelection.tsx:import MobileLayout from "@/components/layouts/MobileLayout";
+src//components/routines/TemplateSelection.tsx:import React, { useState, useEffect } from "react";
+src//components/routines/TemplateSelection.tsx:import { Card } from "@/components/ui/cards";
+src//components/routines/TemplateSelection.tsx:import { ChevronRight, Search, Sparkles, PlusCircle, Folder } from "lucide-react";
+src//components/routines/TemplateSelection.tsx:import { SearchInput } from "@/components/ui/form";
+src//components/routines/TemplateSelection.tsx:import { Template as TemplateType } from "@/types/templates";
+src//components/routines/TemplateSelection.tsx:import { cn } from "@/lib/utils";
+src//components/routines/TemplateSelection.tsx:import { motion, AnimatePresence } from "framer-motion";
+src//components/routines/TemplateSelection.tsx:import { templateService } from "@/services/TemplateService";
+src//components/routines/TemplateSelection.tsx:import { useNavigate } from "react-router-dom";
+src//components/routines/TemplateSelection.tsx:import { useRoutineStore } from "@/store/routineStore";
+src//components/routines/__tests__/ExerciseSelection.test.tsx:import ExerciseSelection from '../ExerciseSelection';
+src//components/routines/__tests__/ExerciseSelection.test.tsx:import { exerciseService } from '@/services/ExerciseService';
+src//components/routines/builder/__tests__/ExerciseItem.test.tsx:import { ExerciseItem } from '../components/ExerciseItem';
+src//components/routines/builder/__tests__/ExerciseItem.test.tsx:import { RoutineExercise } from '@/types/templates';
+src//components/routines/builder/__tests__/RoutineBlock.test.tsx:import { RoutineBlock as RoutineBlockType, RoutineExercise } from '@/types/templates';
+src//components/routines/builder/__tests__/RoutineBlock.test.tsx:import { RoutineBlock } from '../components/RoutineBlock';
+src//components/routines/builder/__tests__/RoutineHeader.test.tsx:import { RoutineHeader } from '../components/RoutineHeader';
+src//components/routines/builder/__tests__/TemplateCard.test.tsx:import { Template } from '@/types/templates';
+src//components/routines/builder/__tests__/TemplateCard.test.tsx:import { TemplateCard } from '../components/TemplateCard';
+src//components/routines/builder/__tests__/formatters.test.ts:import { formatDuration, formatExerciseDuration } from '../utils/formatters';
+src//components/routines/builder/__tests__/useRoutineActions.test.ts:import { useRoutineActions } from '../hooks/useRoutineActions';
+src//components/routines/builder/__tests__/useRoutineCalculations.test.ts:import { RoutineBlock, RoutineExercise } from '@/types/templates';
+src//components/routines/builder/__tests__/useRoutineCalculations.test.ts:import { useRoutineCalculations } from '../hooks/useRoutineCalculations';
+src//components/routines/builder/components/ExerciseItem.tsx:import { Grip, Trash2, Info } from 'lucide-react';
+src//components/routines/builder/components/ExerciseItem.tsx:import { RoutineExercise } from '@/types/templates';
+src//components/routines/builder/components/ExerciseItem.tsx:import { formatExerciseDuration } from '../utils/formatters';
+src//components/routines/builder/components/RoutineBlock.tsx:import { ChevronDown, ChevronUp, Plus } from 'lucide-react';
+src//components/routines/builder/components/RoutineBlock.tsx:import { ExerciseItem } from './ExerciseItem';
+src//components/routines/builder/components/RoutineBlock.tsx:import { RoutineBlock as RoutineBlockType, RoutineExercise } from '@/types/templates';
+src//components/routines/builder/components/RoutineBlock.tsx:import { cn } from '@/lib/utils';
+src//components/routines/builder/components/RoutineHeader.tsx:import { Play, Heart, Share2, Download, Clock } from 'lucide-react';
+src//components/routines/builder/components/RoutineHeader.tsx:import { formatDuration } from '../utils/formatters';
+src//components/routines/builder/components/TemplateCard.tsx:import StandardButton from '@/components/ui/buttons/StandardButton';
+src//components/routines/builder/components/TemplateCard.tsx:import { Template } from '@/types/templates';
+src//components/routines/builder/hooks/useRoutineActions.ts:import { RoutineExercise } from '@/types/templates';
+src//components/routines/builder/hooks/useRoutineActions.ts:import { useRoutineStore } from '@/store/routineStore';
+src//components/routines/builder/hooks/useRoutineActions.ts:import { useUIStore } from '@/store/uiStore';
+src//components/routines/builder/hooks/useRoutineCalculations.ts:import { RoutineBlock, RoutineExercise } from '@/types/templates';
+src//components/routines/builder/hooks/useRoutineCalculations.ts:import { formatDuration } from '../utils/formatters';
+src//components/routines/builder/index.tsx:import ExerciseSelection from "../ExerciseSelection";
+src//components/routines/builder/index.tsx:import MobileLayout from "@/components/layouts/MobileLayout";
+src//components/routines/builder/index.tsx:import React, { useState, useEffect, useCallback } from "react";
+src//components/routines/builder/index.tsx:import RoutineTypeModal from "../RoutineTypeModal";
+src//components/routines/builder/index.tsx:import StandardButton from "@/components/ui/buttons/StandardButton";
+src//components/routines/builder/index.tsx:import { RoutineBlock } from "./components/RoutineBlock";
+src//components/routines/builder/index.tsx:import { RoutineHeader } from "./components/RoutineHeader";
+src//components/routines/builder/index.tsx:import { SearchInput } from "@/components/ui/form";
+src//components/routines/builder/index.tsx:import { Template, TemplateBlock } from "@/types/templates";
+src//components/routines/builder/index.tsx:import { TemplateCard } from "./components/TemplateCard";
+src//components/routines/builder/index.tsx:import { cn } from "@/lib/utils";
+src//components/routines/builder/index.tsx:import { motion, AnimatePresence } from "framer-motion";
+src//components/routines/builder/index.tsx:import { useRoutineActions } from "./hooks/useRoutineActions";
+src//components/routines/builder/index.tsx:import { useRoutineCalculations } from "./hooks/useRoutineCalculations";
+src//components/routines/builder/index.tsx:import { useRoutineStore } from "@/store/routineStore";
+src//components/routines/player/RoutinePlayer.tsx:import CountdownTimer from './components/CountdownTimer';
+src//components/routines/player/RoutinePlayer.tsx:import { Play, Pause, SkipBack, SkipForward, X } from 'lucide-react';
+src//components/routines/player/RoutinePlayer.tsx:import { Routine, RoutineBlock } from '@/types/templates';
+src//components/routines/player/RoutinePlayer.tsx:import { useRoutinePlayerStore } from '@/store/routinePlayerStore';
+src//components/routines/player/RoutinePlayerWrapper.tsx:import RoutinePlayer from './RoutinePlayer';
+src//components/routines/player/RoutinePlayerWrapper.tsx:import { useRoutinePlayer } from '@/store/uiStore';
+src//components/routines/player/__tests__/CountdownTimer.test.tsx:import CountdownTimer from '../components/CountdownTimer';
+src//components/routines/player/__tests__/RoutinePlayer.test.tsx:import { Routine } from '@/types/templates';
+src//components/routines/player/__tests__/RoutinePlayer.test.tsx:import { RoutinePlayer } from '../index';
+src//components/routines/player/components/ExercisePreview.tsx:import { RoutineExercise } from '@/types/templates';
+src//components/routines/player/components/ExercisePreview.tsx:import { cn } from '@/lib/utils';
+src//components/routines/player/components/ExercisePreview.tsx:import { formatTime } from '@/components/routines/builder/utils/formatters';
+src//components/routines/player/components/ExerciseTimer.tsx:import { cn } from '@/lib/utils';
+src//components/routines/player/components/ExerciseTimer.tsx:import { formatTime } from '@/components/routines/builder/utils/formatters';
+src//components/routines/player/store/useRoutinePlayerStore.ts:import { Routine, RoutineExercise } from '@/types/templates';
+src//components/routines/player/store/useRoutinePlayerStore.ts:import { create } from 'zustand';
+src//components/settings/OfflineSettings.tsx:import { Card } from '@/components/ui/cards/Card'
+src//components/settings/OfflineSettings.tsx:import { NetworkStatus } from '@/components/ui/NetworkStatus'
+src//components/settings/OfflineSettings.tsx:import { Section } from '@/components/ui/Section'
+src//components/settings/OfflineSettings.tsx:import { useNetworkStatus } from '@/lib/network/networkService'
+src//components/ui/Accordion.tsx:import { ChevronDown } from 'lucide-react'
+src//components/ui/Accordion.tsx:import { cn } from '@/lib/utils'
+src//components/ui/Grid.tsx:import { Masonry } from 'react-virtualized'
+src//components/ui/Grid.tsx:import { cn } from '@/lib/utils'
+src//components/ui/List.tsx:import { Virtuoso } from 'react-virtuoso'
+src//components/ui/List.tsx:import { cn } from '@/lib/utils'
+src//components/ui/Modal.tsx:import { cn } from '@/lib/utils'
+src//components/ui/NetworkStatus.tsx:import { syncRoutines } from '@/lib/storage/routineStorage'
+src//components/ui/NetworkStatus.tsx:import { useNetworkStatus } from '@/lib/network/networkService'
+src//components/ui/NetworkStatusIndicator.tsx:import { Wifi, WifiOff } from 'lucide-react'
+src//components/ui/NetworkStatusIndicator.tsx:import { cn } from '@/lib/utils'
+src//components/ui/NetworkStatusIndicator.tsx:import { useNetworkStatus } from '@/hooks/useNetworkStatus'
+src//components/ui/NetworkToast.tsx:import { useNetworkStatus } from '@/hooks/useNetworkStatus'
+src//components/ui/OfflineImage.tsx:import { useNetworkStatus } from '@/lib/network/networkService'
+src//components/ui/OfflineImage.tsx:import { useOfflineImage } from '@/hooks/useOfflineImage'
+src//components/ui/OfflineVideo.tsx:import { useNetworkStatus } from '@/lib/network/networkService'
+src//components/ui/OfflineVideo.tsx:import { useOfflineVideo } from '@/hooks/useOfflineVideo'
+src//components/ui/Section.tsx:import { cn } from '@/lib/utils';
+src//components/ui/Tabs.tsx:import { cn } from '@/lib/utils'
+src//components/ui/TabsWithStore.tsx:import Tabs, { TabsProps } from './Tabs'
+src//components/ui/TabsWithStore.tsx:import { useTabGroup } from '@/store/uiStore'
+src//components/ui/Toast.tsx:import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react'
+src//components/ui/Toast.tsx:import { cn } from '@/lib/utils'
+src//components/ui/Toast.tsx:import { useToasts } from '@/store/uiStore'
+src//components/ui/__tests__/Accordion.test.tsx:import { Accordion } from '../Accordion';
+src//components/ui/__tests__/Grid.test.tsx:import { Grid } from '../Grid';
+src//components/ui/__tests__/List.test.tsx:import { List } from '../List';
+src//components/ui/__tests__/Modal.test.tsx:import { Modal } from '../Modal';
+src//components/ui/__tests__/SaveButton.test.tsx:import { SaveButton } from '../buttons/SaveButton';
+src//components/ui/__tests__/Section.test.tsx:import { Section } from '../Section';
+src//components/ui/buttons/FavoriteButton.tsx:import { Button } from '@/components/ui/button';
+src//components/ui/buttons/FavoriteButton.tsx:import { Heart, Loader2 } from 'lucide-react';
+src//components/ui/buttons/FavoriteButton.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/FavoriteButton.tsx:import { supabase } from '@/api/supabase';
+src//components/ui/buttons/FavoriteButton.tsx:import { toggle_favorite_routine, check_routine_relationship } from '@/api/routines/relationships';
+src//components/ui/buttons/FavoriteButton.tsx:import { useToast } from '@/hooks/use-toast';
+src//components/ui/buttons/IOSButton.tsx:import { Loader2 } from 'lucide-react';
+src//components/ui/buttons/IOSButton.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/IOSButton.tsx:import { useIOSTouch } from '@/hooks/useIOSTouch';
+src//components/ui/buttons/PublicToggle.tsx:import { Globe, Lock, Loader2 } from 'lucide-react';
+src//components/ui/buttons/PublicToggle.tsx:import { Label } from '@/components/ui/label';
+src//components/ui/buttons/PublicToggle.tsx:import { Switch } from '@/components/ui/switch';
+src//components/ui/buttons/PublicToggle.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/PublicToggle.tsx:import { supabase } from '@/api/supabase';
+src//components/ui/buttons/PublicToggle.tsx:import { useToast } from '@/hooks/use-toast';
+src//components/ui/buttons/RemoveButton.tsx:import { Button } from '@/components/ui/button';
+src//components/ui/buttons/RemoveButton.tsx:import { Trash2, Loader2 } from 'lucide-react';
+src//components/ui/buttons/RemoveButton.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/RemoveButton.tsx:import { remove_routine_from_library } from '@/api/routines/relationships';
+src//components/ui/buttons/RemoveButton.tsx:import { supabase } from '@/api/supabase';
+src//components/ui/buttons/RemoveButton.tsx:import { useToast } from '@/hooks/use-toast';
+src//components/ui/buttons/SaveButton.tsx:import { Check, WifiOff } from 'lucide-react';
+src//components/ui/buttons/SaveButton.tsx:import { useNetworkStatus } from '@/hooks/useNetworkStatus';
+src//components/ui/buttons/ShareButton.tsx:import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+src//components/ui/buttons/ShareButton.tsx:import { Button } from '@/components/ui/button';
+src//components/ui/buttons/ShareButton.tsx:import { Input } from '@/components/ui/input';
+src//components/ui/buttons/ShareButton.tsx:import { Share2, Loader2, Search, UserPlus } from 'lucide-react';
+src//components/ui/buttons/ShareButton.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/ShareButton.tsx:import { share_routine_with_user } from '@/api/routines/relationships';
+src//components/ui/buttons/ShareButton.tsx:import { supabase } from '@/api/supabase';
+src//components/ui/buttons/ShareButton.tsx:import { useToast } from '@/hooks/use-toast';
+src//components/ui/buttons/StandardButton.tsx:import { cn } from '@/lib/utils';
+src//components/ui/buttons/__tests__/SaveButton.test.tsx:import { SaveButton } from '../SaveButton';
+src//components/ui/buttons/__tests__/StandardButton.test.tsx:import StandardButton from '../StandardButton';
+src//components/ui/cards/Card.tsx:import { cn } from '@/lib/utils'
+src//components/ui/cards/__tests__/Card.test.tsx:import { Card } from '../cards/Card';
+src//components/ui/form/CheckboxGroup.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/CheckboxGroupWithStore.tsx:import CheckboxGroup from './CheckboxGroup'
+src//components/ui/form/CheckboxGroupWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/DatePicker.tsx:import { Input } from './Input'
+src//components/ui/form/DatePicker.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/DatePicker.tsx:import { format, addDays, isSameDay, isWithinInterval, isBefore, isAfter, startOfWeek, endOfWeek } from 'date-fns'
+src//components/ui/form/DatePickerWithStore.tsx:import DatePicker from './DatePicker'
+src//components/ui/form/DatePickerWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/FileUpload.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/FileUploadWithStore.tsx:import FileUpload, { FileUploadProps } from './FileUpload'
+src//components/ui/form/FileUploadWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/Input.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/InputWithStore.tsx:import { Input } from './Input'
+src//components/ui/form/InputWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/PasswordInput.tsx:import zxcvbn from 'zxcvbn'
+src//components/ui/form/PasswordInput.tsx:import { Eye, EyeOff } from 'lucide-react'
+src//components/ui/form/PasswordInput.tsx:import { Input } from './Input'
+src//components/ui/form/PasswordInput.tsx:import { StrengthIndicator, type PasswordStrength } from './StrengthIndicator'
+src//components/ui/form/PasswordInput.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/RadioGroup.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/RadioGroupWithStore.tsx:import RadioGroup from './RadioGroup'
+src//components/ui/form/RadioGroupWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/RangeSlider.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/RangeSliderWithStore.tsx:import RangeSlider from './RangeSlider'
+src//components/ui/form/RangeSliderWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/SearchInput.tsx:import { Input, type InputProps } from './Input'
+src//components/ui/form/SearchInput.tsx:import { Search } from 'lucide-react'
+src//components/ui/form/SearchInput.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/SearchInputWithStore.tsx:import { SearchInput } from './SearchInput'
+src//components/ui/form/SearchInputWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/Select.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/SelectWithStore.tsx:import Select from './Select'
+src//components/ui/form/SelectWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/StrengthIndicator.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/Switch.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/SwitchWithStore.tsx:import Switch, { SwitchProps } from './Switch'
+src//components/ui/form/SwitchWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/TimeInput.tsx:import { Input } from './Input'
+src//components/ui/form/TimeInput.tsx:import { cn } from '@/lib/utils'
+src//components/ui/form/TimeInput.tsx:import { formatTimeInput, timeToSeconds, secondsToTime } from '@/lib/utils/timeFormat'
+src//components/ui/form/TimeInputWithStore.tsx:import { TimeInput } from './TimeInput'
+src//components/ui/form/TimeInputWithStore.tsx:import { withFormStore } from '@/components/hoc/withFormStore'
+src//components/ui/form/__tests__/TimeInput.test.tsx:import { TimeInput } from '../TimeInput';
+src//config/supabase.ts:import { createClient } from '@supabase/supabase-js'
+src//data/studio/content.ts:import { ExerciseId, StudioId } from '../../types/ids';
+src//data/studio/content.ts:import { StudioCustomization } from './types';
+src//data/studio/content.ts:import { supabase } from '../../config/supabase';
+src//data/studio/types.ts:import { StudioId, ContentId } from '../../types/ids';
+src//data/tailwind.config.ts:import plugin from "tailwindcss/plugin";
+src//data/tailwind.config.ts:import type { Config } from "tailwindcss";
+src//hooks/useOfflineData.ts:import { ApiError } from '@/lib/supabase/api'
+src//hooks/useOfflineData.ts:import { getFromStore, saveToStore } from '@/lib/storage/db'
+src//hooks/useOfflineData.ts:import { isOffline } from '@/lib/supabase/client'
+src//hooks/useOfflineData.ts:import { useQuery, QueryKey, UseQueryOptions } from '@tanstack/react-query'
+src//hooks/useOfflineImage.ts:import { getOrFetchMedia } from '@/lib/storage/mediaCache'
+src//hooks/useOfflineImage.ts:import { useNetworkStatus } from '@/lib/network/networkService'
+src//hooks/useOfflineVideo.ts:import { getOrFetchMedia } from '@/lib/storage/mediaCache'
+src//hooks/useOfflineVideo.ts:import { useNetworkStatus } from '@/lib/network/networkService'
+src//index.tsx:import * as serviceWorkerRegistration from './service-worker-registration'
+src//index.tsx:import App from './App'
+src//index.tsx:import ReactDOM from 'react-dom/client'
+src//index.tsx:import { NetworkToast } from './components/ui/NetworkToast'
+src//lib/network/networkService.ts:import { create } from 'zustand'
+src//lib/network/networkService.ts:import { persist } from 'zustand/middleware'
+src//lib/storage/db.ts:import type { Category, Exercise, Block, Template } from '../supabase/types'
+src//lib/storage/db.ts:import { openDB, DBSchema, IDBPDatabase } from 'idb'
+src//lib/storage/mediaCache.ts:import { openDB, DBSchema, IDBPDatabase } from 'idb'
+src//lib/storage/mediaCache.ts:import { useNetworkStore } from '../network/networkService'
+src//lib/storage/routineStorage.ts:import type { Template } from '../supabase/types'
+src//lib/storage/routineStorage.ts:import { from, supabase } from '../supabase/client'
+src//lib/storage/routineStorage.ts:import { openDB, DBSchema, IDBPDatabase } from 'idb'
+src//lib/storage/routineStorage.ts:import { useNetworkStore } from '../network/networkService'
+src//lib/storage/routineStorage.ts:import { v4 as uuidv4 } from 'uuid'
+src//lib/storage/sync.ts:import type { Category, Exercise, Block, Template } from '../supabase/types'
+src//lib/storage/sync.ts:import { from } from '../supabase/client'
+src//lib/storage/sync.ts:import { getAllFromStore, processQueue, saveToStore } from './db'
+src//lib/supabase.ts:import { createClient } from '@supabase/supabase-js'
+src//lib/supabase/api.ts:import { from, isOffline, supabase } from './client'
+src//lib/supabase/client.ts:import type { Database } from './types'
+src//lib/supabase/client.ts:import { createClient } from '@supabase/supabase-js'
+src//lib/supabase/hooks.ts:import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+src//lib/utils.ts:import { twMerge } from 'tailwind-merge';
+src//lib/utils.ts:import { type ClassValue, clsx } from 'clsx';
+src//lib/verify-connection.ts:import { supabaseAdmin } from './supabase'
+src//main.tsx:import App from './App'
+src//main.tsx:import ReactDOM from 'react-dom/client'
+src//pages/ExerciseDemo.tsx:import StandardButton from '@/components/ui/buttons/StandardButton'
+src//pages/ExerciseDemo.tsx:import { ExerciseSection } from '@/components/exercises/ExerciseSection'
+src//pages/ExerciseDemo.tsx:import { Section } from '@/components/ui/Section'
+src//pages/ExerciseDemo.tsx:import { startPeriodicSync, stopPeriodicSync, syncAll } from '@/lib/storage/sync'
+src//pages/ExerciseDemo.tsx:import { useExerciseStore } from '@/store/exerciseStore'
+src//pages/ExerciseLibrary.tsx:import type { Exercise } from '@/lib/supabase/types'
+src//pages/ExerciseLibrary.tsx:import { Card } from '@/components/ui/cards/Card'
+src//pages/ExerciseLibrary.tsx:import { Grid } from '@/components/ui/Grid'
+src//pages/ExerciseLibrary.tsx:import { List } from '@/components/ui/List'
+src//pages/ExerciseLibrary.tsx:import { Section } from '@/components/ui/Section'
+src//pages/ExerciseLibrary.tsx:import { useExerciseStore, useFilteredExercises } from '@/store/exerciseStore'
+src//pages/component-test.tsx:import { CheckboxGroup } from '@/components/ui/form/CheckboxGroup';
+src//pages/component-test.tsx:import { DatePicker } from '@/components/ui/form/DatePicker';
+src//pages/component-test.tsx:import { FileUpload } from '@/components/ui/form/FileUpload';
+src//pages/component-test.tsx:import { Input } from '@/components/ui/form/Input';
+src//pages/component-test.tsx:import { RadioGroup } from '@/components/ui/form/RadioGroup';
+src//pages/component-test.tsx:import { RangeSlider } from '@/components/ui/form/RangeSlider';
+src//pages/component-test.tsx:import { SearchInput } from '@/components/ui/form/SearchInput';
+src//pages/component-test.tsx:import { Select } from '@/components/ui/form/Select';
+src//pages/component-test.tsx:import { Switch } from '@/components/ui/form/Switch';
+src//pages/component-test.tsx:import { TimeInput } from '@/components/ui/form/TimeInput';
+src//pages/component-test.tsx:import { timeToSeconds } from '@/lib/utils/timeFormat';
+src//pages/component-test.tsx:import { useExerciseStore } from '@/store/exerciseStore';
+src//scripts/import-exercises.ts:import { importExercises } from '../lib/transforms/importExercises'
+src//service-worker-registration.ts:import { useNetworkStore } from './lib/network/networkService'
+src//service-worker.ts:import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+src//service-worker.ts:import { ExpirationPlugin } from 'workbox-expiration'
+src//service-worker.ts:import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategies'
+src//service-worker.ts:import { clientsClaim } from 'workbox-core'
+src//service-worker.ts:import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+src//service-worker.ts:import { registerRoute } from 'workbox-routing'
+src//services/ExerciseService.ts:import { Exercise, ExerciseFilters, ScoredExercise, ExerciseResponse } from '../types/exercises';
+src//services/ExerciseService.ts:import { TemplateBlock } from '../types/templates';
+src//services/RoutinePopulationService.ts:import { Exercise } from '../types/exercises';
+src//services/RoutinePopulationService.ts:import { Template, TemplateBlock, Routine, RoutineBlock, RoutineExercise } from '../types/templates';
+src//services/RoutinePopulationService.ts:import { exerciseService } from './ExerciseService';
+src//services/RoutinePopulationService.ts:import { v4 as uuidv4 } from 'uuid';
+src//services/TemplateService.ts:import { Template, TemplateStructure, TemplateBlock } from '../types/templates';
+src//services/VariationService.ts:import * as variationsApi from '../api/variations/variations';
+src//services/VariationService.ts:import { TemplateBlock } from '../types/templates';
+src//services/VariationService.ts:import { Variation, VariationFilters, ScoredVariation, VariationResponse, VariationCategory } from '../types/variations';
+src//store/__tests__/exerciseLibraryStore.test.ts:import { useExerciseLibraryStore } from '../exerciseLibraryStore'
+src//store/exerciseLibraryStore.ts:import { Exercise } from '@/data/core/exercises'
+src//store/exerciseLibraryStore.ts:import { create } from 'zustand'
+src//store/exerciseLibraryStore.ts:import { persist } from 'zustand/middleware'
+src//store/exerciseStore.ts:import type { Exercise, Category } from '@/lib/supabase/types'
+src//store/exerciseStore.ts:import { create } from 'zustand'
+src//store/exerciseStore.ts:import { from } from '@/lib/supabase/client'
+src//store/exerciseStore.ts:import { getAllFromStore, saveToStore } from '@/lib/storage/db'
+src//store/exerciseStore.ts:import { isOffline } from '@/lib/supabase/client'
+src//store/formStore.ts:import { create } from 'zustand'
+src//store/formStore.ts:import { persist } from 'zustand/middleware'
+src//store/routinePlayerStore.ts:import { Routine, RoutineExercise } from '@/types/templates';
+src//store/routinePlayerStore.ts:import { create } from 'zustand';
+src//store/routineStore.ts:import create from 'zustand';
+src//store/routineStore.ts:import { Command, CommandHistory } from '../types/commands';
+src//store/routineStore.ts:import { Exercise } from '../types/exercises';
+src//store/routineStore.ts:import { Template, Routine, RoutineBlock, RoutineExercise } from '../types/templates';
+src//store/routineStore.ts:import { devtools } from 'zustand/middleware';
+src//store/routineStore.ts:import { exerciseService } from '../services/ExerciseService';
+src//store/routineStore.ts:import { templateService } from '../services/TemplateService';
+src//store/uiStore.ts:import { Routine } from '@/types/templates'
+src//store/uiStore.ts:import { create } from 'zustand'
+src//store/uiStore.ts:import { persist } from 'zustand/middleware'
+src//types/models.ts:import { BlockId, CategoryId, ExerciseId, RoutineId, TemplateId, StudioId } from './ids';
+src//types/models.ts:import { z } from 'zod';

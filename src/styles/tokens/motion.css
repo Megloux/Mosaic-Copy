@@ -1,0 +1,43 @@
+/* motion.css - Defines HOW things move in Mosaic */
+:root {
+  /* Core Timing
+     These define the duration of all movements. We keep it simple
+     with just three timing options for consistent feel */
+  --motion-instant: 50ms;      /* For immediate feedback like button presses */
+  --motion-natural: 200ms;     /* For most transitions */
+  --motion-smooth: 300ms;      /* For complex movements like drag and drop */
+
+  /* Movement Physics
+     These curves determine how elements accelerate and decelerate.
+     Based on iOS physics for natural feel */
+  --spring-ios-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);   /* For drag lift */
+  --spring-ios-snap: cubic-bezier(0.24, 1.12, 0.76, 1);     /* For drag drop */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);          /* For transitions */
+
+  /* Touch Response
+     How much elements scale when interacted with */
+  --touch-scale-press: 0.98;    /* Button press feedback */
+  --touch-scale-lift: 1.02;     /* Drag lift feedback */
+  --touch-scale-drop: 0.98;     /* Landing feedback */
+
+  /* Visual Elevation
+     Shadow values for showing height during drag */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+
+  /* System States
+     Timing for loading and feedback states */
+  --spinner-speed: 800ms;       /* How fast loading spinner rotates */
+  --feedback-duration: 200ms;   /* How long success/error messages show */
+}
+
+/* Reduced Motion 
+   Respects user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 0ms;
+    --motion-natural: 0ms;
+    --motion-smooth: 0ms;
+    --spinner-speed: 2000ms;
+  }
+}

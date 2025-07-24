@@ -1,0 +1,21 @@
+import React from 'react'
+import { RangeSlider } from '@/components/ui/form/RangeSlider'
+import { withFormStore } from '@/components/hoc/withFormStore'
+
+/**
+ * RangeSlider component connected to the Zustand form store
+ * 
+ * This component can be used in two ways:
+ * 1. Standalone with direct value/onChange props
+ * 2. Connected to form store with formId/name props
+ * 
+ * @example
+ * // Standalone usage
+ * <RangeSliderWithStore value={50} onChange={handleChange} />
+ * 
+ * // Connected to form store
+ * <RangeSliderWithStore formId="exerciseForm" name="intensity" />
+ */
+const RangeSliderWithStore = withFormStore(RangeSlider, 'RangeSlider')
+
+export const RangeSliderWithStore

@@ -1,0 +1,42 @@
+import Switch, { SwitchProps } from './Switch'
+import { withFormStore } from '@/components/hoc/withFormStore'
+
+/**
+ * Switch component connected to the Zustand form store
+ * 
+ * This component can be used in two ways:
+ * 1. Standalone with direct checked/onChange props
+ * 2. Connected to form store with formId/name props
+ * 
+ * @example
+ * // Standalone usage
+ * <SwitchWithStore checked={isActive} onChange={handleChange} />
+ * 
+ * // Connected to form store
+ * <SwitchWithStore formId="userPreferences" name="darkMode" />
+ */
+
+// Define the wrapper component to handle the conversion between form values and Switch props
+const SwitchWrapper = (props: SwitchProps & { name?: string }) => {
+  const { value, onChange, ...rest } = props
+
+  // Handle boolean value conversion for the Switch component
+  const handleChange = (checked: boolean) => {
+    if (onChange) {
+      onChange(checked)
+    }
+  }
+
+  return (
+    <Switch
+      checked={!!value}
+      onChange={handleChange}
+      {...rest}
+    />
+  )
+}
+
+// Connect the SwitchWrapper to the form store
+const SwitchWithStore = withFormStore(SwitchWrapper, 'Switch')
+
+export const SwitchWithStore

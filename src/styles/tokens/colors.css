@@ -1,0 +1,45 @@
+/* tokens/colors.css */
+:root {
+  /* Core Brand Colors - Raw Values */
+  --core-black: 0 0 0;          /* Pure black background */
+  --core-white: 255 255 255;    /* Pure white text */
+  --core-teal: 0 183 120;       /* Mosaic's teal */
+  --core-teal-light: 0 213 140; /* Lighter variation of Mosaic's teal */
+
+  /* Border Opacities */
+  --border-opacity-subtle: 0.1;    /* Subtle borders */
+  --border-opacity-medium: 0.2;    /* Standard borders */
+  --border-opacity-visible: 0.3;   /* Emphasized borders */
+
+  /* Semantic Colors */
+  --color-background: var(--core-black);
+  --color-foreground: var(--core-white);
+  --color-accent: var(--core-teal);
+  --color-accent-light: var(--core-teal-light);
+
+  /* Surface Colors with Border Opacities */
+  --surface-base: rgba(255, 255, 255, var(--border-opacity-subtle));    /* Subtle elevation */
+  --surface-raised: rgba(255, 255, 255, var(--border-opacity-medium));   /* Cards, modals */
+  --surface-overlay: rgba(255, 255, 255, var(--border-opacity-visible)); /* Overlays */
+  --surface-accent: rgba(0, 183, 120, var(--border-opacity-medium));     /* Accent surfaces */
+
+  /* Interactive States */
+  --state-hover: rgba(255, 255, 255, var(--border-opacity-subtle));
+  --state-active: rgba(255, 255, 255, var(--border-opacity-medium));
+  --state-selected: rgba(0, 183, 120, var(--border-opacity-medium));
+  --state-disabled: rgba(255, 255, 255, 0.05);
+
+  /* Feedback Colors */
+  --feedback-success: 34 197 94;  /* Green */
+  --feedback-warning: 234 179 8;  /* Yellow */
+  --feedback-error: 239 68 68;    /* Red */
+  --feedback-info: 59 130 246;    /* Blue */
+
+  /* Component-Specific Colors */
+  --exercise-card-bg: var(--surface-raised);
+  --exercise-card-active: var(--surface-accent);
+  --drag-handle: var(--surface-overlay);
+  --drag-handle-active: var(--state-active);
+  --timeline-grid: var(--surface-base);
+  --template-block: var(--surface-raised);
+}
