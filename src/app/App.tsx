@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ExerciseDemo } from '@/pages/ExerciseDemo'
-import { ExerciseLibrary } from '@/pages/ExerciseLibrary'
+import { ExerciseLibrary } from '@/features/exercises/components/ExerciseLibrary'
 import { SupabaseTest } from '@/components/SupabaseTest'
 import { SaveButton } from '@/components/ui/buttons/SaveButton'
 import { NetworkStatusIndicator } from '@/components/ui/NetworkStatusIndicator'
@@ -23,7 +23,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/exercises" element={<ExerciseLibrary />} />
+          <Route path="/exercises" element={<ExerciseLibrary onAddToRoutineBuilder={(exercise) => console.log('Add to routine:', exercise)} />} />
           <Route path="/" element={
             <div className="min-h-screen bg-gray-50">
               <div className="max-w-7xl mx-auto py-12 px-4">

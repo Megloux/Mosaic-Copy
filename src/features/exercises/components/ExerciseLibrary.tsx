@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useExerciseLibraryStore } from '@/features/exercises/model/exerciseLibraryStore'
-import { Grid } from '@/components/ui/Grid'
-import { SearchInput } from '@/components/ui/form/SearchInput'
-import { ExerciseCard } from '@/components/exercises/ExerciseCard'
-import { ExerciseDetail } from '@/components/exercises/ExerciseDetail'
+import { Grid } from '@/shared/ui/Grid'
+import { SearchInput } from '@/shared/ui/form/SearchInput'
+import { ExerciseCard } from '@/features/exercises/components/ExerciseCard'
+import { ExerciseDetail } from '@/features/exercises/components/ExerciseDetail'
 import { Exercise } from '@/data/core/exercises'
 import { motion } from 'framer-motion'
 
@@ -229,7 +229,7 @@ export const ExerciseLibrary: React.FC<ExerciseLibraryProps> = ({
                   className="flex items-center p-2 hover:bg-[rgba(var(--color-surface-hover),1)] rounded cursor-pointer"
                   onClick={() => toggleCategoryExpansion(category.id)}
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded mr-3 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-[rgb(var(--core-teal))] rounded mr-3 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
@@ -264,8 +264,8 @@ export const ExerciseLibrary: React.FC<ExerciseLibraryProps> = ({
                   >
                     {viewType === 'grid' ? (
                       <Grid 
-                        layout="grid" 
-                        gap="medium" 
+                        layout="responsive" 
+                        gap="md" 
                         cols={2}
                         className="w-full"
                       >
@@ -288,7 +288,7 @@ export const ExerciseLibrary: React.FC<ExerciseLibraryProps> = ({
                           >
                             <div className="w-10 h-10 rounded bg-[rgba(var(--color-surface-accent),1)] mr-3 flex-shrink-0"></div>
                             <div className="flex-1">
-                              <div className="font-medium">{exercise.exercise_name}</div>
+                              <div className="font-medium uppercase">{exercise.exercise_name}</div>
                               <div className="text-xs text-[rgba(var(--color-foreground),0.6)] flex items-center">
                                 <span>{exercise.standard_time}</span>
                                 <span className="mx-1">•</span>

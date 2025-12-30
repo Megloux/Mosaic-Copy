@@ -6,7 +6,9 @@ import {
   obliques_exercises, 
   lower_body_lsd_exercises, 
   lower_body_heavy_exercises, 
-  upper_body_exercises 
+  upper_body_exercises,
+  lower_body_straps_exercises,
+  cardio_bursts_exercises
 } from '@/data/core/exercises'
 
 // Define the categories
@@ -46,7 +48,9 @@ export const useExerciseLibraryStore = create<ExerciseLibraryState>()(
         { id: 'c2', name: 'Obliques' },
         { id: 'c3', name: 'Lower Body (Heavy)' },
         { id: 'c4', name: 'Lower Body (LSD)' },
-        { id: 'c6', name: 'Upper Body' }
+        { id: 'c5', name: 'Lower Body Straps' },
+        { id: 'c6', name: 'Upper Body' },
+        { id: 'c7', name: 'Cardio Bursts' }
       ],
       selectedExercise: null,
       viewType: 'grid',
@@ -66,7 +70,9 @@ export const useExerciseLibraryStore = create<ExerciseLibraryState>()(
             ...Object.values(obliques_exercises),
             ...Object.values(lower_body_lsd_exercises),
             ...Object.values(lower_body_heavy_exercises),
-            ...Object.values(upper_body_exercises)
+            ...Object.values(upper_body_exercises),
+            ...Object.values(lower_body_straps_exercises),
+            ...Object.values(cardio_bursts_exercises)
           ];
           
           set({ 
@@ -92,7 +98,9 @@ export const useExerciseLibraryStore = create<ExerciseLibraryState>()(
             { id: 'c2', name: 'Obliques' },
             { id: 'c3', name: 'Lower Body (Heavy)' },
             { id: 'c4', name: 'Lower Body (LSD)' },
-            { id: 'c6', name: 'Upper Body' }
+            { id: 'c5', name: 'Lower Body Straps' },
+            { id: 'c6', name: 'Upper Body' },
+            { id: 'c7', name: 'Cardio Bursts' }
           ]
         });
       },

@@ -65,7 +65,7 @@ export const ExerciseCard = React.memo(({
       </div>
       
       <div className="p-var(--container-padding-sm)">
-        <h3 className="text-base font-medium leading-tight line-clamp-2">
+        <h3 className="text-base font-medium leading-tight line-clamp-2 uppercase">
           {exercise.exercise_name}
         </h3>
         

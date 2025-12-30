@@ -1,7 +1,7 @@
 // src/data/exercises.ts
 
 // Define the Exercise type
-interface Exercise {
+export interface Exercise {
     id: string;
     exercise_name: string;
     category_id: string;
@@ -16,1005 +16,1199 @@ interface Exercise {
     template_tags: string[];
     vimeo_id: string;
     standard_time: string;
+    category?: string; // Added for compatibility with component-test
+    tags?: string[]; // Added for compatibility with component-test
+    name?: string; // Added for compatibility with component-test
+    isResistance?: boolean; // Added for compatibility with component-test
 }
 
 // Abs exercises (category_id: "c1")
 const abs_exercises = {
     e1: {
         id: "e1",
-        exercise_name: "ModifiedPlank",
+        exercise_name: "ab wheel",
         category_id: "c1",
-        setup_instructions: "Start in forearm plank position with knees down",
-        movement_notes: "Maintain neutral spine, engage core",
-        cueing: "Draw navel to spine, keep shoulders stable",
-        this_that: "Should feel work in deep core muscles",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e2: {
         id: "e2",
-        exercise_name: "HighPlank",
+        exercise_name: "body saw",
         category_id: "c1",
-        setup_instructions: "Start in full plank position on hands",
-        movement_notes: "Keep body in straight line from head to heels",
-        cueing: "Stack shoulders over wrists, engage core",
-        this_that: "Should feel work in shoulders and core, not lower back",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e3: {
         id: "e3",
-        exercise_name: "PlankCrunch",
+        exercise_name: "cobra",
         category_id: "c1",
-        setup_instructions: "Start in plank position on forearms",
-        movement_notes: "Draw knees toward chest while maintaining plank",
-        cueing: "Keep hips level, control the movement",
-        this_that: "Should feel work in lower abs and hip flexors",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e4: {
         id: "e4",
-        exercise_name: "PlankToPike",
+        exercise_name: "plank crunch",
         category_id: "c1",
-        setup_instructions: "Begin in plank position",
-        movement_notes: "Pike hips up and back while maintaining straight legs",
-        cueing: "Push through shoulders, keep core engaged",
-        this_that: "Should feel stretch in hamstrings and work in shoulders",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e5: {
         id: "e5",
-        exercise_name: "BodySaw",
+        exercise_name: "plank to pike",
         category_id: "c1",
-        setup_instructions: "Start in forearm plank on carriage",
-        movement_notes: "Slide carriage back and forth while maintaining plank",
-        cueing: "Keep body rigid, control the movement",
-        this_that: "Should feel intense core stabilization",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e6: {
         id: "e6",
-        exercise_name: "Wheelbarrow",
+        exercise_name: "high bar plank crunch",
         category_id: "c1",
-        setup_instructions: "Start in plank position with feet in straps",
-        movement_notes: "Control carriage movement while maintaining plank",
-        cueing: "Keep hips level, engage core throughout",
-        this_that: "Should feel core stabilization and shoulder work",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["planks"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e7: {
         id: "e7",
-        exercise_name: "Cobra",
+        exercise_name: "arm assisted cable crunches",
         category_id: "c1",
-        setup_instructions: "Lie prone on carriage, hands by shoulders",
-        movement_notes: "Press through hands to lift chest, keeping hips down",
-        cueing: "Draw shoulder blades together, engage core",
-        this_that: "Should feel work in upper back and core stability",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["supine_cables_crunches"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e8: {
         id: "e8",
-        exercise_name: "HighBarPlankCrunch",
+        exercise_name: "footstrap crunces",
         category_id: "c1",
-        setup_instructions: "Plank position holding high bar with hands",
-        movement_notes: "Draw knees to chest while maintaining plank",
-        cueing: "Keep shoulders engaged, control movement",
-        this_that: "Should feel deep core activation and shoulder stability",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["supine_cables_crunches"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e9: {
         id: "e9",
-        exercise_name: "Boomerang",
+        exercise_name: "leg circles",
         category_id: "c1",
-        setup_instructions: "Side-lying position on carriage",
-        movement_notes: "Create circular movement pattern with legs",
-        cueing: "Maintain core stability throughout movement",
-        this_that: "Should feel work in obliques and hip control",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["supine_cables_crunches"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e10: {
         id: "e10",
-        exercise_name: "KneelingPikeNeutral",
+        exercise_name: "kneeling crunch",
         category_id: "c1",
-        setup_instructions: "Start in kneeling position facing tower",
-        movement_notes: "Pike hips back maintaining neutral spine",
-        cueing: "Keep core engaged, move from hips",
-        this_that: "Should feel deep core activation",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e11: {
-        id: "e11",
-        exercise_name: "KneelingCrunchFlexion",
-        category_id: "c1",
-        setup_instructions: "Kneel facing tower, hands behind head",
-        movement_notes: "Curl torso forward maintaining kneeling position",
-        cueing: "Initiate movement from abdominals",
-        this_that: "Should feel focused work in upper abdominals",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 0
-        },
-        template_tags: [],
+        template_tags: ["crunches"],
         vimeo_id: "",
         standard_time: "1:00"
     }
 };
 
-// Export both the type and the data
-export { Exercise, abs_exercises };
-// Continue in the same file after abs_exercises...
-
+// Obliques exercises (category_id: "c2")
 const obliques_exercises = {
-    e12: {
-        id: "e12",
-        exercise_name: "SidePlank",
+    e11: {
+        id: "e11",
+        exercise_name: "kneeling torso twist",
         category_id: "c2",
-        setup_instructions: "Side-lying on forearm, stack shoulders and hips",
-        movement_notes: "Lift hips creating straight line through body",
-        cueing: "Keep body aligned, shoulders stacked",
-        this_that: "Should feel work in side body and core",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["cables_rotational"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e12: {
+        id: "e12",
+        exercise_name: "standing torso twist",
+        category_id: "c2",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
+            heavy_springs: 0
+        },
+        template_tags: ["cables_rotational"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e13: {
         id: "e13",
-        exercise_name: "Teaser",
+        exercise_name: "split squat torso twist",
         category_id: "c2",
-        setup_instructions: "Lie supine on carriage, legs extended",
-        movement_notes: "Roll up to V-sit position with control",
-        cueing: "Keep spine curved, legs straight",
-        this_that: "Should feel deep core integration",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["cables_rotational"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e14: {
         id: "e14",
-        exercise_name: "SnakeTwistedPlankToPike",
+        exercise_name: "oblique sweeps",
         category_id: "c2",
-        setup_instructions: "Start in plank position with rotation",
-        movement_notes: "Move through twisted pike pattern",
-        cueing: "Control rotation while maintaining stability",
-        this_that: "Should feel oblique engagement and shoulder stability",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["cables_anti_rotational"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e15: {
         id: "e15",
-        exercise_name: "TwistedPlankCrunch",
+        exercise_name: "froggy kicks",
         category_id: "c2",
-        setup_instructions: "Plank position with rotational element",
-        movement_notes: "Add cross-body knee drive to opposite elbow",
-        cueing: "Maintain plank while adding rotation",
-        this_that: "Should feel oblique and cross-body connection",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 1,
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["cables_anti_rotational"],
         vimeo_id: "",
         standard_time: "1:00"
     },
     e16: {
         id: "e16",
-        exercise_name: "TwistedSaw",
+        exercise_name: "bird dogs",
         category_id: "c2",
-        setup_instructions: "Start in rotated plank position",
-        movement_notes: "Add saw motion while maintaining rotation",
-        cueing: "Keep rotation stable during movement",
-        this_that: "Should feel deep oblique and core connection",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 0
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e17: {
-        id: "e17",
-        exercise_name: "ObliquePikeNeutral",
-        category_id: "c2",
-        setup_instructions: "Side-lying pike position",
-        movement_notes: "Maintain neutral spine during side pike",
-        cueing: "Move from lateral core, keep spine long",
-        this_that: "Should feel work in side body and obliques",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 0
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e18: {
-        id: "e18",
-        exercise_name: "ObliqueCrunchFlexion",
-        category_id: "c2",
-        setup_instructions: "Side-lying with lateral flexion",
-        movement_notes: "Add side crunch movement pattern",
-        cueing: "Initiate from obliques, control movement",
-        this_that: "Should feel focused oblique work",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 0
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e19: {
-        id: "e19",
-        exercise_name: "Mermaid",
-        category_id: "c2",
-        setup_instructions: "Side-sitting on carriage",
-        movement_notes: "Create lateral flexion with arm reach",
-        cueing: "Keep hips grounded, reach through crown",
-        this_that: "Should feel length in side body",
-        spring_setup: {
-            light_springs: 0,
-            heavy_springs: 0
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e20: {
-        id: "e20",
-        exercise_name: "TorsoTwist",
-        category_id: "c2",
-        setup_instructions: "Seated facing side, hold straps",
-        movement_notes: "Rotate torso maintaining upright position",
-        cueing: "Initiate from core, keep hips stable",
-        this_that: "Should feel rotational core work",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:00"
-    },
-    e21: {
-        id: "e21",
-        exercise_name: "ChopsAndSwings",
-        category_id: "c2",
-        setup_instructions: "Stand facing side, hold strap",
-        movement_notes: "Create diagonal chopping pattern",
-        cueing: "Move from core, control momentum",
-        this_that: "Should feel diagonal core connection",
-        spring_setup: {
-            light_springs: 2,
-            heavy_springs: 0
-        },
-        template_tags: [],
+        template_tags: ["cables_anti_rotational"],
         vimeo_id: "",
         standard_time: "1:00"
     }
 };
 
-// Export both the type and the data
-export { Exercise, abs_exercises, obliques_exercises };
+// Lower Body LSD exercises (category_id: "c4")
 const lower_body_lsd_exercises = {
-    e22: {
-        id: "e22",
-        exercise_name: "FloorLunge",
+    e17: {
+        id: "e17",
+        exercise_name: "platform lunge (front)",
         category_id: "c4",
-        setup_instructions: "Standing on floor facing carriage",
-        movement_notes: "Step back into lunge position",
-        cueing: "Keep front knee stacked, back heel lifted",
-        this_that: "Should feel work in front leg quad and glute",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["lunges_light_springs"],
+        vimeo_id: "",
+        standard_time: "2:00"
+    },
+    e18: {
+        id: "e18",
+        exercise_name: "platform lunge (back)",
+        category_id: "c4",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 1,
+            heavy_springs: 0
+        },
+        template_tags: ["lunges_light_springs"],
+        vimeo_id: "",
+        standard_time: "2:00"
+    },
+    e19: {
+        id: "e19",
+        exercise_name: "carriage lunge (front)",
+        category_id: "c4",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 1,
+            heavy_springs: 0
+        },
+        template_tags: ["lunges_light_springs"],
+        vimeo_id: "",
+        standard_time: "2:00"
+    },
+    e20: {
+        id: "e20",
+        exercise_name: "carriage lunge (back)",
+        category_id: "c4",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 1,
+            heavy_springs: 0
+        },
+        template_tags: ["lunges_light_springs"],
+        vimeo_id: "",
+        standard_time: "2:00"
+    },
+    e21: {
+        id: "e21",
+        exercise_name: "floor lunge",
+        category_id: "c4",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 1,
+            heavy_springs: 0
+        },
+        template_tags: ["lunges_light_springs"],
+        vimeo_id: "",
+        standard_time: "2:00"
+    },
+    e22: {
+        id: "e22",
+        exercise_name: "power lunge",
+        category_id: "c4",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 1,
+            heavy_springs: 0
+        },
+        template_tags: ["lunges_light_springs"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e23: {
         id: "e23",
-        exercise_name: "PlatformLunge",
+        exercise_name: "lateral lunge (front)",
         category_id: "c4",
-        setup_instructions: "Standing on platform facing away",
-        movement_notes: "Step forward into lunge position",
-        cueing: "Control carriage movement, maintain alignment",
-        this_that: "Should feel work in front leg quad and hip flexor",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["lunges_light_springs"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e24: {
         id: "e24",
-        exercise_name: "CarriageLunge",
+        exercise_name: "lateral lunge (back)",
         category_id: "c4",
-        setup_instructions: "Standing on carriage facing platform",
-        movement_notes: "Control carriage movement in lunge pattern",
-        cueing: "Keep torso upright, control the carriage",
-        this_that: "Should feel work in both legs equally",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["lunges_light_springs"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e25: {
         id: "e25",
-        exercise_name: "LateralLunge",
+        exercise_name: "kneeling inner thighs",
         category_id: "c4",
-        setup_instructions: "Standing sideways on carriage",
-        movement_notes: "Step out to side into lateral lunge",
-        cueing: "Keep working leg straight, bend standing knee",
-        this_that: "Should feel work in inner thigh and lateral hip",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["lunges_light_springs"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e26: {
         id: "e26",
-        exercise_name: "PowerLunge",
+        exercise_name: "Squats (Heavy)",
         category_id: "c4",
-        setup_instructions: "Standing on carriage in lunge position",
-        movement_notes: "Add power element to lunge pattern",
-        cueing: "Control power phase, soft landing",
-        this_that: "Should feel explosive power in legs",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
-            heavy_springs: 0
+            heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["squats_and_deadlifts"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e27: {
         id: "e27",
-        exercise_name: "SquatLightResistance",
+        exercise_name: "Squats (Light)",
         category_id: "c4",
-        setup_instructions: "Standing on carriage facing back",
-        movement_notes: "Perform squat pattern with light resistance",
-        cueing: "Keep weight in heels, knees track toes",
-        this_that: "Should feel work in quads and glutes",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["squats_and_deadlifts"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e28: {
         id: "e28",
-        exercise_name: "BridgeSeriesLightResistance",
+        exercise_name: "Deadlifts",
         category_id: "c4",
-        setup_instructions: "Lying supine on carriage, feet on platform",
-        movement_notes: "Perform bridge series with light resistance",
-        cueing: "Press through heels, engage glutes",
-        this_that: "Should feel work in hamstrings and glutes",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
-            heavy_springs: 0
+            heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["squats_and_deadlifts"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e29: {
         id: "e29",
-        exercise_name: "InnerThighSeries",
+        exercise_name: "Pistol Squats",
         category_id: "c4",
-        setup_instructions: "Side-lying on carriage, bottom leg extended",
-        movement_notes: "Perform inner thigh strengthening series",
-        cueing: "Keep hips stacked, engage inner thigh",
-        this_that: "Should feel focused work in adductors",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["squats_and_deadlifts"],
         vimeo_id: "",
         standard_time: "2:00"
-    },
+    }
+};
+
+// Lower Body Heavy exercises (category_id: "c3")
+const lower_body_heavy_exercises = {
     e30: {
         id: "e30",
-        exercise_name: "DeadliftProgressions",
-        category_id: "c4",
-        setup_instructions: "Standing on carriage facing back",
-        movement_notes: "Progress through deadlift patterns",
-        cueing: "Hinge at hips, maintain neutral spine",
-        this_that: "Should feel work in posterior chain",
+        exercise_name: "Running Man",
+        category_id: "c3",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e31: {
         id: "e31",
-        exercise_name: "SquatWithRow",
-        category_id: "c4",
-        setup_instructions: "Standing on carriage, holding straps",
-        movement_notes: "Combine squat with rowing motion",
-        cueing: "Coordinate squat with row, maintain form",
-        this_that: "Should feel integration of lower body and back",
+        exercise_name: "Skater Kick",
+        category_id: "c3",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
-            heavy_springs: 0
+            heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e32: {
         id: "e32",
-        exercise_name: "WellKicks",
-        category_id: "c4",
-        setup_instructions: "Standing at well, facing side",
-        movement_notes: "Perform controlled leg kicks",
-        cueing: "Maintain stable standing leg, control kicks",
-        this_that: "Should feel work in standing leg and kicking leg",
+        exercise_name: "Donkey Kick",
+        category_id: "c3",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
-    }
-};
-
-// Add to exports
-export { Exercise, abs_exercises, obliques_exercises, lower_body_lsd_exercises };
-const lower_body_heavy_exercises = {
+    },
     e33: {
         id: "e33",
-        exercise_name: "RunningMan",
+        exercise_name: "Scooter Kick",
         category_id: "c3",
-        setup_instructions: "Standing on carriage, facing back",
-        movement_notes: "Alternate leg pressing pattern",
-        cueing: "Drive through heel, control return",
-        this_that: "Should feel work in pressing leg glute and quad",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e34: {
         id: "e34",
-        exercise_name: "ScooterKick",
+        exercise_name: "Well Kick",
         category_id: "c3",
-        setup_instructions: "Standing on carriage sideways",
-        movement_notes: "Press carriage out in kicking motion",
-        cueing: "Keep standing leg stable, control kick",
-        this_that: "Should feel work in standing leg and kicking leg",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e35: {
         id: "e35",
-        exercise_name: "DonkeyKickExternalRotation",
+        exercise_name: "Standing Side Kicks",
         category_id: "c3",
-        setup_instructions: "All fours on carriage, working leg externally rotated",
-        movement_notes: "Press leg back maintaining rotation",
-        cueing: "Keep hips level, maintain external rotation",
-        this_that: "Should feel work in glute and external rotators",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e36: {
         id: "e36",
-        exercise_name: "SpiderKickExternalRotation",
+        exercise_name: "Superhero",
         category_id: "c3",
-        setup_instructions: "Plank position, working leg externally rotated",
-        movement_notes: "Press leg back from plank",
-        cueing: "Maintain plank position, control leg movement",
-        this_that: "Should feel work in glute and core stability",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e37: {
         id: "e37",
-        exercise_name: "SideLyingLegPressHighBar",
+        exercise_name: "Bridge Press",
         category_id: "c3",
-        setup_instructions: "Side-lying, foot on high bar",
-        movement_notes: "Press leg while maintaining side-lying position",
-        cueing: "Keep hips stacked, press through heel",
-        this_that: "Should feel work in outer hip and thigh",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e38: {
         id: "e38",
-        exercise_name: "SuperLungeHeavy",
+        exercise_name: "Hip Thrusts",
         category_id: "c3",
-        setup_instructions: "Standing in lunge position with heavy resistance",
-        movement_notes: "Perform deep lunge pattern",
-        cueing: "Control depth, maintain alignment",
-        this_that: "Should feel intense work in both legs",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     },
     e39: {
         id: "e39",
-        exercise_name: "SquatHeavy",
+        exercise_name: "Split Squat with Row",
         category_id: "c3",
-        setup_instructions: "Standing on carriage with heavy resistance",
-        movement_notes: "Perform squat pattern",
-        cueing: "Keep weight in heels, control depth",
-        this_that: "Should feel intense work in quads and glutes",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 1,
             heavy_springs: 1
         },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e40: {
-        id: "e40",
-        exercise_name: "SkaterKick",
-        category_id: "c3",
-        setup_instructions: "Standing sideways, working leg crossed behind",
-        movement_notes: "Press leg in skating motion",
-        cueing: "Control cross-body movement, maintain balance",
-        this_that: "Should feel work in outer hip and thigh",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e41: {
-        id: "e41",
-        exercise_name: "StandingSideKickExternalRotation",
-        category_id: "c3",
-        setup_instructions: "Standing sideways, working leg externally rotated",
-        movement_notes: "Press leg out maintaining rotation",
-        cueing: "Keep standing leg stable, maintain rotation",
-        this_that: "Should feel work in hip rotators and stabilizers",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e42: {
-        id: "e42",
-        exercise_name: "StandingOuterThighs",
-        category_id: "c3",
-        setup_instructions: "Standing sideways at bar",
-        movement_notes: "Press leg out to side",
-        cueing: "Keep hips level, press through heel",
-        this_that: "Should feel work in outer thigh and hip",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e43: {
-        id: "e43",
-        exercise_name: "BungeeKick",
-        category_id: "c3",
-        setup_instructions: "Standing facing side with bungee",
-        movement_notes: "Kick leg with bungee resistance",
-        cueing: "Control kick and return, maintain alignment",
-        this_that: "Should feel work throughout leg",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e44: {
-        id: "e44",
-        exercise_name: "BridgeSeriesHeavy",
-        category_id: "c3",
-        setup_instructions: "Lying supine, feet on platform, heavy resistance",
-        movement_notes: "Perform bridge series",
-        cueing: "Press through heels, maintain pelvic control",
-        this_that: "Should feel intense work in hamstrings and glutes",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "2:00"
-    },
-    e45: {
-        id: "e45",
-        exercise_name: "Superhero",
-        category_id: "c3",
-        setup_instructions: "Standing facing back, arms in superhero position",
-        movement_notes: "Press carriage while maintaining arm position",
-        cueing: "Keep upper body stable, press through legs",
-        this_that: "Should feel full body integration",
-        spring_setup: {
-            light_springs: 1,
-            heavy_springs: 1
-        },
-        template_tags: [],
+        template_tags: ["heavy_pressing"],
         vimeo_id: "",
         standard_time: "2:00"
     }
 };
 
-// Add to exports
-export { Exercise, abs_exercises, obliques_exercises, lower_body_lsd_exercises, lower_body_heavy_exercises };
-// Upper Body Exercises
+// Upper Body Exercises (category_id: "c6")
 const upper_body_exercises = {
-    e46: {
-        id: "e46",
-        exercise_name: "SexyBack",
+    e40: {
+        id: "e40",
+        exercise_name: "Chest Press",
         category_id: "c6",
-        setup_instructions: "Standing facing back, holding straps",
-        movement_notes: "Pull straps with back engagement",
-        cueing: "Draw shoulder blades together, maintain posture",
-        this_that: "Should feel work in upper back and shoulders",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["heavy_pushing"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e41: {
+        id: "e41",
+        exercise_name: "Tricep Press",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["heavy_pushing"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e42: {
+        id: "e42",
+        exercise_name: "Lat Pull",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["pulling"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e43: {
+        id: "e43",
+        exercise_name: "Underhand",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["pulling"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e44: {
+        id: "e44",
+        exercise_name: "Overhand",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["pulling"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e45: {
+        id: "e45",
+        exercise_name: "Overhead Press",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e46: {
+        id: "e46",
+        exercise_name: "Overhead Tricep Extension",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 3,
+            heavy_springs: 0
+        },
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e47: {
         id: "e47",
-        exercise_name: "ChestOpener",
+        exercise_name: "Front Raise",
         category_id: "c6",
-        setup_instructions: "Standing facing forward, arms open",
-        movement_notes: "Open arms against resistance",
-        cueing: "Keep chest lifted, control movement",
-        this_that: "Should feel stretch in chest, work in upper back",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e48: {
         id: "e48",
-        exercise_name: "Newspaper",
+        exercise_name: "Serve the platter",
         category_id: "c6",
-        setup_instructions: "Standing facing back, arms forward",
-        movement_notes: "Pull straps apart like opening newspaper",
-        cueing: "Keep shoulders down, open through chest",
-        this_that: "Should feel work in back and shoulders",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e49: {
         id: "e49",
-        exercise_name: "LatPulldown",
+        exercise_name: "Newspaper",
         category_id: "c6",
-        setup_instructions: "Standing facing back, arms overhead",
-        movement_notes: "Pull straps down engaging lats",
-        cueing: "Keep core engaged, pull from back",
-        this_that: "Should feel work in latissimus dorsi",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e50: {
         id: "e50",
-        exercise_name: "KneelingBicepCurl",
+        exercise_name: "Chest Opener",
         category_id: "c6",
-        setup_instructions: "Kneeling facing back, arms extended",
-        movement_notes: "Perform bicep curl with straps",
-        cueing: "Keep elbows still, curl from biceps",
-        this_that: "Should feel focused work in biceps",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e51: {
         id: "e51",
-        exercise_name: "OverheadTricepExtension",
+        exercise_name: "Tricep Kickback",
         category_id: "c6",
-        setup_instructions: "Standing facing forward, arms overhead",
-        movement_notes: "Extend arms against resistance",
-        cueing: "Keep elbows by ears, extend from triceps",
-        this_that: "Should feel focused work in triceps",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e52: {
         id: "e52",
-        exercise_name: "HugATree",
+        exercise_name: "Reverse fly",
         category_id: "c6",
-        setup_instructions: "Standing facing back, arms wide",
-        movement_notes: "Draw arms together in hugging motion",
-        cueing: "Keep shoulders down, engage chest",
-        this_that: "Should feel work in chest and arms",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e53: {
         id: "e53",
-        exercise_name: "ServePlatter",
+        exercise_name: "Tailone face pull",
         category_id: "c6",
-        setup_instructions: "Standing facing side, arms in serving position",
-        movement_notes: "Move arms in serving motion",
-        cueing: "Control movement, engage shoulders",
-        this_that: "Should feel work in shoulders and arms",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e54: {
         id: "e54",
-        exercise_name: "Superman",
+        exercise_name: "Tailbone bicep curl",
         category_id: "c6",
-        setup_instructions: "Standing facing back, arms extended",
-        movement_notes: "Pull straps while maintaining extension",
-        cueing: "Keep arms straight, engage back",
-        this_that: "Should feel work in entire back",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
             light_springs: 3,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["long_cables"],
         vimeo_id: "",
         standard_time: "1:30"
-    }
-};
-    e60: {
-        id: "e55",
-        exercise_name: "FacePull",
-        category_id: "c6",
-        setup_instructions: "Standing facing back, arms at shoulder height",
-        movement_notes: "Pull straps towards face with external rotation",
-        cueing: "Draw elbows wide, rotate palms back",
-        this_that: "Should feel work in rear deltoids and rotator cuff",
-        spring_setup: {
-            light_springs: 3,
-            heavy_springs: 0
-        },
-        template_tags: [],
-        vimeo_id: "",
-        standard_time: "1:30"
-    }
-// Lower Body Straps Exercises
-const lower_body_straps_exercises = {
+    },
     e55: {
-        id: "e56",
-        exercise_name: "BirdDog",
-        category_id: "c5",
-        setup_instructions: "All fours with feet in straps",
-        movement_notes: "Alternate leg extensions",
-        cueing: "Keep hips level, maintain core stability",
-        this_that: "Should feel work in core and legs",
+        id: "e55",
+        exercise_name: "Bench Press",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 3,
-            heavy_springs: 0
+            light_springs: 0,
+            heavy_springs: 2
         },
-        template_tags: [],
+        template_tags: ["short_cables_heavy"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e56: {
-        id: "e57",
-        exercise_name: "Crane",
-        category_id: "c5",
-        setup_instructions: "Prone position, feet in straps",
-        movement_notes: "Lift and lower legs with control",
-        cueing: "Keep pelvis stable, engage hamstrings",
-        this_that: "Should feel work in hamstrings and glutes",
+        id: "e56",
+        exercise_name: "Close Grip Press",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 3,
-            heavy_springs: 0
+            light_springs: 0,
+            heavy_springs: 2
         },
-        template_tags: [],
+        template_tags: ["short_cables_heavy"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e57: {
-        id: "e58",
-        exercise_name: "FrogKickObliqueSweep",
-        category_id: "c5",
-        setup_instructions: "Prone position, feet in straps",
-        movement_notes: "Combine frog kick with oblique movement",
-        cueing: "Control diagonal movement, keep core engaged",
-        this_that: "Should feel work in inner thighs and obliques",
+        id: "e57",
+        exercise_name: "Chest Fly",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 3,
-            heavy_springs: 0
+            light_springs: 0,
+            heavy_springs: 2
         },
-        template_tags: [],
+        template_tags: ["short_cables_heavy"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e58: {
-        id: "e59",
-        exercise_name: "SidePlankWithLegLifts",
-        category_id: "c5",
-        setup_instructions: "Side plank position, top foot in strap",
-        movement_notes: "Lift and lower leg while maintaining plank",
-        cueing: "Keep hips stacked, lift from outer hip",
-        this_that: "Should feel work in outer hip and core",
+        id: "e58",
+        exercise_name: "Bent over rows",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 3,
-            heavy_springs: 0
+            light_springs: 0,
+            heavy_springs: 2
         },
-        template_tags: [],
+        template_tags: ["short_cables_heavy"],
         vimeo_id: "",
         standard_time: "1:30"
     },
     e59: {
-        id: "e60",
-        exercise_name: "SideLyingLegSweep",
-        category_id: "c5",
-        setup_instructions: "Side-lying, top leg in strap",
-        movement_notes: "Sweep leg forward and back",
-        cueing: "Keep hips stable, control movement",
-        this_that: "Should feel work in hip flexors and glutes",
+        id: "e59",
+        exercise_name: "Squat rows",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
         spring_setup: {
-            light_springs: 3,
+            light_springs: 0,
+            heavy_springs: 2
+        },
+        template_tags: ["short_cables_heavy"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e60: {
+        id: "e60",
+        exercise_name: "Tricep Kickback",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
             heavy_springs: 0
         },
-        template_tags: [],
+        template_tags: ["short_cables_light"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e61: {
+        id: "e61",
+        exercise_name: "Chest Opener",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
+            heavy_springs: 0
+        },
+        template_tags: ["short_cables_light"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e62: {
+        id: "e62",
+        exercise_name: "Lateral Raise",
+        category_id: "c6",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
+            heavy_springs: 0
+        },
+        template_tags: ["short_cables_light"],
         vimeo_id: "",
         standard_time: "1:30"
     }
 };
 
-// Add to exports
-export { 
-    Exercise, 
-    abs_exercises, 
-    obliques_exercises, 
-    lower_body_lsd_exercises, 
+// Cardio Bursts Exercises (category_id: "c7")
+const cardio_bursts_exercises = {
+    e65: {
+        id: "e65",
+        exercise_name: "Burpees",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e66: {
+        id: "e66",
+        exercise_name: "Mt Climbers",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e67: {
+        id: "e67",
+        exercise_name: "Pushups",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e68: {
+        id: "e68",
+        exercise_name: "Up/Downs",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e69: {
+        id: "e69",
+        exercise_name: "Army Crawls",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    },
+    e70: {
+        id: "e70",
+        exercise_name: "Step Ups",
+        category_id: "c7",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 0,
+            heavy_springs: 0
+        },
+        template_tags: ["cardio"],
+        vimeo_id: "",
+        standard_time: "1:00"
+    }
+};
+
+// Lower Body Straps Exercises (category_id: "c5")
+const lower_body_straps_exercises = {
+    e63: {
+        id: "e63",
+        exercise_name: "Clamshell Side planks",
+        category_id: "c5",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
+            heavy_springs: 0
+        },
+        template_tags: ["footstraps"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    },
+    e64: {
+        id: "e64",
+        exercise_name: "Side lying legs",
+        category_id: "c5",
+        setup_instructions: "",
+        movement_notes: "",
+        cueing: "",
+        this_that: "",
+        spring_setup: {
+            light_springs: 2,
+            heavy_springs: 0
+        },
+        template_tags: ["footstraps"],
+        vimeo_id: "",
+        standard_time: "1:30"
+    }
+};
+
+// Export all exercise data
+export {
+    abs_exercises,
+    obliques_exercises,
+    lower_body_lsd_exercises,
     lower_body_heavy_exercises,
     upper_body_exercises,
-    lower_body_straps_exercises 
+    cardio_bursts_exercises,
+    lower_body_straps_exercises
 };
+
+// Create a flattened array of all exercises for component testing
+export const exercisesMock: Exercise[] = [
+    ...Object.values(abs_exercises),
+    ...Object.values(obliques_exercises),
+    ...Object.values(lower_body_lsd_exercises),
+    ...Object.values(lower_body_heavy_exercises),
+    ...Object.values(upper_body_exercises),
+    ...Object.values(cardio_bursts_exercises),
+    ...Object.values(lower_body_straps_exercises)
+].map(exercise => ({
+    ...exercise,
+    // Add derived properties for compatibility with component-test
+    name: exercise.exercise_name,
+    category: getCategoryName(exercise.category_id),
+    tags: exercise.template_tags,
+    isResistance: exercise.category_id === 'c3' || exercise.category_id === 'c6'
+}));
+
+// Helper function to get category name from ID
+function getCategoryName(categoryId: string): string {
+    const categoryMap: Record<string, string> = {
+        'c1': 'Abs',
+        'c2': 'Obliques',
+        'c3': 'Lower Body Heavy',
+        'c4': 'Lower Body LSD',
+        'c5': 'Lower Body Straps',
+        'c6': 'Upper Body',
+        'c7': 'Cardio Bursts'
+    };
+    return categoryMap[categoryId] || 'Unknown';
+}

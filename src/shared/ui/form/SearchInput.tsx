@@ -100,28 +100,8 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     }, [debouncedValue, onSearch, handleClear, handleHapticFeedback])
 
     return (
-      <Input
-        ref={ref}
-        type="search"
-        className={cn(
-          'pl-9 transition-all duration-200',
-          isFocused && 'ring-2 ring-primary/20',
-          className
-        )}
-        clearable
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        aria-label="Search"
-        onClear={handleClear}
-        clearButtonContent={
-          <span className="flex h-4 w-4 items-center justify-center">×</span>
-        }
-        {...props}
-      >
-        <div className="absolute left-3 top-1/2 -translate-y-1/2">
+      <div className="relative w-full">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
           <Search 
             className={cn(
               "h-4 w-4 transition-colors duration-200",
@@ -129,7 +109,28 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             )}
           />
         </div>
-      </Input>
+        <Input
+          ref={ref}
+          type="search"
+          className={cn(
+            'pl-9 transition-all duration-200',
+            isFocused && 'ring-2 ring-primary/20',
+            className
+          )}
+          clearable
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          aria-label="Search"
+          onClear={handleClear}
+          clearButtonContent={
+            <span className="flex h-4 w-4 items-center justify-center">×</span>
+          }
+          {...props}
+        />
+      </div>
     )
   }
 )

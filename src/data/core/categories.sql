@@ -11,4 +11,5 @@ INSERT INTO categories (id, name) VALUES
     ('c4', 'LowerBodyLungesSquatsDeadlifts'),
     ('c5', 'LowerBodyStraps'),
     ('c6', 'UpperBody'),
-    ('c7', 'Variations');
+    ('c7', 'CardioBursts'),
+    ('c8', 'Variations');
