@@ -10,6 +10,11 @@ export default {
         'light-blue': {
           500: '#0ea5e9',
         },
+        primary: {
+          DEFAULT: 'rgb(0 183 120)',
+          foreground: 'rgb(255 255 255)',
+        },
+        'primary-foreground': 'rgb(255 255 255)',
       },
     },
   },

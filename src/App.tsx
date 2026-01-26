@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import ErrorBoundary from './ErrorBoundary'
+import { LoginForm, SignupForm, ForgotPasswordForm } from '@/features/auth'
+import { PrivacyPolicy } from '@/pages/PrivacyPolicy'
 
-// Import pages - ExerciseLibrary has runtime errors, commenting out
-// import { ExerciseLibrary } from './pages/ExerciseLibrary'
+// Import FSA components - Working ExerciseLibrary from Feature-Slice Architecture
+import { ExerciseLibrary } from './features/exercises/components/ExerciseLibrary'
 // import { RoutineBuilder } from './components/routines/RoutineBuilder'
 
 export default function App() {
@@ -194,13 +196,13 @@ export default function App() {
               </div>
             } />
             <Route path="/exercises" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold mb-4">Exercise Library</h1>
-                <div className="p-4 bg-red-100 rounded">
-                  <p>❌ ExerciseLibrary component has runtime errors</p>
-                  <p className="text-sm mt-2">Need to debug the component dependencies</p>
-                </div>
-              </div>
+              <ExerciseLibrary 
+                onAddToRoutineBuilder={(exercise) => {
+                  console.log('Adding exercise to routine builder:', exercise.exercise_name)
+                  // TODO: Implement routine builder integration
+                }}
+                className="min-h-screen"
+              />
             } />
             <Route path="/builder" element={
               <div className="p-8">
@@ -218,6 +220,23 @@ export default function App() {
                 </div>
               </div>
             } />
+            {/* Auth Routes */}
+            <Route path="/login" element={
+              <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'rgb(var(--core-black))' }}>
+                <LoginForm />
+              </div>
+            } />
+            <Route path="/signup" element={
+              <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'rgb(var(--core-black))' }}>
+                <SignupForm />
+              </div>
+            } />
+            <Route path="/forgot-password" element={
+              <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'rgb(var(--core-black))' }}>
+                <ForgotPasswordForm />
+              </div>
+            } />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
       </ErrorBoundary>

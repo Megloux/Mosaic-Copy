@@ -6,6 +6,10 @@
   --core-teal: 0 183 120;       /* Mosaic's teal */
   --core-teal-light: 0 213 140; /* Lighter variation of Mosaic's teal */
 
+  /* Primary (for buttons/components) */
+  --primary: rgb(0 183 120);              /* Same as core-teal */
+  --primary-foreground: rgb(255 255 255); /* White text on teal */
+
   /* Border Opacities */
   --border-opacity-subtle: 0.1;    /* Subtle borders */
   --border-opacity-medium: 0.2;    /* Standard borders */

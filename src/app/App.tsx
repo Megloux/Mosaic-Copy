@@ -7,6 +7,8 @@ import { SaveButton } from '@/components/ui/buttons/SaveButton'
 import { NetworkStatusIndicator } from '@/components/ui/NetworkStatusIndicator'
 import { NetworkToast } from '@/components/ui/NetworkToast'
 import { RoutinePlayerWrapper } from '@/components/routines/player/RoutinePlayerWrapper'
+import { LoginForm, SignupForm, ForgotPasswordForm, ProtectedRoute, AuthHeader } from '@/features/auth'
+import { PrivacyPolicy } from '@/pages/PrivacyPolicy'
 
 // Create a client
 const queryClient = new QueryClient({
@@ -23,9 +25,39 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/exercises" element={<ExerciseLibrary onAddToRoutineBuilder={(exercise) => console.log('Add to routine:', exercise)} />} />
+          {/* Auth Routes (Public) */}
+          <Route path="/login" element={
+            <div className="min-h-screen bg-background flex items-center justify-center p-4">
+              <LoginForm />
+            </div>
+          } />
+          <Route path="/signup" element={
+            <div className="min-h-screen bg-background flex items-center justify-center p-4">
+              <SignupForm />
+            </div>
+          } />
+          <Route path="/forgot-password" element={
+            <div className="min-h-screen bg-background flex items-center justify-center p-4">
+              <ForgotPasswordForm />
+            </div>
+          } />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          
+          {/* Protected Routes */}
+          <Route path="/exercises" element={
+            <ProtectedRoute>
+              <ExerciseLibrary onAddToRoutineBuilder={(exercise) => console.log('Add to routine:', exercise)} />
+            </ProtectedRoute>
+          } />
           <Route path="/" element={
             <div className="min-h-screen bg-gray-50">
+              {/* Auth Header */}
+              <header className="bg-white border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                  <h1 className="text-xl font-bold text-gray-900">Mosaic</h1>
+                  <AuthHeader />
+                </div>
+              </header>
               <div className="max-w-7xl mx-auto py-12 px-4">
                 <h1 className="text-4xl font-bold text-gray-900 mb-8">MosaicWindsurf</h1>
                 <div className="space-y-6">

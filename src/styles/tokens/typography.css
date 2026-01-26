@@ -1,4 +1,5 @@
 /* src/styles/tokens/typography.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
 :root {
   /* ===== Font Family ===== */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -39,7 +40,6 @@
 }
 
 /* ===== Font Loading ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
 
 /* ===== iOS Optimizations ===== */
 @supports (-webkit-touch-callout: none) {

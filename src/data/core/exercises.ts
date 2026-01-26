@@ -138,7 +138,7 @@ const abs_exercises = {
     },
     e8: {
         id: "e8",
-        exercise_name: "footstrap crunces",
+        exercise_name: "footstrap crunches",
         category_id: "c1",
         setup_instructions: "",
         movement_notes: "",
