@@ -239,16 +239,28 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
             )}
           </div>
 
-          {/* Studio Name - Optional */}
-          <Input
-            label="Studio Name (optional)"
-            type="text"
-            value={studioName}
-            onChange={(e) => setStudioName(e.target.value)}
-            placeholder="Where do you teach?"
-            disabled={loading}
-            className={inputClass}
-          />
+          {/* Studio Instagram Handle - Optional */}
+          <div>
+            <Input
+              label="Studio Instagram (optional)"
+              type="text"
+              value={studioName}
+              onChange={(e) => setStudioName(e.target.value.replace(/^@/, '').replace(/[^a-z0-9._]/gi, ''))}
+              placeholder="studiofitness"
+              disabled={loading}
+              className={inputClass}
+            />
+            {studioName && (
+              <a
+                href={`https://instagram.com/${studioName}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-1 text-sm text-teal-600 hover:text-teal-700"
+              >
+                @{studioName} ↗
+              </a>
+            )}
+          </div>
 
           {/* Password */}
           <PasswordInput

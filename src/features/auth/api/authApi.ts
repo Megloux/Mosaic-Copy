@@ -65,6 +65,15 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
     const { data: authData, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          first_name: firstName || null,
+          last_name: lastName || null,
+          phone: phone || null,
+          username: username || null,
+          studio_name: studioName || null,
+        }
+      }
     })
 
     if (error) {
@@ -73,25 +82,6 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
         return { user: null, session: null, error: 'An account with this email already exists. Try signing in instead.' }
       }
       return { user: null, session: null, error: error.message }
-    }
-
-    // Update profile row with additional fields (row created by database trigger)
-    if (authData.user) {
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .update({
-          first_name: firstName || null,
-          last_name: lastName || null,
-          phone: phone || null,
-          username: username || null,
-          studio_name: studioName || null,
-        })
-        .eq('id', authData.user.id)
-
-      if (profileError) {
-        console.error('Failed to update profile:', profileError)
-        // Don't fail signup if profile update fails - user can update later
-      }
     }
 
     return { user: authData.user, session: authData.session, error: null }
