@@ -9,14 +9,18 @@ jest.mock('@/data/core/exercises', () => ({
       id: 'e1',
       exercise_name: 'Modified Plank',
       category_id: 'c1',
-      setup_instructions: 'Test instructions',
-      movement_notes: 'Test notes',
-      cueing: 'Test cueing',
-      this_that: 'Test comparison',
       spring_setup: { light_springs: 2, heavy_springs: 0 },
       template_tags: ['test'],
       vimeo_id: '12345',
-      standard_time: '30s'
+      standard_time: '30s',
+      muscle_tags: ['Core'],
+      visual_cue: 'Test cue',
+      setup_cues: ['Test setup'],
+      movement_cues: ['Test movement'],
+      breathing_cues: { exhale: 'Test', inhale: 'Test' },
+      common_mistakes: ['Test mistake'],
+      easier_modification: 'Test easier',
+      harder_progression: 'Test harder'
     }
   },
   obliques_exercises: {
@@ -24,14 +28,18 @@ jest.mock('@/data/core/exercises', () => ({
       id: 'e2',
       exercise_name: 'Side Plank',
       category_id: 'c2',
-      setup_instructions: 'Test instructions',
-      movement_notes: 'Test notes',
-      cueing: 'Test cueing',
-      this_that: 'Test comparison',
       spring_setup: { light_springs: 1, heavy_springs: 1 },
       template_tags: ['test'],
       vimeo_id: '23456',
-      standard_time: '45s'
+      standard_time: '45s',
+      muscle_tags: ['Obliques'],
+      visual_cue: 'Test cue',
+      setup_cues: ['Test setup'],
+      movement_cues: ['Test movement'],
+      breathing_cues: { exhale: 'Test', inhale: 'Test' },
+      common_mistakes: ['Test mistake'],
+      easier_modification: 'Test easier',
+      harder_progression: 'Test harder'
     }
   },
   lower_body_lsd_exercises: {},
@@ -105,14 +113,18 @@ describe('useExerciseLibraryStore', () => {
       id: 'test',
       exercise_name: 'Test Exercise',
       category_id: 'c1',
-      setup_instructions: 'Test',
-      movement_notes: 'Test',
-      cueing: 'Test',
-      this_that: 'Test',
       spring_setup: { light_springs: 1, heavy_springs: 1 },
       template_tags: [],
       vimeo_id: '12345',
-      standard_time: '30s'
+      standard_time: '30s',
+      muscle_tags: [],
+      visual_cue: '',
+      setup_cues: [],
+      movement_cues: [],
+      breathing_cues: { exhale: '', inhale: '' },
+      common_mistakes: [],
+      easier_modification: '',
+      harder_progression: ''
     }
     
     act(() => {

@@ -15,10 +15,6 @@ export interface Exercise {
     id: string;
     exercise_name: string;
     category_id: string;
-    setup_instructions: string;
-    movement_notes: string;
-    cueing: string;
-    this_that: string;
     spring_setup: {
         light_springs: number;
         heavy_springs: number;
@@ -26,17 +22,24 @@ export interface Exercise {
     template_tags: string[];
     vimeo_id: string;
     standard_time: string;
-    category?: string; 
-    tags?: string[]; 
-    name?: string; 
-    isResistance?: boolean; 
+    muscle_tags: string[];
+    visual_cue: string;
+    setup_cues: string[];
+    movement_cues: string[];
+    breathing_cues: {
+        exhale: string;
+        inhale: string;
+    };
+    common_mistakes: string[];
+    easier_modification: string;
+    harder_progression: string;
 }
 
 // Type mapping helper to convert between original Exercise and FSA Exercise
 export const mapToFSAExercise = (exercise: Exercise): FSAExercise => ({
     id: exercise.id,
-    name: exercise.name || exercise.exercise_name || '',
-    description: exercise.movement_notes || '',
+    name: exercise.exercise_name || '',
+    description: exercise.visual_cue || '',
     duration: {
         default: parseInt(exercise.standard_time || '60', 10),
         min: 30,
@@ -44,11 +47,11 @@ export const mapToFSAExercise = (exercise: Exercise): FSAExercise => ({
     },
     difficulty: 1,
     equipment: [],
-    muscleGroups: [],
-    tags: exercise.tags || exercise.template_tags || [],
+    muscleGroups: exercise.muscle_tags || [],
+    tags: exercise.template_tags || [],
     thumbnailUrl: '',
     videoUrl: exercise.vimeo_id ? `https://vimeo.com/${exercise.vimeo_id}` : undefined,
-    isResistance: exercise.isResistance || false
+    isResistance: exercise.category_id === 'c3' || exercise.category_id === 'c6'
 });
 
 /**

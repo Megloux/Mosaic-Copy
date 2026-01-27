@@ -9,10 +9,6 @@ export interface Variation {
   id: string;
   variation_name: string;
   category_id: string;
-  setup_instructions: string;
-  movement_notes: string;
-  cueing: string;
-  this_that: string;
   spring_setup: {
     light_springs: number;
     heavy_springs: number;
@@ -20,6 +16,17 @@ export interface Variation {
   template_tags: string[];
   vimeo_id: string;
   standard_time: string;
+  muscle_tags: string[];
+  visual_cue: string;
+  setup_cues: string[];
+  movement_cues: string[];
+  breathing_cues: {
+    exhale: string;
+    inhale: string;
+  };
+  common_mistakes: string[];
+  easier_modification: string;
+  harder_progression: string;
 }
 
 /**

@@ -94,8 +94,8 @@ export const ExerciseSection: React.FC<ExerciseSectionProps> = ({
             className="p-4 rounded-lg bg-surface-raised hover:bg-surface-overlay transition-colors"
           >
             <h3 className="font-medium text-lg mb-2">{exercise.exercise_name}</h3>
-            {exercise.setup_instructions && (
-              <p className="text-sm text-foreground/60 mb-4">{exercise.setup_instructions}</p>
+            {exercise.setup_cues && exercise.setup_cues.length > 0 && (
+              <p className="text-sm text-foreground/60 mb-4">{exercise.setup_cues[0]}</p>
             )}
             <div className="flex items-center justify-between">
               <span className="text-sm">

@@ -65,14 +65,19 @@ export const ExerciseSection: React.FC<ExerciseSectionProps> = ({
         {filteredExercises.map((exercise: any) => (
           <div key={exercise.id} className="p-4 bg-white/5 rounded-lg">
             <h3 className="text-lg font-semibold mb-1">{exercise.exercise_name}</h3>
-            <p className="text-sm text-foreground/60 mb-2">{exercise.setup_instructions}</p>
+            {exercise.setup_cues?.length > 0 && (
+              <p className="text-sm text-foreground/60 mb-2">{exercise.setup_cues[0]}</p>
+            )}
             <div className="flex gap-2 text-xs mb-2">
               <span>Springs: {exercise.spring_setup?.light_springs ?? 0}L/{exercise.spring_setup?.heavy_springs ?? 0}H</span>
               <span>Time: {exercise.standard_time}</span>
             </div>
-            <div className="text-xs text-foreground/50 mb-2">{exercise.movement_notes}</div>
-            <div className="text-xs text-foreground/50 mb-2">Cueing: {exercise.cueing}</div>
-            <div className="text-xs text-foreground/50 mb-2">This/That: {exercise.this_that}</div>
+            {exercise.visual_cue && (
+              <div className="text-xs text-foreground/50 mb-2 italic">"{exercise.visual_cue}"</div>
+            )}
+            {exercise.movement_cues?.length > 0 && (
+              <div className="text-xs text-foreground/50 mb-2">{exercise.movement_cues[0]}</div>
+            )}
             {exercise.vimeo_id && (
               <a href={`https://vimeo.com/${exercise.vimeo_id}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline text-xs">Watch Video</a>
             )}

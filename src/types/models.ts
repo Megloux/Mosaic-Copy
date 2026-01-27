@@ -16,10 +16,6 @@ export interface Exercise {
     id: ExerciseId;
     exercise_name: string;
     category_id: CategoryId;
-    setup_instructions: string;
-    movement_notes: string;
-    cueing: string;
-    this_that: string;
     spring_setup: {
         light_springs: number;
         heavy_springs: number;
@@ -27,6 +23,17 @@ export interface Exercise {
     template_tags: string[];
     vimeo_id: string;
     standard_time: string;
+    muscle_tags: string[];
+    visual_cue: string;
+    setup_cues: string[];
+    movement_cues: string[];
+    breathing_cues: {
+        exhale: string;
+        inhale: string;
+    };
+    common_mistakes: string[];
+    easier_modification: string;
+    harder_progression: string;
 }
 
 /**
@@ -96,17 +103,24 @@ export const exerciseSchema = z.object({
     id: z.string().regex(/^e\d+$/),
     exercise_name: z.string(),
     category_id: z.string().regex(/^c\d+$/),
-    setup_instructions: z.string(),
-    movement_notes: z.string(),
-    cueing: z.string(),
-    this_that: z.string(),
     spring_setup: z.object({
         light_springs: z.number(),
         heavy_springs: z.number()
     }),
     template_tags: z.array(z.string()),
     vimeo_id: z.string(),
-    standard_time: z.string()
+    standard_time: z.string(),
+    muscle_tags: z.array(z.string()),
+    visual_cue: z.string(),
+    setup_cues: z.array(z.string()),
+    movement_cues: z.array(z.string()),
+    breathing_cues: z.object({
+        exhale: z.string(),
+        inhale: z.string()
+    }),
+    common_mistakes: z.array(z.string()),
+    easier_modification: z.string(),
+    harder_progression: z.string()
 });
 
 // Type assertion helper
