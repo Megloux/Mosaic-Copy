@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import ErrorBoundary from './ErrorBoundary'
 import { LoginForm, SignupForm, ForgotPasswordForm } from '@/features/auth'
@@ -16,18 +16,7 @@ export default function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={
-              <div className="p-8" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
-                <h1 
-                  className="mb-8" 
-                  style={{ 
-                    fontSize: 'var(--text-4xl)',
-                    fontWeight: 'var(--font-brand)',
-                    letterSpacing: 'var(--tracking-default)',
-                    color: 'rgb(var(--core-teal))'
-                  }}
-                >
-                  MOSAIC
-                </h1>
+              <div className="p-4 pt-6" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
                 <div className="space-y-6">
                   <div 
                     className="p-6 rounded-lg" 
@@ -48,8 +37,9 @@ export default function App() {
                     </p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div 
-                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
+                    <Link 
+                      to="/exercises"
+                      className="block p-6 rounded-lg transition-all duration-200 hover:scale-105" 
                       style={{ backgroundColor: 'var(--surface-base)' }}
                     >
                       <h3 
@@ -80,7 +70,7 @@ export default function App() {
                       >
                         Navigate → Exercises
                       </p>
-                    </div>
+                    </Link>
                     <div 
                       className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
                       style={{ backgroundColor: 'var(--surface-base)' }}
