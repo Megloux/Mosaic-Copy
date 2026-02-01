@@ -6,12 +6,13 @@
  */
 
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
 import { PasswordInput } from '@/components/ui/form/PasswordInput'
 import { cn } from '@/shared/lib/utils'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
+import { useUIStore } from '@/store/uiStore'
 
 export interface LoginFormProps {
   className?: string
@@ -20,7 +21,9 @@ export interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { signIn, loading, error, clearError } = useAuthStore()
+  const addToast = useUIStore(state => state.addToast)
   
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -59,8 +62,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
     const result = await signIn(email.trim().toLowerCase(), password)
     
     if (result.success) {
+      addToast({
+        type: 'success',
+        title: 'Welcome back!',
+        message: 'You have successfully signed in.',
+        duration: 3000,
+      })
       onSuccess?.()
-      navigate('/')
+      
+      // Redirect to the page they were trying to access, or home
+      const from = (location.state as any)?.from?.pathname || '/'
+      navigate(from, { replace: true })
     }
   }
 

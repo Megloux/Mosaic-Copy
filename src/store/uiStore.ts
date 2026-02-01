@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useShallow } from 'zustand/react/shallow'
 import { Routine } from '@/types/templates'
 
 // Types for toast notifications
@@ -136,41 +137,53 @@ export const useUIStore = create<UIState>()(
   )
 )
 
-// Selector hooks for better performance
-export const useToasts = () => useUIStore(state => ({
-  toasts: state.toasts,
-  addToast: state.addToast,
-  removeToast: state.removeToast,
-  clearToasts: state.clearToasts
-}))
+// Selector hooks for better performance - using useShallow to prevent infinite re-renders
+export const useToasts = () => useUIStore(
+  useShallow(state => ({
+    toasts: state.toasts,
+    addToast: state.addToast,
+    removeToast: state.removeToast,
+    clearToasts: state.clearToasts
+  }))
+)
 
-export const useModals = () => useUIStore(state => ({
-  modals: state.modals,
-  openModal: state.openModal,
-  closeModal: state.closeModal,
-  closeAllModals: state.closeAllModals
-}))
+export const useModals = () => useUIStore(
+  useShallow(state => ({
+    modals: state.modals,
+    openModal: state.openModal,
+    closeModal: state.closeModal,
+    closeAllModals: state.closeAllModals
+  }))
+)
 
-export const useTheme = () => useUIStore(state => ({
-  theme: state.theme,
-  setTheme: state.setTheme
-}))
+export const useTheme = () => useUIStore(
+  useShallow(state => ({
+    theme: state.theme,
+    setTheme: state.setTheme
+  }))
+)
 
-export const useSidebar = () => useUIStore(state => ({
-  sidebarOpen: state.sidebarOpen,
-  toggleSidebar: state.toggleSidebar,
-  setSidebarOpen: state.setSidebarOpen
-}))
+export const useSidebar = () => useUIStore(
+  useShallow(state => ({
+    sidebarOpen: state.sidebarOpen,
+    toggleSidebar: state.toggleSidebar,
+    setSidebarOpen: state.setSidebarOpen
+  }))
+)
 
-export const useTabGroup = (groupId: string) => useUIStore(state => ({
-  activeTab: state.activeTabs[groupId],
-  setActiveTab: (tabId: string) => state.setActiveTab(groupId, tabId)
-}))
+export const useTabGroup = (groupId: string) => useUIStore(
+  useShallow(state => ({
+    activeTab: state.activeTabs[groupId],
+    setActiveTab: (tabId: string) => state.setActiveTab(groupId, tabId)
+  }))
+)
 
 // Selector hook for the Routine Player
-export const useRoutinePlayer = () => useUIStore(state => ({
-  visible: state.routinePlayerVisible,
-  routine: state.currentPlayingRoutine,
-  showRoutinePlayer: state.showRoutinePlayer,
-  hideRoutinePlayer: state.hideRoutinePlayer
-}))
+export const useRoutinePlayer = () => useUIStore(
+  useShallow(state => ({
+    visible: state.routinePlayerVisible,
+    routine: state.currentPlayingRoutine,
+    showRoutinePlayer: state.showRoutinePlayer,
+    hideRoutinePlayer: state.hideRoutinePlayer
+  }))
+)

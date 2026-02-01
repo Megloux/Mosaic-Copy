@@ -10,6 +10,7 @@ import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
 import { cn } from '@/shared/lib/utils'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
+import { useUIStore } from '@/store/uiStore'
 
 export interface ForgotPasswordFormProps {
   className?: string
@@ -17,6 +18,7 @@ export interface ForgotPasswordFormProps {
 
 export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ className }) => {
   const { resetPassword, loading, error, clearError } = useAuthStore()
+  const addToast = useUIStore(state => state.addToast)
   
   const [email, setEmail] = React.useState('')
   const [localError, setLocalError] = React.useState<string | null>(null)
@@ -50,6 +52,12 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ classNam
     const result = await resetPassword(email.trim().toLowerCase())
     
     if (result.success) {
+      addToast({
+        type: 'success',
+        title: 'Email sent',
+        message: 'Check your inbox for password reset instructions.',
+        duration: 5000,
+      })
       setSubmitted(true)
     }
   }

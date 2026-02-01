@@ -2,7 +2,11 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-const supabaseServiceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY
+const supabaseServiceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || ''
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing Supabase environment variables')
+}
 
 // Create client with appropriate key based on context
 export const supabase = createClient(
@@ -10,5 +14,7 @@ export const supabase = createClient(
   typeof window === 'undefined' ? supabaseServiceRoleKey : supabaseAnonKey
 )
 
-// Admin client for migrations and backend operations only
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey)
+// Admin client for migrations and backend operations only (only works server-side)
+export const supabaseAdmin = supabaseServiceRoleKey 
+  ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : supabase

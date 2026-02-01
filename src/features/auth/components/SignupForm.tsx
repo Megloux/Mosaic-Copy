@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
 import { PasswordInput } from '@/components/ui/form/PasswordInput'
@@ -22,6 +22,7 @@ export interface SignupFormProps {
 
 export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { signUp, loading, error, clearError } = useAuthStore()
   const addToast = useUIStore(state => state.addToast)
   
@@ -139,7 +140,10 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
         duration: 5000,
       })
       onSuccess?.()
-      navigate('/')
+      
+      // Redirect to the page they were trying to access, or home
+      const from = (location.state as any)?.from?.pathname || '/'
+      navigate(from, { replace: true })
     }
   }
 

@@ -1,20 +1,55 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import ErrorBoundary from './ErrorBoundary'
-import { LoginForm, SignupForm, ForgotPasswordForm } from '@/features/auth'
+import { LoginForm, SignupForm, ForgotPasswordForm, ProtectedRoute, EmailVerificationPage, ResetPasswordPage, useAuthStore } from '@/features/auth'
 import { PrivacyPolicy } from '@/pages/PrivacyPolicy'
+import { ToastContainer } from '@/shared/ui/Toast'
+import { ProfilePage } from '@/features/profile'
 
 // Import FSA components - Working ExerciseLibrary from Feature-Slice Architecture
 import { ExerciseLibrary } from './features/exercises/components/ExerciseLibrary'
 // import { RoutineBuilder } from './components/routines/RoutineBuilder'
 
 export default function App() {
+  const { initialize, initialized, loading } = useAuthStore()
+
+  // Initialize auth on app load
+  useEffect(() => {
+    initialize()
+  }, [initialize])
+
   return (
     <Router>
       <ErrorBoundary>
-        <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--core-black))', color: 'rgb(var(--core-white))' }}>
-          <Navigation />
-          <Routes>
+        {/* Show loading screen while checking auth state */}
+        {(!initialized || loading) ? (
+          <div 
+            className="min-h-screen flex items-center justify-center" 
+            style={{ backgroundColor: 'rgb(var(--core-black))' }}
+          >
+            <div className="flex flex-col items-center gap-4">
+              <div 
+                className="h-12 w-12 animate-spin rounded-full border-4 border-t-transparent"
+                style={{ borderColor: 'rgb(var(--core-teal))' }}
+              />
+              <p 
+                className="text-sm"
+                style={{ 
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 'var(--font-thin)'
+                }}
+              >
+                Loading...
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--core-black))', color: 'rgb(var(--core-white))' }}>
+            <Navigation />
+            <ToastContainer />
+            <Routes>
             <Route path="/" element={
               <div className="p-4 pt-6" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
                 <div className="space-y-6">
@@ -210,6 +245,12 @@ export default function App() {
                 </div>
               </div>
             } />
+            {/* Profile Route - Protected */}
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            } />
             {/* Auth Routes */}
             <Route path="/login" element={
               <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'rgb(var(--core-black))' }}>
@@ -226,9 +267,12 @@ export default function App() {
                 <ForgotPasswordForm />
               </div>
             } />
+            <Route path="/verify-email" element={<EmailVerificationPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
+        )}
       </ErrorBoundary>
     </Router>
   )

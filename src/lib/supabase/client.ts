@@ -2,10 +2,10 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/shared/api/supabase/types'
 
 // Initialize Supabase client
-// Use process.env for Jest compatibility and fallback to hardcoded values for development
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://your-supabase-url.supabase.co'
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key-for-development'
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'your-service-role-key-for-development'
+// Use import.meta.env for Vite compatibility
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseServiceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || ''
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables')

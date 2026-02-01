@@ -47,6 +47,12 @@ class ErrorBoundary extends Component<Props, State> {
             </div>
             <div className="text-sm text-gray-600">
               <p>We're sorry, but something unexpected happened.</p>
+              {this.state.error && (
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded text-red-800 text-xs font-mono overflow-auto max-h-48">
+                  <p className="font-bold">{this.state.error.name}: {this.state.error.message}</p>
+                  <pre className="mt-2 whitespace-pre-wrap">{this.state.error.stack}</pre>
+                </div>
+              )}
               <button 
                 onClick={() => window.location.reload()} 
                 className="mt-4 bg-teal-600 text-white px-4 py-2 rounded-md text-sm hover:bg-teal-700 transition-colors"

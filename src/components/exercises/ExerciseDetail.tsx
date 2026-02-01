@@ -29,18 +29,24 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({
   onClose,
   onAddToRoutineBuilder
 }) => {
-  // Local state for image error handling
-  const [imageError, setImageError] = useState(false)
+  // Local state for video playback
+  const [isPlaying, setIsPlaying] = useState(false)
   
-  // Determine the thumbnail URL based on the Vimeo ID
-  const thumbnailUrl = exercise.vimeo_id 
-    ? `https://vumbnail.com/${exercise.vimeo_id}.jpg`
-    : '/images/exercise-placeholder.jpg'
+  // Google Drive embed URL for video playback
+  const videoEmbedUrl = exercise.vimeo_id 
+    ? `https://drive.google.com/file/d/${exercise.vimeo_id}/preview`
+    : null
   
   // Handle adding exercise to routine builder
   const handleAddExercise = () => {
     onAddToRoutineBuilder(exercise)
-    // Don't close the modal automatically - let the caller decide
+  }
+  
+  // Handle video play
+  const handlePlayVideo = () => {
+    if (videoEmbedUrl) {
+      setIsPlaying(true)
+    }
   }
 
   return (
@@ -66,29 +72,45 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({
 
       {/* Modal Content - Four Card Structure */}
       <div className="p-[var(--container-padding-md)] space-y-4 overflow-y-auto max-h-[70vh]">
-        {/* Card 1: Video Thumbnail */}
-        <Card variant="outline" padding="medium" className="overflow-hidden">
+        {/* Card 1: Video Player */}
+        <Card variant="default" padding="medium" className="overflow-hidden rounded-lg">
           <div className="text-center mb-2">
             <h3 className="text-lg font-medium">{exercise.exercise_name}</h3>
           </div>
-          <div className="aspect-video relative overflow-hidden rounded-md">
-            {!imageError ? (
-              <img
-                src={thumbnailUrl}
-                alt={exercise.exercise_name}
-                className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
+          <div className="aspect-video relative overflow-hidden rounded-md bg-black">
+            {isPlaying && videoEmbedUrl ? (
+              <iframe
+                src={videoEmbedUrl}
+                className="w-full h-full"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title={exercise.exercise_name}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-surface-hover">
-                <span className="text-foreground/60">No Video Available</span>
-              </div>
+              <button
+                onClick={handlePlayVideo}
+                className="w-full h-full flex flex-col items-center justify-center bg-surface-hover hover:bg-surface-hover/80 transition-colors cursor-pointer"
+                disabled={!videoEmbedUrl}
+              >
+                {videoEmbedUrl ? (
+                  <>
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center mb-2">
+                      <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <span className="text-foreground/60 text-sm">Click to play video</span>
+                  </>
+                ) : (
+                  <span className="text-foreground/60">No Video Available</span>
+                )}
+              </button>
             )}
           </div>
         </Card>
 
         {/* Card 2: Setup & Basics */}
-        <Card variant="outline" padding="medium">
+        <Card variant="default" padding="medium" className="rounded-lg">
           <h4 className="text-base font-semibold mb-3">Setup & Basics</h4>
           
           <div className="space-y-3">
@@ -156,7 +178,7 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({
         </Card>
 
         {/* Card 4: Mistakes & Modifications */}
-        <Card variant="outline" padding="medium">
+        <Card variant="default" padding="medium" className="rounded-lg">
           <h4 className="text-base font-semibold mb-3">Common Mistakes & Modifications</h4>
           
           <div className="space-y-3">
