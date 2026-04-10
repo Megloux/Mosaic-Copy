@@ -16,7 +16,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Warmup Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -28,7 +28,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Heavy Bilateral Warmup",
-      "template_tags": ["HeavyBilateral"],
+      "template_tags": ["heavy_bilateral"],
       "exercise_count": {
         "min": 1,
         "max": 1
@@ -40,7 +40,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Pressing Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -52,7 +52,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Footstrap Block",
-      "template_tags": ["Footstrap"],
+      "template_tags": ["footstrap"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -64,7 +64,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Light Resistance",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -76,7 +76,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Heavy Upper Body",
-      "template_tags": ["HeavyResistance"],
+      "template_tags": ["heavy_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -88,7 +88,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Light Cable Work",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -100,7 +100,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Bodyweight",
-      "template_tags": ["Bodyweight"],
+      "template_tags": ["bodyweight"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -112,7 +112,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -135,7 +135,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -147,7 +147,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Leg Block 1",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -159,7 +159,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Leg Block 2",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -171,7 +171,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b4",
       "name": "Oblique Block 1",
-      "template_tags": ["Obliques"],
+      "template_tags": ["obliques"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -183,7 +183,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b5",
       "name": "Oblique Block 2",
-      "template_tags": ["Obliques"],
+      "template_tags": ["obliques"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -195,7 +195,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Upper Body Block",
-      "template_tags": ["UpperBody"],
+      "template_tags": ["upper_body"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -207,7 +207,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 3,
         "max": 5
@@ -230,7 +230,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -242,7 +242,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Bilateral Warmup",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -254,7 +254,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Heavy Upper Body",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -266,7 +266,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Main Upper Body Block",
-      "template_tags": ["UpperBody"],
+      "template_tags": ["upper_body"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -278,7 +278,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -301,7 +301,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -313,7 +313,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Bilateral Warmup",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -325,7 +325,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -337,7 +337,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Footstrap Block",
-      "template_tags": ["Footstrap"],
+      "template_tags": ["footstrap"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -349,7 +349,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Light Resistance",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -361,7 +361,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -384,7 +384,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Cable Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -396,7 +396,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b4",
       "name": "Oblique Cable Block 1",
-      "template_tags": ["Obliques"],
+      "template_tags": ["obliques"],
       "exercise_count": {
         "min": 3,
         "max": 4
@@ -408,7 +408,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b5",
       "name": "Oblique Cable Block 2",
-      "template_tags": ["Obliques"],
+      "template_tags": ["obliques"],
       "exercise_count": {
         "min": 3,
         "max": 4
@@ -420,7 +420,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Long Black Cable Block",
-      "template_tags": ["UpperBody"],
+      "template_tags": ["upper_body"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -432,7 +432,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Leg Cable Block 1",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -444,7 +444,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Leg Cable Block 2",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -456,7 +456,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Cable Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -468,7 +468,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Block",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -491,7 +491,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core/Cardio Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 5,
         "max": 6
@@ -503,7 +503,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Heavy Bilateral Warmup",
-      "template_tags": ["HeavyBilateral"],
+      "template_tags": ["heavy_bilateral"],
       "exercise_count": {
         "min": 1,
         "max": 1
@@ -515,7 +515,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -527,7 +527,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Power Round",
-      "template_tags": ["PowerRound"],
+      "template_tags": ["power_round"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -539,7 +539,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core with Cardio",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 3,
         "max": 3
@@ -551,7 +551,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Leg Block 2",
-      "template_tags": ["LowerBody"],
+      "template_tags": ["lower_body"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -563,7 +563,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Upper Body with Cardio",
-      "template_tags": ["UpperBody"],
+      "template_tags": ["upper_body"],
       "exercise_count": {
         "min": 5,
         "max": 5
@@ -575,7 +575,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core with Cardio",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -598,7 +598,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Anterior Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -610,7 +610,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Quad Focus Warmup",
-      "template_tags": ["HeavyBilateral"],
+      "template_tags": ["heavy_bilateral"],
       "exercise_count": {
         "min": 1,
         "max": 1
@@ -622,7 +622,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Anterior Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -634,7 +634,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Anterior Footstrap",
-      "template_tags": ["Footstrap"],
+      "template_tags": ["footstrap"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -646,7 +646,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Light Anterior Work",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -658,7 +658,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Heavy Chest/Shoulders",
-      "template_tags": ["HeavyResistance"],
+      "template_tags": ["heavy_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -670,7 +670,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Light Anterior Upper Body",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -682,7 +682,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Anterior Bodyweight",
-      "template_tags": ["Bodyweight"],
+      "template_tags": ["bodyweight"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -694,7 +694,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Anterior Core",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -717,7 +717,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Posterior Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -729,7 +729,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Posterior Chain Warmup",
-      "template_tags": ["HeavyBilateral"],
+      "template_tags": ["heavy_bilateral"],
       "exercise_count": {
         "min": 1,
         "max": 1
@@ -741,7 +741,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Posterior Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -753,7 +753,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Posterior Footstrap",
-      "template_tags": ["Footstrap"],
+      "template_tags": ["footstrap"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -765,7 +765,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Light Posterior Work",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -777,7 +777,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Heavy Back/Shoulders",
-      "template_tags": ["HeavyResistance"],
+      "template_tags": ["heavy_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -789,7 +789,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Light Posterior Upper Body",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -801,7 +801,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Posterior Bodyweight",
-      "template_tags": ["Bodyweight"],
+      "template_tags": ["bodyweight"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -813,7 +813,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Posterior Core",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -836,7 +836,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Core Warmup",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 4,
         "max": 5
@@ -848,7 +848,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Push/Pull Warmup",
-      "template_tags": ["HeavyBilateral"],
+      "template_tags": ["heavy_bilateral"],
       "exercise_count": {
         "min": 1,
         "max": 1
@@ -860,7 +860,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b2",
       "name": "Heavy Push Legs",
-      "template_tags": ["HeavyPressing"],
+      "template_tags": ["heavy_pressing"],
       "exercise_count": {
         "min": 2,
         "max": 3
@@ -872,7 +872,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b3",
       "name": "Pull Footstrap",
-      "template_tags": ["Footstrap"],
+      "template_tags": ["footstrap"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -884,7 +884,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b7",
       "name": "Light Push/Pull Legs",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -896,7 +896,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Heavy Push Upper Body",
-      "template_tags": ["HeavyResistance"],
+      "template_tags": ["heavy_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -908,7 +908,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Light Pull Upper Body",
-      "template_tags": ["LightResistance"],
+      "template_tags": ["light_resistance"],
       "exercise_count": {
         "min": 2,
         "max": 2
@@ -920,7 +920,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b6",
       "name": "Push/Pull Bodyweight",
-      "template_tags": ["Bodyweight"],
+      "template_tags": ["bodyweight"],
       "exercise_count": {
         "min": 1,
         "max": 2
@@ -932,7 +932,7 @@ INSERT INTO templates (name, description, structure, is_pro_only) VALUES (
     {
       "block_id": "b1",
       "name": "Ending Core Push/Pull",
-      "template_tags": ["Core"],
+      "template_tags": ["core"],
       "exercise_count": {
         "min": 2,
         "max": 3

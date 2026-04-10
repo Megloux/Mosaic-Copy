@@ -9,7 +9,8 @@ import { ProfilePage } from '@/features/profile'
 
 // Import FSA components - Working ExerciseLibrary from Feature-Slice Architecture
 import { ExerciseLibrary } from './features/exercises/components/ExerciseLibrary'
-// import { RoutineBuilder } from './components/routines/RoutineBuilder'
+// Standalone Routine Builder (self-contained, no legacy dependencies)
+import { RoutineBuilderEntry } from './features/routines/ui/RoutineBuilderEntry'
 
 export default function App() {
   const { initialize, initialized, loading } = useAuthStore()
@@ -229,14 +230,7 @@ export default function App() {
                 className="min-h-screen"
               />
             } />
-            <Route path="/builder" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold mb-4">Routine Builder</h1>
-                <div className="p-4 bg-yellow-100 rounded">
-                  <p>🚧 Routine Builder component coming next...</p>
-                </div>
-              </div>
-            } />
+            <Route path="/builder" element={<RoutineBuilderEntry />} />
             <Route path="/routines" element={
               <div className="p-8">
                 <h1 className="text-2xl font-bold mb-4">Routines</h1>
