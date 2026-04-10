@@ -12,18 +12,18 @@ import { useRoutineStore } from '@/features/routines/model/routineStore';
 import { Template, TemplateBlock } from '@/features/routines/model/types';
 import { cn } from '@/shared/lib/utils';
 
-// Import sub-components
-import { RoutineHeader } from "@/components/routines/builder/components/RoutineHeader";
-import { RoutineBlock } from "@/components/routines/builder/components/RoutineBlock";
-import { TemplateCard } from "@/components/routines/builder/components/TemplateCard";
+// Import sub-components (local to this feature)
+import { RoutineHeader } from "./RoutineHeader";
+import { RoutineBlock } from "./RoutineBlock";
+import { TemplateCard } from "./TemplateCard";
 
-// Import hooks
-import { useRoutineCalculations } from "@/components/routines/builder/hooks/useRoutineCalculations";
-import { useRoutineActions } from "@/components/routines/builder/hooks/useRoutineActions";
+// Import hooks (local to this feature)
+import { useRoutineCalculations } from "../model/useRoutineCalculations";
+import { useRoutineActions } from "../model/useRoutineActions";
 
-// Import related components
-import { ExerciseSelection } from "@/components/routines/ExerciseSelection";
-import { RoutineTypeModal } from "@/components/routines/RoutineTypeModal";
+// Import related components from routines feature
+import { ExerciseSelection } from "@/features/routines/components/ExerciseSelection";
+import { RoutineTypeModal } from "@/features/routines/components/RoutineTypeModal";
 
 /**
  * RoutineBuilder Component

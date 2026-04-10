@@ -1,6 +1,6 @@
 import React from 'react';
 import { Play, Heart, Share2, Download, Clock } from 'lucide-react';
-import { formatDuration } from '@/components/routines/builder/utils/formatters';
+import { formatDuration } from '../lib/formatters';
 
 interface RoutineHeaderProps {
   title: string;
