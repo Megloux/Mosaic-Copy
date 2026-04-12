@@ -79,7 +79,7 @@ export const Toast = ({
       
       <div className="flex-1 min-w-0">
         <h4 className="text-sm font-medium text-white mb-1">{title}</h4>
-        {message && <p className="text-xs text-white/70">{message}</p>}
+        {message && <p className="text-xs" style={{ color: 'var(--text-secondary-color)' }}>{message}</p>}
       </div>
       
       {dismissible && (

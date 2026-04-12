@@ -38,9 +38,9 @@ export default function App() {
               <p 
                 className="text-sm"
                 style={{ 
-                  color: 'rgba(255, 255, 255, 0.6)',
+                  color: 'var(--text-secondary-color)',
                   fontFamily: 'var(--font-primary)',
-                  fontWeight: 'var(--font-thin)'
+                  fontWeight: 'var(--text-secondary-weight)'
                 }}
               >
                 Loading...
@@ -53,13 +53,13 @@ export default function App() {
             <ToastContainer />
             <Routes>
             <Route path="/" element={
-              <div className="p-4 pt-6" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
+              <div className="p-4 pt-6" style={{ fontFamily: 'var(--font-primary)' }}>
                 <div className="space-y-6">
                   <Card variant="primary" size="default">
                     <h2 className="text-xl font-semibold mb-3" style={{ color: 'rgb(var(--core-teal-light))' }}>
                       Welcome to Your Pilates Platform
                     </h2>
-                    <p className="text-base text-white/80" style={{ fontWeight: 'var(--font-thin)' }}>
+                    <p className="text-base" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                       The Spotify of Pilates Programming. Discover, create, and execute your perfect routine.
                     </p>
                   </Card>
@@ -67,32 +67,32 @@ export default function App() {
                     <Link to="/exercises" className="block transition-all duration-200 hover:scale-[1.02]">
                       <Card size="default" className="h-full">
                         <h3 className="text-lg font-semibold mb-3">Exercise Library</h3>
-                        <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
+                        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                           Browse and discover exercises with advanced filtering
                         </p>
-                        <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Exercises</p>
+                        <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Exercises</p>
                       </Card>
                     </Link>
                     <Link to="/builder" className="block transition-all duration-200 hover:scale-[1.02]">
                       <Card size="default" className="h-full">
                         <h3 className="text-lg font-semibold mb-3">Routine Builder</h3>
-                        <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
+                        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                           Create custom routines from templates or scratch
                         </p>
-                        <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Builder</p>
+                        <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Builder</p>
                       </Card>
                     </Link>
                     <Card size="default">
                       <h3 className="text-lg font-semibold mb-3">Routine Player</h3>
-                      <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
+                      <p className="text-sm mb-4" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                         Execute routines with guided timer and instructions
                       </p>
-                      <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Player</p>
+                      <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Player</p>
                     </Card>
                   </div>
                   <Card variant="secondary" size="default">
                     <h3 className="text-lg font-semibold mb-4">Platform Features</h3>
-                    <ul className="space-y-2 text-sm text-white/70" style={{ fontWeight: 'var(--font-thin)' }}>
+                    <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                       <li>Offline-first design with PWA capabilities</li>
                       <li>iOS-native feel with Capacitor integration</li>
                       <li>Advanced exercise discovery and routine creation</li>
@@ -115,7 +115,7 @@ export default function App() {
               <div className="p-8">
                 <h1 className="text-2xl font-bold mb-4">Routines</h1>
                 <Card size="default" variant="secondary">
-                  <p className="text-white/60">Routines component coming next...</p>
+                  <p style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>Routines component coming next...</p>
                 </Card>
               </div>
             } />

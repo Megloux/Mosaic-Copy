@@ -75,7 +75,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
                   title
                 )}
                 {description && (
-                  <div className="text-sm text-white/50">
+                  <div className="text-sm" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
                     {description}
                   </div>
                 )}

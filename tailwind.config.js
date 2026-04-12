@@ -27,11 +27,11 @@ export default {
         },
         muted: {
           DEFAULT: 'rgba(255, 255, 255, 0.08)',
-          foreground: 'rgba(255, 255, 255, 0.5)',
+          foreground: 'rgba(255, 255, 255, 0.25)',  /* matches --text-muted-color */
         },
         secondary: {
           DEFAULT: 'rgba(255, 255, 255, 0.1)',
-          foreground: 'rgba(255, 255, 255, 0.7)',
+          foreground: 'rgba(255, 255, 255, 0.85)',  /* matches --text-secondary-color */
         },
         accent: {
           DEFAULT: 'rgba(0, 183, 120, 0.15)',

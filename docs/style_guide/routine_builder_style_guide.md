@@ -43,22 +43,28 @@ border: 1px solid rgba(ACCENT,0.22);
 | Orange | `251,146,60` | Obliques, Stacked templates |
 | Light Blue | `96,165,250` | Posterior, secondary info |
 
-### Text Opacity Scale
+### Semantic Text Tokens (from `tokens/typography.css`)
+
+| Level | Color Token | Weight Token | Values | Use For |
+|-------|-------------|--------------|--------|---------|
+| **Primary** | `--text-primary-color` | `--text-primary-weight` | `rgba(255,255,255,1)`, `600` | Headings, exercise names, bold labels |
+| **Secondary** | `--text-secondary-color` | `--text-secondary-weight` | `rgba(255,255,255,0.85)`, `500` | Subtitles, descriptions, stats bars |
+| **Tertiary** | `--text-tertiary-color` | `--text-tertiary-weight` | `rgba(255,255,255,0.35)`, `400` | Metadata, timestamps, spring info |
+| **Muted** | `--text-muted-color` | `--text-muted-weight` | `rgba(255,255,255,0.25)`, `400` | Hints, placeholders, disabled text |
+
 ```css
-/* Primary text */
-color: rgb(var(--core-white));          /* 100% */
+/* Usage — always use tokens, never hardcode rgba */
+color: var(--text-primary-color);
+font-weight: var(--text-primary-weight);
 
-/* Secondary text */
-color: rgba(255,255,255,0.5);          /* 50% */
+color: var(--text-secondary-color);
+font-weight: var(--text-secondary-weight);
 
-/* Tertiary / hint text */
-color: rgba(255,255,255,0.4);          /* 40% */
+color: var(--text-tertiary-color);
+font-weight: var(--text-tertiary-weight);
 
-/* Disabled / subtle */
-color: rgba(255,255,255,0.25);         /* 25% */
-
-/* Micro labels */
-color: rgba(255,255,255,0.35);         /* 35% — section headers */
+color: var(--text-muted-color);
+font-weight: var(--text-muted-weight);
 ```
 
 ---
@@ -67,11 +73,12 @@ color: rgba(255,255,255,0.35);         /* 35% — section headers */
 
 ### Font Tokens (from `tokens/typography.css`)
 ```css
-font-family: var(--font-primary);       /* System font stack */
-font-weight: var(--font-thin);          /* Light body text */
-font-weight: 500;                       /* Medium — metadata */
-font-weight: 600;                       /* Semibold — labels, buttons */
-font-weight: 700;                       /* Bold — headings */
+font-family: var(--font-primary);              /* Inter system font stack */
+font-weight: var(--text-primary-weight);       /* 600 — headings, names */
+font-weight: var(--text-secondary-weight);     /* 500 — subtitles, stats */
+font-weight: var(--text-tertiary-weight);      /* 400 — metadata, timestamps */
+font-weight: var(--text-muted-weight);         /* 400 — hints, placeholders */
+font-weight: 700;                              /* Bold — page titles only */
 ```
 
 ### Text Sizing Patterns
@@ -80,10 +87,10 @@ font-weight: 700;                       /* Bold — headings */
 | Page title | `text-3xl` (30px) | 700 | `-0.03em` |
 | Section label | `text-xs` uppercase | 600 | `tracking-widest` |
 | Card title | `text-base` (16px) | 600 | `-0.01em` |
-| Card subtitle | `text-xs` (12px) | `--font-thin` | default |
+| Card subtitle | `text-xs` (12px) | `--text-secondary-weight` (500) | default |
 | Badge/tag | `text-[9px]` | 700 | `tracking-widest` |
-| Exercise name | `text-sm` (14px) | 500 | `-0.01em` |
-| Stats/metadata | `text-xs` or `text-[10px]` | 500 | default |
+| Exercise name | `text-sm` (14px) | `font-medium` (500) | `-0.01em` |
+| Stats/metadata | `text-xs` or `text-[10px]` | `--text-tertiary-weight` (400) | default |
 
 ---
 
@@ -238,4 +245,5 @@ whileTap:   { scale: 0.9 }    // Icon buttons
 - Use white text at full opacity for anything but primary headings
 - Add borders thicker than 1px
 - Use drop shadows (use ambient glow blurs instead)
-- Use emojis in the UI except for template identity icons
+- Use emojis anywhere in the UI
+- Hardcode `rgba(255,255,255,0.XX)` for text — always use `var(--text-*-color)` tokens
