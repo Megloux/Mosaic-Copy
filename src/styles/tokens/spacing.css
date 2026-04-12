@@ -17,6 +17,12 @@
   --spacing-20: 5rem;       /* 80px - Massive */
   --spacing-24: 6rem;       /* 96px - Hero */
 
+  /* ===== Named Spacing Aliases ===== */
+  --spacing-xs: var(--spacing-1);   /* 4px */
+  --spacing-sm: var(--spacing-2);   /* 8px */
+  --spacing-md: var(--spacing-4);   /* 16px */
+  --spacing-lg: var(--spacing-6);   /* 24px */
+
   /* ===== iOS-Specific Spacing ===== */
   --ios-safe-area-top: env(safe-area-inset-top, 47px);      /* Notch & status bar */
   --ios-safe-area-bottom: env(safe-area-inset-bottom, 34px); /* Home indicator */

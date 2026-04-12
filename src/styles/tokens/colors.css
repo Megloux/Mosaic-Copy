@@ -39,6 +39,10 @@
   --feedback-error: 239 68 68;    /* Red */
   --feedback-info: 59 130 246;    /* Blue */
 
+  /* Overlay Backdrops */
+  --overlay-light: rgba(0, 0, 0, 0.5);    /* Semi-transparent backdrop */
+  --overlay-heavy: rgba(0, 0, 0, 0.8);    /* Heavy focus backdrop */
+
   /* Component-Specific Colors */
   --exercise-card-bg: var(--surface-raised);
   --exercise-card-active: var(--surface-accent);

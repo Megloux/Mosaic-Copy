@@ -298,7 +298,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
               </h1>
               <span
                 className="text-xs opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ color: 'rgba(255,255,255,0.35)', transitionDuration: 'var(--motion-natural)' }}
+                style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)', transitionDuration: 'var(--motion-natural)' }}
               >
                 tap to rename
               </span>
@@ -312,7 +312,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             <Clock className="w-3.5 h-3.5" style={{ color: 'rgb(var(--core-teal))' }} />
             <span
               className="text-sm"
-              style={{ fontWeight: 'var(--font-timer)', color: 'rgba(255,255,255,0.7)' }}
+              style={{ fontWeight: 'var(--text-secondary-weight)', color: 'var(--text-secondary-color)' }}
             >
               {durationMinutes > 0 ? `${durationMinutes} min` : '0 min'}
             </span>
@@ -325,7 +325,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             <Layers className="w-3.5 h-3.5" style={{ color: 'rgb(var(--core-teal))' }} />
             <span
               className="text-sm"
-              style={{ fontWeight: 'var(--font-timer)', color: 'rgba(255,255,255,0.7)' }}
+              style={{ fontWeight: 'var(--text-secondary-weight)', color: 'var(--text-secondary-color)' }}
             >
               {routine.blocks.length} block{routine.blocks.length !== 1 ? 's' : ''}
             </span>
@@ -338,7 +338,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             <Dumbbell className="w-3.5 h-3.5" style={{ color: 'rgb(var(--core-teal))' }} />
             <span
               className="text-sm"
-              style={{ fontWeight: 'var(--font-timer)', color: 'rgba(255,255,255,0.7)' }}
+              style={{ fontWeight: 'var(--text-secondary-weight)', color: 'var(--text-secondary-color)' }}
             >
               {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
             </span>
@@ -380,7 +380,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
           style={{
             fontWeight: 500,
             backgroundColor: 'rgba(255,255,255,0.03)',
-            color: 'rgba(255,255,255,0.35)',
+            color: 'var(--text-tertiary-color)',
             border: '1px dashed rgba(255,255,255,0.08)',
             transitionDuration: 'var(--motion-natural)',
           }}

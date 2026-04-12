@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Plus, Trash2, GripVertical, Flame, Snowflake, Zap, PenLine } from 'lucide-react';
+import { ChevronDown, Plus, Trash2, GripVertical, Zap, PenLine } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BuilderBlock, RoutineExerciseEntry, formatSeconds } from './types';
 
@@ -15,10 +15,10 @@ interface BlockTheme {
 
 const BLOCK_THEMES: Record<string, BlockTheme> = {
   warmup: {
-    accent: 'rgb(251,191,36)',        // amber
-    accentFaded: 'rgba(251,191,36,0.15)',
-    gradient: 'linear-gradient(135deg, rgba(251,191,36,0.10) 0%, rgba(251,191,36,0.02) 100%)',
-    icon: <Flame className="w-3.5 h-3.5" style={{ color: 'rgb(251,191,36)' }} />,
+    accent: 'rgba(255,255,255,0.6)',
+    accentFaded: 'rgba(255,255,255,0.08)',
+    gradient: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
+    icon: <Zap className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.6)' }} />,
     label: 'WARM UP',
   },
   main: {
@@ -29,10 +29,10 @@ const BLOCK_THEMES: Record<string, BlockTheme> = {
     label: 'MAIN',
   },
   cooldown: {
-    accent: 'rgb(96,165,250)',        // blue-400
-    accentFaded: 'rgba(96,165,250,0.15)',
-    gradient: 'linear-gradient(135deg, rgba(96,165,250,0.08) 0%, rgba(96,165,250,0.02) 100%)',
-    icon: <Snowflake className="w-3.5 h-3.5" style={{ color: 'rgb(96,165,250)' }} />,
+    accent: 'rgba(255,255,255,0.5)',
+    accentFaded: 'rgba(255,255,255,0.06)',
+    gradient: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
+    icon: <Zap className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />,
     label: 'COOL DOWN',
   },
 };
@@ -108,7 +108,7 @@ export const BlockCard: React.FC<BlockCardProps> = ({
             </div>
             <p
               className="text-xs mt-0.5"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 'var(--font-thin)' }}
+              style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
             >
               {block.exercises.length}
               {block.slotCount
@@ -171,13 +171,13 @@ export const BlockCard: React.FC<BlockCardProps> = ({
                   </div>
                   <p
                     className="text-sm mb-1"
-                    style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 500 }}
+                    style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
                   >
                     {block.instructions || 'No exercises yet'}
                   </p>
                   <p
                     className="text-xs mb-4"
-                    style={{ color: 'rgba(255,255,255,0.25)', fontWeight: 'var(--font-thin)' }}
+                    style={{ color: 'var(--text-muted-color)', fontWeight: 'var(--text-muted-weight)' }}
                   >
                     {block.slotCount
                       ? `Pick ${block.slotCount.min}${block.slotCount.max !== block.slotCount.min ? `-${block.slotCount.max}` : ''} exercises`
@@ -295,12 +295,12 @@ const ExerciseRow: React.FC<{
       transition={{ duration: 0.2 }}
       className="flex items-center gap-3 px-3 py-2.5 rounded-xl group"
       style={{
-        backgroundColor: isCustom ? 'rgba(168,85,247,0.04)' : 'rgba(255,255,255,0.025)',
-        border: isCustom ? '1px dashed rgba(168,85,247,0.15)' : '1px solid transparent',
+        backgroundColor: isCustom ? accentFaded.replace(/[\d.]+\)$/, '0.04)') : 'rgba(255,255,255,0.025)',
+        border: isCustom ? `1px dashed ${accentFaded}` : '1px solid transparent',
         transitionProperty: 'background-color',
         transitionDuration: 'var(--motion-natural)',
       }}
-      whileHover={{ backgroundColor: isCustom ? 'rgba(168,85,247,0.08)' : 'rgba(255,255,255,0.05)' }}
+      whileHover={{ backgroundColor: isCustom ? accentFaded : 'rgba(255,255,255,0.05)' }}
     >
       {/* Drag handle */}
       <GripVertical
@@ -315,8 +315,8 @@ const ExerciseRow: React.FC<{
       <span
         className="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold flex-shrink-0"
         style={{
-          backgroundColor: isCustom ? 'rgba(168,85,247,0.15)' : accentFaded,
-          color: isCustom ? 'rgba(168,85,247,0.9)' : accent,
+          backgroundColor: accentFaded,
+          color: accent,
         }}
       >
         {index + 1}
@@ -354,7 +354,7 @@ const ExerciseRow: React.FC<{
               value={entry.durationSeconds}
               onChange={(e) => onUpdate({ durationSeconds: Number(e.target.value) })}
               className="bg-transparent text-xs outline-none cursor-pointer"
-              style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 'var(--font-thin)' }}
+              style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
             >
               {[15, 30, 45, 60, 90, 120].map((s) => (
                 <option key={s} value={s} style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>
@@ -365,7 +365,7 @@ const ExerciseRow: React.FC<{
           ) : (
             <span
               className="text-xs"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 'var(--font-thin)' }}
+              style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
             >
               {formatSeconds(entry.durationSeconds)}
             </span>
@@ -375,7 +375,7 @@ const ExerciseRow: React.FC<{
               <span className="text-white/10">·</span>
               <span
                 className="text-xs"
-                style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 'var(--font-thin)' }}
+                style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
               >
                 {springs.lightSprings > 0 && `${springs.lightSprings}L`}
                 {springs.lightSprings > 0 && springs.heavySprings > 0 && ' '}
@@ -388,7 +388,7 @@ const ExerciseRow: React.FC<{
               <span className="text-white/10">·</span>
               <span
                 className="text-xs truncate"
-                style={{ color: 'rgba(255,255,255,0.25)', fontWeight: 'var(--font-thin)' }}
+                style={{ color: 'var(--text-muted-color)', fontWeight: 'var(--text-muted-weight)' }}
               >
                 {entry.exercise.templateTags.join(', ')}
               </span>
@@ -399,7 +399,7 @@ const ExerciseRow: React.FC<{
               <span className="text-white/10">·</span>
               <span
                 className="text-[10px]"
-                style={{ color: 'rgba(168,85,247,0.5)', fontWeight: 600, letterSpacing: '0.03em' }}
+                style={{ color: accent, opacity: 0.5, fontWeight: 600, letterSpacing: '0.03em' }}
               >
                 CUSTOM
               </span>

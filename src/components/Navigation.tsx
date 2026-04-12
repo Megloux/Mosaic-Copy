@@ -16,10 +16,10 @@ export const Navigation: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { path: '/', label: 'Home', icon: '🏠' },
-    { path: '/exercises', label: 'Exercises', icon: '💪' },
-    { path: '/builder', label: 'Builder', icon: '🔧' },
-    { path: '/routines', label: 'Routines', icon: '📋' },
+    { path: '/', label: 'Home' },
+    { path: '/exercises', label: 'Exercises' },
+    { path: '/builder', label: 'Builder' },
+    { path: '/routines', label: 'Routines' },
   ]
 
   return (
@@ -55,7 +55,7 @@ export const Navigation: React.FC = () => {
                   className="px-3 py-2 rounded-md transition-all duration-200"
                   style={{
                     fontSize: 'var(--text-sm)',
-                    fontWeight: 'var(--font-thin)',
+                    fontWeight: 'var(--text-secondary-weight)',
                     fontFamily: 'var(--font-primary)',
                     letterSpacing: 'var(--tracking-default)',
                     ...(location.pathname === item.path
@@ -64,7 +64,7 @@ export const Navigation: React.FC = () => {
                           color: 'rgb(var(--core-black))'
                         }
                       : {
-                          color: 'rgba(255, 255, 255, 0.7)'
+                          color: 'var(--text-secondary-color)'
                         })
                   }}
                 >
@@ -142,7 +142,6 @@ export const Navigation: React.FC = () => {
                     : 'rgb(var(--core-white))'
                 }}
               >
-                <span style={{ fontSize: '1.25rem' }}>{item.icon}</span>
                 <span style={{ 
                   fontSize: '1rem',
                   fontWeight: location.pathname === item.path ? '600' : '400'

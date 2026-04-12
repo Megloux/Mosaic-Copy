@@ -55,7 +55,7 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
           </h1>
           <p
             className="text-sm max-w-sm"
-            style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 'var(--font-thin)' }}
+            style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
           >
             Start fresh or choose a master-trainer template.
           </p>
@@ -94,7 +94,7 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
               </h3>
               <p
                 className="text-xs"
-                style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 'var(--font-thin)' }}
+                style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
               >
                 Blank canvas — add exercises freely
               </p>
@@ -110,10 +110,10 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
           className="w-full text-left rounded-2xl p-5 transition-colors"
           style={{
             background: showTemplates
-              ? 'linear-gradient(135deg, rgba(168,85,247,0.14) 0%, rgba(168,85,247,0.04) 100%)'
+              ? 'linear-gradient(135deg, rgba(0,183,120,0.14) 0%, rgba(0,183,120,0.04) 100%)'
               : 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
             border: showTemplates
-              ? '1px solid rgba(168,85,247,0.22)'
+              ? '1px solid rgba(0,183,120,0.22)'
               : '1px solid rgba(255,255,255,0.08)',
             transitionDuration: 'var(--motion-natural)',
           }}
@@ -123,11 +123,11 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
               className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
                 background: showTemplates
-                  ? 'linear-gradient(135deg, rgba(168,85,247,0.2) 0%, rgba(168,85,247,0.06) 100%)'
+                  ? 'linear-gradient(135deg, rgba(0,183,120,0.2) 0%, rgba(0,183,120,0.06) 100%)'
                   : 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)',
               }}
             >
-              <LayoutTemplate className="w-6 h-6" style={{ color: showTemplates ? 'rgba(168,85,247,0.9)' : 'rgba(255,255,255,0.6)' }} />
+              <LayoutTemplate className="w-6 h-6" style={{ color: showTemplates ? 'rgb(var(--core-teal))' : 'rgba(255,255,255,0.6)' }} />
             </div>
             <div className="flex-1">
               <h3
@@ -138,7 +138,7 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
               </h3>
               <p
                 className="text-xs"
-                style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 'var(--font-thin)' }}
+                style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
               >
                 {TEMPLATES.length} master-trainer blueprints
               </p>
@@ -166,7 +166,7 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({
             <div className="px-5 mb-3">
               <h2
                 className="text-[11px] uppercase tracking-widest"
-                style={{ color: 'rgba(168,85,247,0.6)', fontWeight: 600 }}
+                style={{ color: 'rgba(0,183,120,0.6)', fontWeight: 600 }}
               >
                 Choose a Template
               </h2>
@@ -211,7 +211,7 @@ const TemplateCard: React.FC<{
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.97 }}
       onClick={onSelect}
-      className="relative text-left rounded-2xl overflow-hidden aspect-[4/5] flex flex-col justify-end p-4"
+      className="relative text-left rounded-2xl overflow-hidden flex flex-col justify-end p-4"
       style={{
         background: `linear-gradient(160deg, rgba(${rgb},0.20) 0%, rgba(${rgb},0.04) 60%, rgba(0,0,0,0.3) 100%)`,
         border: `1px solid rgba(${rgb},0.12)`,
@@ -242,9 +242,6 @@ const TemplateCard: React.FC<{
         </div>
       )}
 
-      {/* Icon */}
-      <div className="text-2xl mb-2">{template.icon}</div>
-
       {/* Name */}
       <h3
         className="text-sm font-bold leading-snug mb-1"
@@ -256,7 +253,7 @@ const TemplateCard: React.FC<{
       {/* Description */}
       <p
         className="text-[10px] leading-relaxed mb-2.5 line-clamp-2"
-        style={{ color: 'rgba(255,255,255,0.45)', fontWeight: 'var(--font-thin)' }}
+        style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
       >
         {template.description}
       </p>
@@ -267,7 +264,7 @@ const TemplateCard: React.FC<{
           <Layers className="w-3 h-3" style={{ color: `rgba(${rgb},0.7)` }} />
           <span
             className="text-[10px]"
-            style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}
+            style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
           >
             {template.blocks.length}
           </span>
@@ -276,7 +273,7 @@ const TemplateCard: React.FC<{
           <Clock className="w-3 h-3" style={{ color: `rgba(${rgb},0.7)` }} />
           <span
             className="text-[10px]"
-            style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}
+            style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
           >
             ~{template.estimatedMinutes}m
           </span>

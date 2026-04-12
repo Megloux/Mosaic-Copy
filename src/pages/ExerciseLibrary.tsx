@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Section } from '@/shared/ui/Section'
 import { Card } from '@/shared/ui/Card'
-import { Button } from '@/shared/ui/Button'
+import { StandardButton } from '@/shared/ui/buttons/StandardButton'
 import { SearchInput } from '@/shared/ui/form/SearchInput'
 import { cn } from '@/shared/lib/utils'
 
@@ -116,7 +116,7 @@ export const ExerciseLibrary = () => {
               </h3>
               <div className="flex flex-wrap gap-[var(--spacing-2)]">
                 {categories.map(category => (
-                  <Button
+                  <StandardButton
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     size="sm"
@@ -129,7 +129,7 @@ export const ExerciseLibrary = () => {
                     )}
                   >
                     {category}
-                  </Button>
+                  </StandardButton>
                 ))}
               </div>
             </div>
@@ -141,7 +141,7 @@ export const ExerciseLibrary = () => {
               </h3>
               <div className="flex flex-wrap gap-[var(--spacing-2)]">
                 {difficulties.map(difficulty => (
-                  <Button
+                  <StandardButton
                     key={difficulty}
                     variant={selectedDifficulty === difficulty ? "default" : "outline"}
                     size="sm"
@@ -154,7 +154,7 @@ export const ExerciseLibrary = () => {
                     )}
                   >
                     {difficulty}
-                  </Button>
+                  </StandardButton>
                 ))}
               </div>
             </div>
@@ -202,13 +202,13 @@ export const ExerciseLibrary = () => {
                 </div>
 
                 {/* Action Button */}
-                <Button
+                <StandardButton
                   variant="default"
                   size="default"
                   className="w-full bg-[rgb(var(--core-teal))] text-[rgb(var(--core-black))] hover:bg-[rgb(var(--core-teal-light))] font-[var(--font-thin)] min-h-[var(--touch-target-min)] transition-all duration-[var(--motion-natural)]"
                 >
                   Add to Routine
-                </Button>
+                </StandardButton>
               </div>
             </Card>
           ))}
@@ -221,7 +221,7 @@ export const ExerciseLibrary = () => {
               <p className="text-[var(--text-lg)] text-[rgba(var(--core-white),0.6)] font-[var(--font-thin)]">
                 No exercises found matching your criteria
               </p>
-              <Button
+              <StandardButton
                 variant="outline"
                 onClick={() => {
                   setSearchQuery('')
@@ -231,7 +231,7 @@ export const ExerciseLibrary = () => {
                 className="bg-[var(--surface-base)] text-[rgb(var(--core-white))] hover:bg-[var(--state-hover)] border-[rgba(var(--core-white),var(--border-opacity-medium))]"
               >
                 Clear Filters
-              </Button>
+              </StandardButton>
             </div>
           </Section>
         )}

@@ -6,6 +6,7 @@ import { LoginForm, SignupForm, ForgotPasswordForm, ProtectedRoute, EmailVerific
 import { PrivacyPolicy } from '@/pages/PrivacyPolicy'
 import { ToastContainer } from '@/shared/ui/Toast'
 import { ProfilePage } from '@/features/profile'
+import { Card } from '@/shared/ui/Card'
 
 // Import FSA components - Working ExerciseLibrary from Feature-Slice Architecture
 import { ExerciseLibrary } from './features/exercises/components/ExerciseLibrary'
@@ -54,170 +55,49 @@ export default function App() {
             <Route path="/" element={
               <div className="p-4 pt-6" style={{ fontFamily: 'var(--font-primary)', fontWeight: 'var(--font-thin)' }}>
                 <div className="space-y-6">
-                  <div 
-                    className="p-6 rounded-lg" 
-                    style={{ backgroundColor: 'var(--surface-raised)' }}
-                  >
-                    <h2 
-                      className="mb-3" 
-                      style={{ 
-                        fontSize: 'var(--text-xl)',
-                        fontWeight: 'var(--font-timer)',
-                        color: 'rgb(var(--core-teal-light))'
-                      }}
-                    >
+                  <Card variant="primary" size="default">
+                    <h2 className="text-xl font-semibold mb-3" style={{ color: 'rgb(var(--core-teal-light))' }}>
                       Welcome to Your Pilates Platform
                     </h2>
-                    <p style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--font-thin)' }}>
+                    <p className="text-base text-white/80" style={{ fontWeight: 'var(--font-thin)' }}>
                       The Spotify of Pilates Programming. Discover, create, and execute your perfect routine.
                     </p>
-                  </div>
+                  </Card>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Link 
-                      to="/exercises"
-                      className="block p-6 rounded-lg transition-all duration-200 hover:scale-105" 
-                      style={{ backgroundColor: 'var(--surface-base)' }}
-                    >
-                      <h3 
-                        className="mb-3" 
-                        style={{ 
-                          fontSize: 'var(--text-lg)',
-                          fontWeight: 'var(--font-timer)',
-                          color: 'rgb(var(--core-white))'
-                        }}
-                      >
-                        Exercise Library
-                      </h3>
-                      <p 
-                        className="mb-4" 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgba(255, 255, 255, 0.7)'
-                        }}
-                      >
-                        Browse and discover exercises with advanced filtering
-                      </p>
-                      <p 
-                        style={{ 
-                          fontSize: 'var(--text-xs)',
-                          color: 'rgb(var(--core-teal))'
-                        }}
-                      >
-                        Navigate → Exercises
-                      </p>
+                    <Link to="/exercises" className="block transition-all duration-200 hover:scale-[1.02]">
+                      <Card size="default" className="h-full">
+                        <h3 className="text-lg font-semibold mb-3">Exercise Library</h3>
+                        <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
+                          Browse and discover exercises with advanced filtering
+                        </p>
+                        <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Exercises</p>
+                      </Card>
                     </Link>
-                    <div 
-                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
-                      style={{ backgroundColor: 'var(--surface-base)' }}
-                    >
-                      <h3 
-                        className="mb-3" 
-                        style={{ 
-                          fontSize: 'var(--text-lg)',
-                          fontWeight: 'var(--font-timer)',
-                          color: 'rgb(var(--core-white))'
-                        }}
-                      >
-                        Routine Builder
-                      </h3>
-                      <p 
-                        className="mb-4" 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgba(255, 255, 255, 0.7)'
-                        }}
-                      >
-                        Create custom routines from templates or scratch
-                      </p>
-                      <p 
-                        style={{ 
-                          fontSize: 'var(--text-xs)',
-                          color: 'rgb(var(--core-teal))'
-                        }}
-                      >
-                        Navigate → Builder
-                      </p>
-                    </div>
-                    <div 
-                      className="p-6 rounded-lg transition-all duration-200 hover:scale-105" 
-                      style={{ backgroundColor: 'var(--surface-base)' }}
-                    >
-                      <h3 
-                        className="mb-3" 
-                        style={{ 
-                          fontSize: 'var(--text-lg)',
-                          fontWeight: 'var(--font-timer)',
-                          color: 'rgb(var(--core-white))'
-                        }}
-                      >
-                        Routine Player
-                      </h3>
-                      <p 
-                        className="mb-4" 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgba(255, 255, 255, 0.7)'
-                        }}
-                      >
+                    <Link to="/builder" className="block transition-all duration-200 hover:scale-[1.02]">
+                      <Card size="default" className="h-full">
+                        <h3 className="text-lg font-semibold mb-3">Routine Builder</h3>
+                        <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
+                          Create custom routines from templates or scratch
+                        </p>
+                        <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Builder</p>
+                      </Card>
+                    </Link>
+                    <Card size="default">
+                      <h3 className="text-lg font-semibold mb-3">Routine Player</h3>
+                      <p className="text-sm text-white/70 mb-4" style={{ fontWeight: 'var(--font-thin)' }}>
                         Execute routines with guided timer and instructions
                       </p>
-                      <p 
-                        style={{ 
-                          fontSize: 'var(--text-xs)',
-                          color: 'rgb(var(--core-teal))'
-                        }}
-                      >
-                        Navigate → Player
-                      </p>
-                    </div>
+                      <p className="text-xs" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Player</p>
+                    </Card>
                   </div>
-                  <div 
-                    className="p-6 rounded-lg" 
-                    style={{ backgroundColor: 'var(--surface-accent)' }}
-                  >
-                    <h3 
-                      className="mb-4" 
-                      style={{ 
-                        fontSize: 'var(--text-lg)',
-                        fontWeight: 'var(--font-timer)',
-                        color: 'rgb(var(--core-black))'
-                      }}
-                    >
-                      Platform Features
-                    </h3>
-                    <ul className="space-y-2">
-                      <li 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgb(var(--core-black))'
-                        }}
-                      >
-                        • Offline-first design with PWA capabilities
-                      </li>
-                      <li 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgb(var(--core-black))'
-                        }}
-                      >
-                        • iOS-native feel with Capacitor integration
-                      </li>
-                      <li 
-                        style={{ 
-                          fontSize: 'var(--text-sm)',
-                          fontWeight: 'var(--font-thin)',
-                          color: 'rgb(var(--core-black))'
-                        }}
-                      >
-                        • Advanced exercise discovery and routine creation
-                      </li>
+                  <Card variant="secondary" size="default">
+                    <h3 className="text-lg font-semibold mb-4">Platform Features</h3>
+                    <ul className="space-y-2 text-sm text-white/70" style={{ fontWeight: 'var(--font-thin)' }}>
+                      <li>Offline-first design with PWA capabilities</li>
+                      <li>iOS-native feel with Capacitor integration</li>
+                      <li>Advanced exercise discovery and routine creation</li>
                     </ul>
-                  </div>
+                  </Card>
                 </div>
               </div>
             } />
@@ -234,9 +114,9 @@ export default function App() {
             <Route path="/routines" element={
               <div className="p-8">
                 <h1 className="text-2xl font-bold mb-4">Routines</h1>
-                <div className="p-4 bg-yellow-100 rounded">
-                  <p>🚧 Routines component coming next...</p>
-                </div>
+                <Card size="default" variant="secondary">
+                  <p className="text-white/60">Routines component coming next...</p>
+                </Card>
               </div>
             } />
             {/* Profile Route - Protected */}

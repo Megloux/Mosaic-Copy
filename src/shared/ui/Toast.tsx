@@ -44,20 +44,20 @@ export const Toast = ({
     error: AlertCircle,
   }[type]
   
-  // Get color based on type
+  // Get color based on type (dark glassmorphism)
   const colorClasses = {
-    info: 'bg-blue-50 border-blue-200 text-blue-800',
-    success: 'bg-green-50 border-green-200 text-green-800',
-    warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-    error: 'bg-red-50 border-red-200 text-red-800',
+    info: 'bg-white/[0.06] border-white/[0.08] text-white',
+    success: 'bg-[rgba(0,183,120,0.08)] border-[rgba(0,183,120,0.15)] text-white',
+    warning: 'bg-white/[0.08] border-white/[0.12] text-white',
+    error: 'bg-[rgba(239,68,68,0.08)] border-[rgba(239,68,68,0.15)] text-white',
   }[type]
   
   // Get icon color based on type
   const iconColorClasses = {
-    info: 'text-blue-500',
-    success: 'text-green-500',
-    warning: 'text-yellow-500',
-    error: 'text-red-500',
+    info: 'text-white/70',
+    success: 'text-[rgb(0,183,120)]',
+    warning: 'text-white/60',
+    error: 'text-red-400',
   }[type]
   
   return (
@@ -68,7 +68,7 @@ export const Toast = ({
       exit={{ opacity: 0, y: -20, scale: 0.95 }}
       transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }} // iOS spring curve
       className={cn(
-        'flex items-start p-4 rounded-lg border shadow-sm',
+        'flex items-start p-4 rounded-2xl border-[0.5px] backdrop-blur-md shadow-lg shadow-black/20',
         'max-w-md w-full',
         colorClasses
       )}
@@ -78,8 +78,8 @@ export const Toast = ({
       </div>
       
       <div className="flex-1 min-w-0">
-        <h4 className="text-sm font-medium mb-1">{title}</h4>
-        {message && <p className="text-xs opacity-90">{message}</p>}
+        <h4 className="text-sm font-medium text-white mb-1">{title}</h4>
+        {message && <p className="text-xs text-white/70">{message}</p>}
       </div>
       
       {dismissible && (
@@ -89,9 +89,9 @@ export const Toast = ({
           className={cn(
             'flex-shrink-0 ml-3 p-1 rounded-full',
             'focus:outline-none focus:ring-2 focus:ring-offset-2',
-            'hover:bg-black/5 active:bg-black/10',
+            'hover:bg-white/10 active:bg-white/15',
             'min-h-[var(--ios-min-touch-target)] min-w-[var(--ios-min-touch-target)]',
-            'flex items-center justify-center'
+            'flex items-center justify-center text-white/50 hover:text-white/80'
           )}
           aria-label="Dismiss"
         >

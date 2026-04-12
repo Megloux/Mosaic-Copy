@@ -3,15 +3,15 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const cardVariants = cva(
-  'rounded-lg border bg-card text-card-foreground shadow-sm',
+  'rounded-2xl border-[0.5px] border-white/[0.06] text-white backdrop-blur-md shadow-lg shadow-black/20',
   {
     variants: {
       variant: {
-        default: 'bg-background',
-        primary: 'bg-primary/10 border-primary/20',
-        secondary: 'bg-secondary/10 border-secondary/20',
-        destructive: 'bg-destructive/10 border-destructive/20',
-        outline: 'bg-transparent',
+        default: 'bg-white/[0.04]',
+        primary: 'bg-[rgba(0,183,120,0.06)] border-[rgba(0,183,120,0.15)]',
+        secondary: 'bg-white/[0.06] border-white/[0.08]',
+        destructive: 'bg-[rgba(239,68,68,0.06)] border-[rgba(239,68,68,0.15)]',
+        outline: 'bg-transparent border-white/[0.08]',
       },
       size: {
         default: 'p-6',
@@ -60,7 +60,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {...props}
       >
         {media && (
-          <div className="overflow-hidden rounded-t-lg">
+          <div className="overflow-hidden rounded-t-2xl">
             {media}
           </div>
         )}
@@ -70,12 +70,12 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             {title && (
               <div>
                 {typeof title === 'string' ? (
-                  <h3 className="text-lg font-semibold">{title}</h3>
+                  <h3 className="text-lg font-semibold text-white">{title}</h3>
                 ) : (
                   title
                 )}
                 {description && (
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-white/50">
                     {description}
                   </div>
                 )}
@@ -92,9 +92,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         <div className={cn(!title && !media && "pt-6", "px-6 pb-6")}>
           {isLoading ? (
             <div className="flex flex-col space-y-3">
-              <div className="h-4 w-1/2 animate-pulse rounded bg-muted"></div>
-              <div className="h-4 w-full animate-pulse rounded bg-muted"></div>
-              <div className="h-4 w-4/5 animate-pulse rounded bg-muted"></div>
+              <div className="h-4 w-1/2 animate-pulse rounded bg-white/[0.06]"></div>
+              <div className="h-4 w-full animate-pulse rounded bg-white/[0.06]"></div>
+              <div className="h-4 w-4/5 animate-pulse rounded bg-white/[0.06]"></div>
             </div>
           ) : (
             children
@@ -102,7 +102,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         </div>
         
         {footer && (
-          <div className="border-t bg-muted/50 px-6 py-4">
+          <div className="border-t border-white/[0.06] bg-white/[0.02] px-6 py-4">
             {footer}
           </div>
         )}

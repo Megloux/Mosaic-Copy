@@ -3,7 +3,7 @@ import { X, Search, Plus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { exercisesMock, type Exercise as RawExercise } from '@/data/core/exercises';
 import { BuilderExercise, CATEGORIES, parseStandardTime, formatSeconds } from './types';
-import { categoriesToShow } from './templateData';
+import { categoriesToShow, exerciseTagFilter } from './templateData';
 
 // ---------- Adapter: raw exercise data → builder exercise ----------
 
@@ -26,13 +26,14 @@ const allExercises: BuilderExercise[] = exercisesMock.map(toBuilderExercise);
 // ---------- Category color mapping ----------
 
 const CATEGORY_COLORS: Record<string, string> = {
-  c1: '239,68,68',    // red – Abs
-  c2: '251,146,60',   // orange – Obliques
-  c3: '168,85,247',   // purple – Heavy Pressing
-  c4: '59,130,246',   // blue – Lunges/Squats
-  c5: '34,197,94',    // green – Straps
-  c6: '236,72,153',   // pink – Upper Body
-  c7: '251,191,36',   // amber – Cardio
+  c1: '0,183,120',    // teal – Abs
+  c2: '0,183,120',    // teal – Obliques
+  c3: '0,183,120',    // teal – Heavy Pressing
+  c4: '0,183,120',    // teal – Lunges/Squats
+  c5: '0,183,120',    // teal – Straps
+  c6: '0,183,120',    // teal – Upper Body
+  c7: '0,183,120',    // teal – Cardio
+  c8: '148,163,184',  // grey – Variations
 };
 
 function catColor(categoryId: string, alpha = 1): string {
@@ -55,20 +56,53 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
   onPick,
   filterTemplateTags,
 }) => {
-  // If template tags are provided, derive the relevant category IDs
+  // Level 1: derive relevant category IDs from template tags
   const templateCategoryIds = useMemo(
     () => (filterTemplateTags?.length ? categoriesToShow(filterTemplateTags) : null),
     [filterTemplateTags]
   );
 
-  // Pre-filtered exercise pool based on template tags
-  const exercisePool = useMemo(
-    () =>
-      templateCategoryIds
-        ? allExercises.filter((e) => templateCategoryIds.includes(e.categoryId))
-        : allExercises,
-    [templateCategoryIds]
+  // Level 2: derive exercise-tag refinement filter (for compound tags)
+  const level2Filter = useMemo(
+    () => (filterTemplateTags?.length ? exerciseTagFilter(filterTemplateTags) : null),
+    [filterTemplateTags]
   );
+
+  // Pre-filtered exercise pool: Level 1 (category) then Level 2 (exercise tags)
+  const exercisePool = useMemo(() => {
+    // Level 1: narrow by category
+    let pool = templateCategoryIds
+      ? allExercises.filter((e) => templateCategoryIds.includes(e.categoryId))
+      : allExercises;
+
+    // Level 2: if a refinement filter exists, further narrow
+    if (level2Filter) {
+      const hasTags = level2Filter.tags.length > 0;
+      const checkSprings = level2Filter.zeroSprings;
+
+      pool = pool.filter((e) => {
+        const exerciseTags = e.templateTags;
+        const totalSprings = e.springSetup.lightSprings + e.springSetup.heavySprings;
+
+        // Untagged exercises always pass (don't hide what we can't classify yet)
+        if (exerciseTags.length === 0) return true;
+
+        // If zeroSprings rule applies and exercise has no springs, keep it
+        if (checkSprings && totalSprings === 0) return true;
+
+        // If tag list is populated, keep exercises that match at least one tag
+        if (hasTags && exerciseTags.some((t) => level2Filter.tags.includes(t))) return true;
+
+        // If tag list is empty (not yet filled in), let everything through
+        if (!hasTags && !checkSprings) return true;
+
+        // Exercise has tags but none match → hide it
+        return false;
+      });
+    }
+
+    return pool;
+  }, [templateCategoryIds, level2Filter]);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [justAdded, setJustAdded] = useState<string | null>(null);
@@ -189,7 +223,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-white/30"
                   style={{
                     color: 'rgb(var(--core-white))',
-                    fontWeight: 'var(--font-thin)',
+                    fontWeight: 'var(--text-secondary-weight)',
                     letterSpacing: '0.01em',
                   }}
                 />
@@ -212,7 +246,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                 className="px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all"
                 style={{
                   backgroundColor: !activeCategory ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.05)',
-                  color: !activeCategory ? 'rgb(var(--core-white))' : 'rgba(255,255,255,0.5)',
+                  color: !activeCategory ? 'rgb(var(--core-white))' : 'var(--text-secondary-color)',
                   transitionDuration: 'var(--motion-natural)',
                 }}
               >
@@ -230,7 +264,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                     className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all"
                     style={{
                       backgroundColor: isActive ? catColor(cat.id, 0.2) : 'rgba(255,255,255,0.05)',
-                      color: isActive ? catColor(cat.id, 1) : 'rgba(255,255,255,0.5)',
+                      color: isActive ? catColor(cat.id, 1) : 'var(--text-secondary-color)',
                       transitionDuration: 'var(--motion-natural)',
                     }}
                   >
@@ -252,7 +286,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
             <div className="flex-1 overflow-y-auto px-5 pt-3 pb-6">
               <p
                 className="text-[11px] uppercase tracking-wider mb-3"
-                style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
+                style={{ color: 'var(--text-tertiary-color)', fontWeight: 600 }}
               >
                 {filtered.length} exercise{filtered.length !== 1 ? 's' : ''}
                 {activeCategory && ` in ${CATEGORIES.find(c => c.id === activeCategory)?.name}`}
@@ -268,13 +302,13 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                   </div>
                   <p
                     className="text-sm mb-1"
-                    style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 500 }}
+                    style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}
                   >
                     No exercises found
                   </p>
                   <p
                     className="text-xs"
-                    style={{ color: 'rgba(255,255,255,0.25)', fontWeight: 'var(--font-thin)' }}
+                    style={{ color: 'var(--text-muted-color)', fontWeight: 'var(--text-muted-weight)' }}
                   >
                     Try a different search term or category
                   </p>
@@ -321,7 +355,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                           <div className="flex items-center gap-1.5 mt-0.5">
                             <span
                               className="text-xs"
-                              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 'var(--font-thin)' }}
+                              style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
                             >
                               {formatSeconds(parseStandardTime(exercise.standardTime))}
                             </span>
@@ -330,7 +364,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                                 <span className="text-white/10">·</span>
                                 <span
                                   className="text-xs"
-                                  style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 'var(--font-thin)' }}
+                                  style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
                                 >
                                   {springs.lightSprings > 0 && `${springs.lightSprings}L`}
                                   {springs.lightSprings > 0 && springs.heavySprings > 0 && ' '}
@@ -343,7 +377,7 @@ export const ExercisePickerModal: React.FC<ExercisePickerModalProps> = ({
                                 <span className="text-white/10">·</span>
                                 <span
                                   className="text-xs truncate"
-                                  style={{ color: 'rgba(255,255,255,0.2)', fontWeight: 'var(--font-thin)' }}
+                                  style={{ color: 'var(--text-muted-color)', fontWeight: 'var(--text-muted-weight)' }}
                                 >
                                   {exercise.templateTags.join(', ')}
                                 </span>

@@ -40,6 +40,57 @@ export function categoriesToShow(templateTags: string[]): string[] {
   return Array.from(cats);
 }
 
+// ---------- Level 2: Tag → Exercise Tag Refinement ----------
+
+/**
+ * For compound/cross-category template tags, this map specifies which
+ * exercise-level template_tags values are relevant.
+ *
+ * - `tags`: exercise template_tags values that belong in this slot.
+ *   EMPTY for now — fill in when exercises are fully tagged.
+ * - `zeroSprings`: if true, match exercises with 0 total springs.
+ *
+ * Simple template tags (core, obliques, heavy_pressing, etc.) have NO
+ * entry here — they only need Level 1 (category) filtering.
+ *
+ * When an entry exists but tags is empty, Level 2 is effectively a no-op
+ * (all exercises from the Level 1 pool pass through). As tag values are
+ * added, filtering automatically becomes more precise.
+ */
+export interface ExerciseTagFilter {
+  tags: string[];        // exercise-level template_tags to match
+  zeroSprings?: boolean; // match exercises with 0 total springs
+}
+
+export const TAG_TO_EXERCISE_TAGS: Record<string, ExerciseTagFilter> = {
+  heavy_resistance: { tags: [] },
+  light_resistance: { tags: [] },
+  heavy_bilateral:  { tags: [] },
+  bodyweight:       { tags: [], zeroSprings: true },
+};
+
+/**
+ * Given template tags, return a combined ExerciseTagFilter if Level 2
+ * refinement applies, or null if only Level 1 (category) is needed.
+ */
+export function exerciseTagFilter(templateTags: string[]): ExerciseTagFilter | null {
+  const mergedTags: string[] = [];
+  let zeroSprings = false;
+  let hasLevel2 = false;
+
+  templateTags.forEach((tag) => {
+    const filter = TAG_TO_EXERCISE_TAGS[tag];
+    if (filter) {
+      hasLevel2 = true;
+      mergedTags.push(...filter.tags);
+      if (filter.zeroSprings) zeroSprings = true;
+    }
+  });
+
+  if (!hasLevel2) return null;
+  return { tags: [...new Set(mergedTags)], zeroSprings };
+}
+
 // ---------- Template Types ----------
 
 export interface TemplateBlockDef {
@@ -103,7 +154,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-power-to-precision',
     name: 'Power to Precision',
     description: 'Build power through controlled movements, focusing on form and precision in each exercise',
-    accentColor: '168,85,247',    // purple
+    accentColor: '0,183,120',     // teal
     icon: '⚡',
     isProOnly: true,
     blocks: [
@@ -123,7 +174,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-upper-body-focus',
     name: 'Upper Body Focus',
     description: 'Concentrated upper body workout incorporating pressing, pulling, and stabilization',
-    accentColor: '236,72,153',    // pink
+    accentColor: '0,183,120',     // teal
     icon: '💪',
     isProOnly: true,
     blocks: [
@@ -139,7 +190,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-lower-body-focus',
     name: 'Lower Body Focus',
     description: 'Targeted lower body exercises focusing on strength, stability, and power',
-    accentColor: '59,130,246',    // blue
+    accentColor: '0,183,120',     // teal
     icon: '🦵',
     isProOnly: true,
     blocks: [
@@ -156,7 +207,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-cable-strap',
     name: 'Cable/Strap Focused',
     description: 'Utilizing cables and straps for dynamic resistance training and stability work',
-    accentColor: '34,197,94',     // green
+    accentColor: '0,183,120',     // teal
     icon: '🔗',
     isProOnly: true,
     blocks: [
@@ -175,7 +226,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-power-round',
     name: 'Power Round',
     description: 'High-intensity workout combining strength exercises with cardio bursts for endurance',
-    accentColor: '239,68,68',     // red
+    accentColor: '0,183,120',     // teal
     icon: '🔥',
     isProOnly: true,
     blocks: [
@@ -194,7 +245,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-stacked-anterior',
     name: 'Stacked - Anterior Day',
     description: 'Targeted workout for the front of the body, emphasizing chest, abs, and quads',
-    accentColor: '251,146,60',    // orange
+    accentColor: '0,183,120',     // teal
     icon: '🎯',
     isProOnly: true,
     blocks: [
@@ -214,7 +265,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-stacked-posterior',
     name: 'Stacked - Posterior Day',
     description: 'Focused on the back of the body, strengthening back, glutes, and hamstrings',
-    accentColor: '96,165,250',    // light blue
+    accentColor: '0,183,120',     // teal
     icon: '🔄',
     isProOnly: true,
     blocks: [
@@ -234,7 +285,7 @@ export const TEMPLATES: TemplateDef[] = [
     id: 'tpl-stacked-push-pull',
     name: 'Stacked - Push/Pull Day',
     description: 'Alternating push and pull movements for balanced full-body strength development',
-    accentColor: '251,191,36',    // amber
+    accentColor: '0,183,120',     // teal
     icon: '↔️',
     isProOnly: true,
     blocks: [

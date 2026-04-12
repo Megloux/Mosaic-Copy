@@ -50,7 +50,8 @@ export const useExerciseLibraryStore = create<ExerciseLibraryState>()(
         { id: 'c4', name: 'Lower Body (LSD)' },
         { id: 'c5', name: 'Lower Body Straps' },
         { id: 'c6', name: 'Upper Body' },
-        { id: 'c7', name: 'Cardio Bursts' }
+        { id: 'c7', name: 'Cardio Bursts' },
+        { id: 'c8', name: 'Variations' }
       ],
       selectedExercise: null,
       viewType: 'grid',

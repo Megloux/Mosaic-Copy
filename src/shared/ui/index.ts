@@ -12,6 +12,7 @@ export { Tabs } from './Tabs';
 export { Toast } from './Toast';
 
 // Buttons
+export { IOSButton } from './buttons/IOSButton';
 export { StandardButton } from './buttons/StandardButton';
 export { FavoriteButton } from './buttons/FavoriteButton';
 export { ShareButton } from './buttons/ShareButton';

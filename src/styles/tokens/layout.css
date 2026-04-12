@@ -72,6 +72,13 @@
   --layer-toast: 400;         /* Notifications */
   --layer-system: 999;        /* System UI */
 
+  /* Container Size Aliases (for Modal) */
+  --container-md: 500px;      /* Standard modal width */
+  --container-lg: 700px;      /* Large modal width */
+
+  /* Border Radius */
+  --radius-full: 9999px;      /* Pill shape */
+
   /* Aspect Ratios */
   --ratio-square: 1;
   --ratio-video: 1.7778;      /* 16:9 */
