@@ -16,17 +16,25 @@
 - [ ] Exercise details view
 
 ### 3. Routine Builder
-- [ ] Template selection
-- [ ] Block-based exercise selection
-- [ ] Timing configuration
-- [ ] Save and edit functionality
+- [x] Template selection (template gallery flow)
+- [x] Flat exercise list (no blocks in scratch mode)
+- [x] Timing configuration (typeable duration: 130 = 1:30)
+- [x] Add from library or custom/manual
+- [x] Drag and drop reorder (Spotify-style)
+- [x] Multi-select with copy/paste/delete
+- [ ] Save and edit functionality (Phase 3 — Supabase persistence)
 - [ ] Preview mode
 
 ### 4. Routine Player
-- [ ] Exercise sequence display
-- [ ] Timer integration
-- [ ] Voice prompts
-- [ ] Progress tracking
+- [x] Standalone feature (zero imports from other features)
+- [x] Flat playlist — exercises only, no blocks/rest injected
+- [x] Circular countdown timer (TimerRing SVG)
+- [x] Playback controls (play/pause, skip fwd/back)
+- [x] Two-tone Up Next card (teal gradient)
+- [x] Progress bar with exercise count
+- [x] Completion screen with session stats
+- [x] iOS safe areas + 44px touch targets
+- [ ] Haptic feedback (wired in store, needs device)
 - [ ] Offline playback support
 
 ## Phase 2: Social Features (Weeks 3-4)
