@@ -82,13 +82,15 @@ export default function App() {
                         <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Builder</p>
                       </Card>
                     </Link>
-                    <Card size="default">
-                      <h3 className="text-lg font-semibold mb-3">Routine Player</h3>
-                      <p className="text-sm mb-4" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
-                        Execute routines with guided timer and instructions
-                      </p>
-                      <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Player</p>
-                    </Card>
+                    <Link to="/builder" className="block transition-all duration-200 hover:scale-[1.02]">
+                      <Card size="default" className="h-full">
+                        <h3 className="text-lg font-semibold mb-3">Routine Player</h3>
+                        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary-color)', fontWeight: 'var(--text-secondary-weight)' }}>
+                          Build a routine then play it with guided timer and instructions
+                        </p>
+                        <p className="text-sm font-semibold" style={{ color: 'rgb(var(--core-teal))' }}>Navigate → Builder</p>
+                      </Card>
+                    </Link>
                   </div>
                   <Card variant="secondary" size="default">
                     <h3 className="text-lg font-semibold mb-4">Platform Features</h3>

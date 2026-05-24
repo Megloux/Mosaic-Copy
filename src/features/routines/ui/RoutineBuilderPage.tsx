@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Layers } from 'lucide-react';
+import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Layers, Play } from 'lucide-react';
 import {
   BuilderRoutine,
   BuilderBlock,
@@ -26,11 +26,13 @@ import { ExercisePickerModal } from './ExercisePickerModal';
 interface RoutineBuilderPageProps {
   initialRoutine?: BuilderRoutine;
   onBack?: () => void;
+  onPlay?: (routine: BuilderRoutine) => void;
 }
 
 export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
   initialRoutine,
   onBack,
+  onPlay,
 }) => {
   // ----- State -----
   const [routine, setRoutine] = useState<BuilderRoutine>(
@@ -218,12 +220,29 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             <RotateCcw className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.45)' }} />
           </button>
 
+          {onPlay && totalExercises > 0 && (
+            <motion.button
+              whileTap={{ scale: 0.96 }}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors"
+              style={{
+                backgroundColor: 'rgb(var(--core-teal))',
+                color: 'rgb(0,0,0)',
+                letterSpacing: '0.03em',
+                transitionDuration: 'var(--motion-natural)',
+              }}
+              onClick={() => onPlay(routine)}
+            >
+              <Play className="w-3.5 h-3.5" />
+              Play
+            </motion.button>
+          )}
+
           <motion.button
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors"
             style={{
-              backgroundColor: 'rgb(var(--core-teal))',
-              color: 'rgb(0,0,0)',
+              backgroundColor: totalExercises > 0 && !onPlay ? 'rgb(var(--core-teal))' : 'rgba(255,255,255,0.08)',
+              color: totalExercises > 0 && !onPlay ? 'rgb(0,0,0)' : 'var(--text-secondary-color)',
               letterSpacing: '0.03em',
               transitionDuration: 'var(--motion-natural)',
             }}

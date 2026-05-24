@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { TemplateGallery } from './TemplateGallery';
 import { RoutineBuilderPage } from './RoutineBuilderPage';
+import { PlayerPage } from '@/features/workout-player/ui/PlayerPage';
+import type { PlayerRoutine } from '@/features/workout-player/model/types';
 import { type TemplateDef } from './templateData';
 import {
   BuilderRoutine,
@@ -18,7 +20,25 @@ import {
  * Self-contained — no router dependencies, just state transitions.
  */
 
-type Screen = 'gallery' | 'builder';
+type Screen = 'gallery' | 'builder' | 'player';
+
+/** Convert builder types → player types at the boundary */
+function toPlayerRoutine(r: BuilderRoutine): PlayerRoutine {
+  return {
+    id: r.id,
+    name: r.name,
+    blocks: r.blocks.map((b) => ({
+      id: b.id,
+      name: b.name,
+      type: b.type,
+      exercises: b.exercises.map((e) => ({
+        id: e.instanceId,
+        name: e.exercise.exerciseName,
+        durationSeconds: e.durationSeconds,
+      })),
+    })),
+  };
+}
 
 /** Convert a TemplateDef into a BuilderRoutine with slot placeholders */
 function routineFromTemplate(template: TemplateDef): BuilderRoutine {
@@ -65,11 +85,30 @@ export const RoutineBuilderEntry: React.FC = () => {
     setInitialRoutine(null);
   }, []);
 
+  const handlePlay = useCallback((routine: BuilderRoutine) => {
+    setInitialRoutine(routine);
+    setScreen('player');
+  }, []);
+
+  const handleBackToBuilder = useCallback(() => {
+    setScreen('builder');
+  }, []);
+
+  if (screen === 'player' && initialRoutine) {
+    return (
+      <PlayerPage
+        routine={toPlayerRoutine(initialRoutine)}
+        onClose={handleBackToBuilder}
+      />
+    );
+  }
+
   if (screen === 'builder' && initialRoutine) {
     return (
       <RoutineBuilderPage
         initialRoutine={initialRoutine}
         onBack={handleBackToGallery}
+        onPlay={handlePlay}
       />
     );
   }
