@@ -1,16 +1,15 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Layers, Play } from 'lucide-react';
+import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Play, Trash2, PenLine } from 'lucide-react';
 import {
   BuilderRoutine,
-  BuilderBlock,
   BuilderExercise,
   RoutineExerciseEntry,
   createDefaultRoutine,
   calcRoutineDuration,
   parseStandardTime,
 } from './types';
-import { BlockCard } from './BlockCard';
+import { DurationInput } from './BlockCard';
 import { ExercisePickerModal } from './ExercisePickerModal';
 
 /**
@@ -153,19 +152,6 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
     []
   );
 
-  const handleAddBlock = useCallback(() => {
-    const id = `b-${Date.now()}`;
-    const newBlock: BuilderBlock = {
-      id,
-      name: 'New Block',
-      type: 'main',
-      exercises: [],
-    };
-    setRoutine((prev) => ({
-      ...prev,
-      blocks: [...prev.blocks, newBlock],
-    }));
-  }, []);
 
   const handleReset = useCallback(() => {
     setRoutine(createDefaultRoutine());
@@ -341,19 +327,6 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
           />
           <div className="flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5" style={{ color: 'rgb(var(--core-teal))' }} />
-            <span
-              className="text-sm"
-              style={{ fontWeight: 'var(--text-secondary-weight)', color: 'var(--text-secondary-color)' }}
-            >
-              {routine.blocks.length} block{routine.blocks.length !== 1 ? 's' : ''}
-            </span>
-          </div>
-          <div
-            className="w-px h-3"
-            style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
-          />
-          <div className="flex items-center gap-1.5">
             <Dumbbell className="w-3.5 h-3.5" style={{ color: 'rgb(var(--core-teal))' }} />
             <span
               className="text-sm"
@@ -365,48 +338,102 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
         </div>
       </section>
 
-      {/* ====== Blocks ====== */}
-      <main className="flex-1 px-4 pt-2 pb-8">
-        <div className="space-y-3">
-          {routine.blocks.map((block, index) => (
-            <motion.div
-              key={block.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: index * 0.06,
-                ease: [0.24, 1.12, 0.76, 1],
-              }}
-            >
-              <BlockCard
-                block={block}
-                onAddExercise={() => openPickerForBlock(block.id)}
-                onAddFreeformExercise={() => handleAddFreeformExercise(block.id)}
-                onRemoveExercise={(instanceId) => handleRemoveExercise(block.id, instanceId)}
-                onUpdateExercise={(instanceId, updates) => handleUpdateExercise(block.id, instanceId, updates)}
-              />
-            </motion.div>
-          ))}
-        </div>
+      {/* ====== Exercises ====== */}
+      <main className="flex-1 px-4 pt-4 pb-8">
+        {totalExercises > 0 && (
+          <div className="space-y-2 mb-4">
+            {routine.blocks[0]?.exercises.map((entry, index) => (
+              <motion.div
+                key={entry.instanceId}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.04, ease: [0.24, 1.12, 0.76, 1] }}
+                className="flex items-center gap-3 rounded-xl px-4 py-3 group"
+                style={{
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                }}
+              >
+                <div
+                  className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{
+                    backgroundColor: 'rgba(0,183,120,0.15)',
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 'var(--text-primary-weight)',
+                    color: 'rgb(var(--core-teal))',
+                  }}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <input
+                    value={entry.exercise.exerciseName}
+                    onChange={(e) => handleUpdateExercise(routine.blocks[0].id, entry.instanceId, { name: e.target.value })}
+                    placeholder="Type exercise name..."
+                    className="bg-transparent outline-none w-full truncate"
+                    style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--text-primary-weight)', color: 'var(--text-primary-color)' }}
+                  />
+                </div>
+                <DurationInput
+                  value={entry.durationSeconds}
+                  onChange={(s: number) => handleUpdateExercise(routine.blocks[0].id, entry.instanceId, { durationSeconds: s })}
+                />
+                <button
+                  onClick={() => handleRemoveExercise(routine.blocks[0].id, entry.instanceId)}
+                  className="p-1.5 rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500/10 transition-all"
+                  style={{ transitionDuration: 'var(--motion-natural)' }}
+                  aria-label="Remove exercise"
+                >
+                  <Trash2 className="w-3.5 h-3.5" style={{ color: 'rgb(239,68,68)' }} />
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
-        {/* Add block */}
-        <motion.button
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={handleAddBlock}
-          className="w-full flex items-center justify-center gap-2 py-3.5 mt-3 rounded-xl text-sm transition-colors"
-          style={{
-            fontWeight: 500,
-            backgroundColor: 'rgba(255,255,255,0.03)',
-            color: 'var(--text-tertiary-color)',
-            border: '1px dashed rgba(255,255,255,0.08)',
-            transitionDuration: 'var(--motion-natural)',
-          }}
-        >
-          <Plus className="w-4 h-4" />
-          Add Block
-        </motion.button>
+        {totalExercises === 0 && (
+          <p
+            className="text-center mb-4 mt-2"
+            style={{ fontSize: 'var(--text-sm)', color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
+          >
+            No exercises yet
+          </p>
+        )}
+
+        {/* Add buttons */}
+        <div className="flex gap-2">
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            onClick={() => openPickerForBlock(routine.blocks[0]?.id)}
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm transition-colors"
+            style={{
+              fontWeight: 500,
+              backgroundColor: 'rgba(0,183,120,0.08)',
+              color: 'rgb(var(--core-teal))',
+              border: '1px solid rgba(0,183,120,0.15)',
+              transitionDuration: 'var(--motion-natural)',
+            }}
+          >
+            <Plus className="w-4 h-4" />
+            From Library
+          </motion.button>
+
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            onClick={() => handleAddFreeformExercise(routine.blocks[0]?.id)}
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm transition-colors"
+            style={{
+              fontWeight: 500,
+              backgroundColor: 'rgba(255,255,255,0.03)',
+              color: 'var(--text-tertiary-color)',
+              border: '1px dashed rgba(255,255,255,0.08)',
+              transitionDuration: 'var(--motion-natural)',
+            }}
+          >
+            <PenLine className="w-4 h-4" />
+            Custom
+          </motion.button>
+        </div>
       </main>
 
       {/* ====== Exercise Picker ====== */}

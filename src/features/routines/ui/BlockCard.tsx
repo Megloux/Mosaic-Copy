@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChevronDown, Plus, Trash2, GripVertical, Zap, PenLine } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BuilderBlock, RoutineExerciseEntry, formatSeconds } from './types';
@@ -349,19 +349,11 @@ const ExerciseRow: React.FC<{
           </p>
         )}
         <div className="flex items-center gap-2 mt-0.5">
-          {isCustom && onUpdate ? (
-            <select
+          {onUpdate ? (
+            <DurationInput
               value={entry.durationSeconds}
-              onChange={(e) => onUpdate({ durationSeconds: Number(e.target.value) })}
-              className="bg-transparent text-xs outline-none cursor-pointer"
-              style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)' }}
-            >
-              {[15, 30, 45, 60, 90, 120].map((s) => (
-                <option key={s} value={s} style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>
-                  {formatSeconds(s)}
-                </option>
-              ))}
-            </select>
+              onChange={(s) => onUpdate({ durationSeconds: s })}
+            />
           ) : (
             <span
               className="text-xs"
@@ -420,5 +412,68 @@ const ExerciseRow: React.FC<{
         <Trash2 className="w-3.5 h-3.5" style={{ color: 'rgb(239,68,68)' }} />
       </motion.button>
     </motion.div>
+  );
+};
+
+// ---------- DurationInput ----------
+// Type "130" → interprets as 1:30 (90s). Type "45" → 0:45 (45s).
+export const DurationInput: React.FC<{ value: number; onChange: (seconds: number) => void }> = ({
+  value,
+  onChange,
+}) => {
+  const [editing, setEditing] = useState(false);
+  const [raw, setRaw] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const parseDuration = (input: string): number => {
+    const digits = input.replace(/\D/g, '');
+    if (!digits) return value;
+    const num = parseInt(digits, 10);
+    if (num <= 0) return value;
+    // "130" → 1min 30s = 90s, "45" → 45s, "200" → 2min 0s = 120s
+    if (num <= 59) return num;
+    const mins = Math.floor(num / 100);
+    const secs = num % 100;
+    return mins * 60 + Math.min(secs, 59);
+  };
+
+  const handleStart = () => {
+    setRaw('');
+    setEditing(true);
+    setTimeout(() => inputRef.current?.focus(), 0);
+  };
+
+  const handleCommit = () => {
+    if (raw.trim()) {
+      onChange(parseDuration(raw));
+    }
+    setEditing(false);
+  };
+
+  if (editing) {
+    return (
+      <input
+        ref={inputRef}
+        value={raw}
+        onChange={(e) => setRaw(e.target.value)}
+        onBlur={handleCommit}
+        onKeyDown={(e) => e.key === 'Enter' && handleCommit()}
+        placeholder={formatSeconds(value)}
+        className="bg-transparent outline-none w-12 text-xs"
+        style={{ color: 'rgb(var(--core-teal))', fontWeight: 'var(--text-secondary-weight)' }}
+        inputMode="numeric"
+        autoComplete="off"
+      />
+    );
+  }
+
+  return (
+    <button
+      onClick={handleStart}
+      className="text-xs hover:underline transition-colors"
+      style={{ color: 'var(--text-tertiary-color)', fontWeight: 'var(--text-tertiary-weight)', transitionDuration: 'var(--motion-natural)' }}
+    >
+      {formatSeconds(value)}
+    </button>
   );
 };

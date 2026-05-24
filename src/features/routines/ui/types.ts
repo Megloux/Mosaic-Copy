@@ -112,13 +112,13 @@ export function createDefaultRoutine(): BuilderRoutine {
   };
 }
 
-/** Create a blank-slate routine (scratch path — no blocks at all) */
+/** Create a blank-slate routine (scratch path — one implicit block, hidden from UI) */
 export function createBlankRoutine(): BuilderRoutine {
   return {
     id: `r-${Date.now()}`,
     name: 'My Routine',
     mode: 'scratch',
-    blocks: [],
+    blocks: [{ id: `b-${Date.now()}`, name: 'Main', type: 'main', exercises: [] }],
     createdAt: new Date().toISOString(),
   };
 }
