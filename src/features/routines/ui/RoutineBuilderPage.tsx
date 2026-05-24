@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Play, Trash2, PenLine } from 'lucide-react';
+import { motion, Reorder } from 'framer-motion';
+import { ArrowLeft, Clock, Save, RotateCcw, Plus, Dumbbell, Play, Trash2, PenLine, GripVertical, Copy, Clipboard, Check } from 'lucide-react';
 import {
   BuilderRoutine,
   BuilderExercise,
@@ -40,6 +40,9 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
   const [pickerOpen, setPickerOpen] = useState(false);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState(false);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [clipboard, setClipboard] = useState<RoutineExerciseEntry[]>([]);
+  const [showActions, setShowActions] = useState(false);
 
   // Get active block's template tags for filtered picker
   const activeBlock = activeBlockId
@@ -52,12 +55,62 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
     [routine]
   );
 
+  // ----- Selection -----
+
+  const toggleSelect = useCallback((instanceId: string) => {
+    setSelected((prev) => {
+      const next = prev.includes(instanceId)
+        ? prev.filter((id) => id !== instanceId)
+        : [...prev, instanceId];
+      if (next.length > 0) setShowActions(true);
+      return next;
+    });
+  }, []);
+
+  const handleCopy = useCallback(() => {
+    const block = routine.blocks[0];
+    if (!block) return;
+    setClipboard(block.exercises.filter((e) => selected.includes(e.instanceId)));
+  }, [routine, selected]);
+
+  const handlePaste = useCallback(() => {
+    if (clipboard.length === 0) return;
+    const pasted = clipboard.map((e) => ({
+      ...e,
+      instanceId: `inst-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    }));
+    setRoutine((prev) => ({
+      ...prev,
+      blocks: prev.blocks.map((b, i) =>
+        i === 0 ? { ...b, exercises: [...b.exercises, ...pasted] } : b
+      ),
+    }));
+  }, [clipboard]);
+
+  const handleDeleteSelected = useCallback(() => {
+    setRoutine((prev) => ({
+      ...prev,
+      blocks: prev.blocks.map((b, i) =>
+        i === 0
+          ? { ...b, exercises: b.exercises.filter((e) => !selected.includes(e.instanceId)) }
+          : b
+      ),
+    }));
+    setSelected([]);
+  }, [selected]);
+
+  const dismissActions = useCallback(() => {
+    setSelected([]);
+    setShowActions(false);
+  }, []);
+
   // ----- Actions -----
 
   const openPickerForBlock = useCallback((blockId: string) => {
+    dismissActions();
     setActiveBlockId(blockId);
     setPickerOpen(true);
-  }, []);
+  }, [dismissActions]);
 
   const handlePickExercise = useCallback(
     (exercise: BuilderExercise) => {
@@ -138,19 +191,6 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
     []
   );
 
-  const handleRemoveExercise = useCallback(
-    (blockId: string, instanceId: string) => {
-      setRoutine((prev) => ({
-        ...prev,
-        blocks: prev.blocks.map((block) =>
-          block.id === blockId
-            ? { ...block, exercises: block.exercises.filter((e) => e.instanceId !== instanceId) }
-            : block
-        ),
-      }));
-    },
-    []
-  );
 
 
   const handleReset = useCallback(() => {
@@ -339,32 +379,63 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
       </section>
 
       {/* ====== Exercises ====== */}
-      <main className="flex-1 px-4 pt-4 pb-8">
+      <main className="flex-1 px-4 pt-4 pb-8" style={{ paddingBottom: showActions ? 72 : undefined }}>
         {totalExercises > 0 && (
-          <div className="space-y-2 mb-4">
+          <Reorder.Group
+            axis="y"
+            values={routine.blocks[0]?.exercises ?? []}
+            onReorder={(newOrder) => {
+              setRoutine((prev) => ({
+                ...prev,
+                blocks: prev.blocks.map((b, i) =>
+                  i === 0 ? { ...b, exercises: newOrder } : b
+                ),
+              }));
+            }}
+            className="space-y-2 mb-4"
+          >
             {routine.blocks[0]?.exercises.map((entry, index) => (
-              <motion.div
+              <Reorder.Item
                 key={entry.instanceId}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.04, ease: [0.24, 1.12, 0.76, 1] }}
-                className="flex items-center gap-3 rounded-xl px-4 py-3 group"
+                value={entry}
+                className="flex items-center gap-2 rounded-xl px-3 py-3 group cursor-grab active:cursor-grabbing"
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  backgroundColor: selected.includes(entry.instanceId)
+                    ? 'rgba(0,183,120,0.08)'
+                    : 'rgba(255,255,255,0.04)',
+                  border: selected.includes(entry.instanceId)
+                    ? '1px solid rgba(0,183,120,0.25)'
+                    : '1px solid rgba(255,255,255,0.06)',
                 }}
               >
-                <div
-                  className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
+                <GripVertical
+                  className="w-4 h-4 flex-shrink-0 opacity-30 group-hover:opacity-60 transition-opacity"
+                  style={{ color: 'var(--text-tertiary-color)' }}
+                />
+                <button
+                  onClick={() => toggleSelect(entry.instanceId)}
+                  className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-colors"
                   style={{
-                    backgroundColor: 'rgba(0,183,120,0.15)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: 'var(--text-primary-weight)',
-                    color: 'rgb(var(--core-teal))',
+                    backgroundColor: selected.includes(entry.instanceId)
+                      ? 'rgb(var(--core-teal))'
+                      : 'rgba(255,255,255,0.06)',
+                    border: selected.includes(entry.instanceId)
+                      ? 'none'
+                      : '1px solid rgba(255,255,255,0.12)',
+                    transitionDuration: 'var(--motion-natural)',
                   }}
+                  aria-label="Select exercise"
+                >
+                  {selected.includes(entry.instanceId) && (
+                    <Check className="w-3 h-3" style={{ color: 'rgb(0,0,0)' }} />
+                  )}
+                </button>
+                <span
+                  className="w-5 text-center flex-shrink-0"
+                  style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--text-tertiary-weight)', color: 'var(--text-tertiary-color)' }}
                 >
                   {index + 1}
-                </div>
+                </span>
                 <div className="flex-1 min-w-0">
                   <input
                     value={entry.exercise.exerciseName}
@@ -378,17 +449,9 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
                   value={entry.durationSeconds}
                   onChange={(s: number) => handleUpdateExercise(routine.blocks[0].id, entry.instanceId, { durationSeconds: s })}
                 />
-                <button
-                  onClick={() => handleRemoveExercise(routine.blocks[0].id, entry.instanceId)}
-                  className="p-1.5 rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500/10 transition-all"
-                  style={{ transitionDuration: 'var(--motion-natural)' }}
-                  aria-label="Remove exercise"
-                >
-                  <Trash2 className="w-3.5 h-3.5" style={{ color: 'rgb(239,68,68)' }} />
-                </button>
-              </motion.div>
+              </Reorder.Item>
             ))}
-          </div>
+          </Reorder.Group>
         )}
 
         {totalExercises === 0 && (
@@ -420,7 +483,7 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
 
           <motion.button
             whileTap={{ scale: 0.97 }}
-            onClick={() => handleAddFreeformExercise(routine.blocks[0]?.id)}
+            onClick={() => { dismissActions(); handleAddFreeformExercise(routine.blocks[0]?.id); }}
             className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm transition-colors"
             style={{
               fontWeight: 500,
@@ -435,6 +498,47 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
           </motion.button>
         </div>
       </main>
+
+      {/* ====== Bottom Action Bar (icons only) ====== */}
+      {showActions && (
+        <div
+          className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-6 px-5 py-3"
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.92)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            paddingBottom: 'max(env(safe-area-inset-bottom, 12px), 12px)',
+            zIndex: 50,
+          }}
+        >
+          <button
+            onClick={handleCopy}
+            className="p-3 rounded-full hover:bg-white/10 transition-colors"
+            style={{ transitionDuration: 'var(--motion-natural)' }}
+            aria-label="Copy selected"
+          >
+            <Copy className="w-5 h-5" style={{ color: 'rgb(var(--core-white))' }} />
+          </button>
+          <button
+            onClick={handlePaste}
+            className="p-3 rounded-full hover:bg-white/10 transition-colors"
+            style={{ transitionDuration: 'var(--motion-natural)', opacity: clipboard.length > 0 ? 1 : 0.3 }}
+            aria-label="Paste"
+            disabled={clipboard.length === 0}
+          >
+            <Clipboard className="w-5 h-5" style={{ color: 'rgb(var(--core-white))' }} />
+          </button>
+          <button
+            onClick={handleDeleteSelected}
+            className="p-3 rounded-full hover:bg-white/10 transition-colors"
+            style={{ transitionDuration: 'var(--motion-natural)' }}
+            aria-label="Delete selected"
+          >
+            <Trash2 className="w-5 h-5" style={{ color: 'rgb(var(--core-white))' }} />
+          </button>
+        </div>
+      )}
 
       {/* ====== Exercise Picker ====== */}
       <ExercisePickerModal
