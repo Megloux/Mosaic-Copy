@@ -84,6 +84,25 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
       return { user: null, session: null, error: error.message }
     }
 
+    // Create profile row directly (upsert to avoid conflict if DB trigger also fires)
+    if (authData.user) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({
+          id: authData.user.id,
+          email: email,
+          first_name: firstName || null,
+          last_name: lastName || null,
+          phone: phone || null,
+          username: username || null,
+          studio_name: studioName || null,
+        }, { onConflict: 'id' })
+
+      if (profileError) {
+        console.error('Failed to create profile:', profileError)
+      }
+    }
+
     return { user: authData.user, session: authData.session, error: null }
   } catch (err) {
     return { 
