@@ -95,7 +95,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
     }, [showPassword, handleHapticFeedback])
 
     return (
-      <div className={cn('space-y-1.5', className)}>
+      <div className="space-y-1.5">
         {label && (
           <div
             className={cn(
@@ -119,7 +119,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             disabled={disabled || loading}
             error={error}
             success={success}
-            className="pr-10"
+            className={cn('pr-10', className)}
             {...props}
           />
           <button
