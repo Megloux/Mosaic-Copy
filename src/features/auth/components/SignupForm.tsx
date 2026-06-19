@@ -39,7 +39,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
   // Form state
   const [localError, setLocalError] = React.useState<string | null>(null)
   const [agreedToTerms, setAgreedToTerms] = React.useState(false)
-  const [usernameStatus, setUsernameStatus] = React.useState<'idle' | 'checking' | 'available' | 'taken'>('idle')
+  const [usernameStatus, setUsernameStatus] = React.useState<'idle' | 'checking' | 'available' | 'taken' | 'error'>('idle')
 
   // Clear errors when user starts typing
   React.useEffect(() => {
@@ -56,8 +56,12 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
 
     const timer = setTimeout(async () => {
       setUsernameStatus('checking')
-      const { available } = await checkUsernameAvailable(username)
-      setUsernameStatus(available ? 'available' : 'taken')
+      const { available, error: checkError } = await checkUsernameAvailable(username)
+      if (checkError) {
+        setUsernameStatus('error')
+      } else {
+        setUsernameStatus(available ? 'available' : 'taken')
+      }
     }, 500)
 
     return () => clearTimeout(timer)
@@ -238,6 +242,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
                 )}
                 {usernameStatus === 'taken' && (
                   <span className="text-red-600">✗ Taken</span>
+                )}
+                {usernameStatus === 'error' && (
+                  <span className="text-gray-400">Could not check availability</span>
                 )}
               </div>
             )}
