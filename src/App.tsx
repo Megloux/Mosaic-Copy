@@ -14,7 +14,7 @@ import { ExerciseLibrary } from './features/exercises/components/ExerciseLibrary
 import { RoutineBuilderEntry } from './features/routines/ui/RoutineBuilderEntry'
 
 export default function App() {
-  const { initialize, initialized, loading } = useAuthStore()
+  const { initialize, initialized } = useAuthStore()
 
   // Initialize auth on app load
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function App() {
     <Router>
       <ErrorBoundary>
         {/* Show loading screen while checking auth state */}
-        {(!initialized || loading) ? (
+        {(!initialized) ? (
           <div 
             className="min-h-screen flex items-center justify-center" 
             style={{ backgroundColor: 'rgb(var(--core-black))' }}
