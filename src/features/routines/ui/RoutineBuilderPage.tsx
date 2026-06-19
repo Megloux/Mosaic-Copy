@@ -9,7 +9,7 @@ import {
   calcRoutineDuration,
   parseStandardTime,
 } from './types';
-import { DurationInput } from './BlockCard';
+import { DurationInput, BlockCard } from './BlockCard';
 import { ExercisePickerModal } from './ExercisePickerModal';
 
 /**
@@ -191,7 +191,19 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
     []
   );
 
-
+  const handleRemoveExercise = useCallback(
+    (blockId: string, instanceId: string) => {
+      setRoutine((prev) => ({
+        ...prev,
+        blocks: prev.blocks.map((block) =>
+          block.id === blockId
+            ? { ...block, exercises: block.exercises.filter((e) => e.instanceId !== instanceId) }
+            : block
+        ),
+      }));
+    },
+    []
+  );
 
   const handleReset = useCallback(() => {
     setRoutine(createDefaultRoutine());
@@ -380,6 +392,21 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
 
       {/* ====== Exercises ====== */}
       <main className="flex-1 px-4 pt-4 pb-8" style={{ paddingBottom: showActions ? 72 : undefined }}>
+        {routine.mode === 'template' ? (
+          <div className="space-y-4">
+            {routine.blocks.map((block) => (
+              <BlockCard
+                key={block.id}
+                block={block}
+                onAddExercise={() => openPickerForBlock(block.id)}
+                onAddFreeformExercise={() => handleAddFreeformExercise(block.id)}
+                onRemoveExercise={(instanceId) => handleRemoveExercise(block.id, instanceId)}
+                onUpdateExercise={(instanceId, updates) => handleUpdateExercise(block.id, instanceId, updates)}
+              />
+            ))}
+          </div>
+        ) : (
+        <>
         {totalExercises > 0 && (
           <Reorder.Group
             axis="y"
@@ -497,6 +524,8 @@ export const RoutineBuilderPage: React.FC<RoutineBuilderPageProps> = ({
             Custom
           </motion.button>
         </div>
+        </>
+        )}
       </main>
 
       {/* ====== Bottom Action Bar (icons only) ====== */}
