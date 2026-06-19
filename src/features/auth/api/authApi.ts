@@ -51,17 +51,6 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
   try {
     const { email, password, firstName, lastName, phone, username, studioName } = data
 
-    // Check if username is taken (if provided)
-    if (username) {
-      const { available, error: usernameError } = await checkUsernameAvailable(username)
-      if (usernameError) {
-        return { user: null, session: null, error: usernameError }
-      }
-      if (!available) {
-        return { user: null, session: null, error: 'Username is already taken' }
-      }
-    }
-
     const { data: authData, error } = await supabase.auth.signUp({
       email,
       password,
