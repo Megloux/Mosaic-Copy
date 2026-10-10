@@ -1,8 +1,8 @@
-import { supabaseAdmin } from './supabase'
+import { supabase } from './supabase'
 
 async function verifyConnection() {
     // Test templates table first - it's critical for our migration
-    const { data: templates, error: templateError } = await supabaseAdmin
+    const { data: templates, error: templateError } = await supabase
         .from('templates')
         .select('id')
         .limit(1)
@@ -13,7 +13,7 @@ async function verifyConnection() {
     }
 
     // Test routines table next
-    const { data: routines, error: routineError } = await supabaseAdmin
+    const { data: routines, error: routineError } = await supabase
         .from('routines')
         .select('id')
         .limit(1)

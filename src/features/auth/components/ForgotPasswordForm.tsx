@@ -8,7 +8,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
 import { useUIStore } from '@/store/uiStore'
 

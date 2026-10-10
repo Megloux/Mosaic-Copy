@@ -7,33 +7,38 @@
  */
 
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { supabase } from '@/config/supabase'
+import { useAuthStore } from '../model/authStore'
 import { useUIStore } from '@/store/uiStore'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 
-type VerificationStatus = 'verifying' | 'success' | 'error' | 'already-verified'
+type VerificationStatus = 'verifying' | 'check-inbox' | 'success' | 'error' | 'already-verified'
 
 export const EmailVerificationPage: React.FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const addToast = useUIStore(state => state.addToast)
-  
+  const resendVerification = useAuthStore(state => state.resendVerification)
+
+  const signupEmail = (location.state as { email?: string } | null)?.email
+
   const [status, setStatus] = useState<VerificationStatus>('verifying')
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [resendLoading, setResendLoading] = useState(false)
-  const [resendEmail, setResendEmail] = useState('')
+  const [resendEmail, setResendEmail] = useState(signupEmail || '')
 
   useEffect(() => {
     const verifyEmail = async () => {
-      // Check for token_hash in URL (Supabase email verification)
+      // token_hash links only exist when a custom email template is used;
+      // default Supabase emails land on /auth/callback instead
       const tokenHash = searchParams.get('token_hash')
       const type = searchParams.get('type')
 
       if (!tokenHash || type !== 'email') {
-        setStatus('error')
-        setErrorMessage('Invalid verification link. Please check your email and try again.')
+        setStatus('check-inbox')
         return
       }
 
@@ -83,12 +88,9 @@ export const EmailVerificationPage: React.FC = () => {
     setResendLoading(true)
 
     try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: resendEmail,
-      })
+      const result = await resendVerification(resendEmail)
 
-      if (error) throw error
+      if (!result.success) throw new Error(result.error || 'Could not resend verification email')
 
       addToast({
         type: 'success',
@@ -203,6 +205,82 @@ export const EmailVerificationPage: React.FC = () => {
             >
               Go to Dashboard
             </StandardButton>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Check your inbox state - default landing after signup
+  if (status === 'check-inbox') {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center p-4"
+        style={{ backgroundColor: 'rgb(var(--core-black))' }}
+      >
+        <div className="bg-white rounded-2xl p-8 shadow-xl max-w-md w-full">
+          <div className="text-center mb-6">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-8 h-8 text-blue-600"
+              >
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <path d="M22 6l-10 7L2 6" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Check your inbox</h1>
+            <p className="text-gray-600">
+              {signupEmail
+                ? `We sent a confirmation link to ${signupEmail}. Click it to activate your account.`
+                : 'We sent you a confirmation link. Click it to activate your account.'}
+            </p>
+          </div>
+
+          {/* Resend verification */}
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Didn't get it? Resend verification email
+              </label>
+              <input
+                type="email"
+                value={resendEmail}
+                onChange={(e) => setResendEmail(e.target.value)}
+                placeholder="you@example.com"
+                className={cn(
+                  'w-full px-4 py-3 rounded-lg border border-gray-300',
+                  'text-gray-900 placeholder:text-gray-400',
+                  'focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent',
+                  'disabled:opacity-50'
+                )}
+                disabled={resendLoading}
+              />
+            </div>
+
+            <StandardButton
+              onClick={handleResendVerification}
+              variant="default"
+              isLoading={resendLoading}
+              loadingText="Sending..."
+              className="w-full"
+            >
+              Resend Verification Email
+            </StandardButton>
+
+            <div className="text-center">
+              <Link
+                to="/login"
+                className="text-sm font-medium"
+                style={{ color: 'rgb(var(--core-teal))' }}
+              >
+                Back to Sign In
+              </Link>
+            </div>
           </div>
         </div>
       </div>

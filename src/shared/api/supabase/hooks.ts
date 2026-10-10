@@ -4,10 +4,10 @@ import {
   getExercisesByCategory, getTemplateWithBlocks
 } from '@/lib/supabase/api'
 import type {
-  Category, CategoryInsert, CategoryUpdate,
-  Exercise, ExerciseInsert, ExerciseUpdate,
-  Block, BlockInsert, BlockUpdate,
-  Template, TemplateInsert, TemplateUpdate,
+  CategoryInsert, CategoryUpdate,
+  ExerciseInsert, ExerciseUpdate,
+  BlockInsert, BlockUpdate,
+  TemplateInsert, TemplateUpdate,
 } from './types'
 
 // Generic CRUD hooks

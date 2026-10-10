@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '@/shared/api/supabase/client'
+import { supabase } from '@/shared/api/supabase/client'
 
 /**
  * Verifies connection to the Supabase database by checking critical tables
@@ -6,7 +6,7 @@ import { supabaseAdmin } from '@/shared/api/supabase/client'
  */
 async function verifyConnection(): Promise<boolean> {
     // Test templates table first - it's critical for our migration
-    const { error: templateError } = await supabaseAdmin
+    const { error: templateError } = await supabase
         .from('templates')
         .select('id')
         .limit(1)
@@ -17,7 +17,7 @@ async function verifyConnection(): Promise<boolean> {
     }
 
     // Test routines table next
-    const { error: routineError } = await supabaseAdmin
+    const { error: routineError } = await supabase
         .from('routines')
         .select('id')
         .limit(1)
@@ -28,7 +28,7 @@ async function verifyConnection(): Promise<boolean> {
     }
 
     // Test exercises table last
-    const { error: exerciseError } = await supabaseAdmin
+    const { error: exerciseError } = await supabase
         .from('exercises')
         .select('id')
         .limit(1)

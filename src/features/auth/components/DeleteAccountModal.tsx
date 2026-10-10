@@ -8,7 +8,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 
 export interface DeleteAccountModalProps {
   isOpen: boolean

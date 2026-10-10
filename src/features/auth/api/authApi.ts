@@ -55,11 +55,12 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: {
           first_name: firstName || null,
           last_name: lastName || null,
           phone: phone || null,
-          username: username || null,
+          username: username ? username.trim().toLowerCase() : null,
           studio_name: studioName || null,
         }
       }
@@ -73,25 +74,7 @@ export async function signUp(data: SignupData): Promise<AuthResult> {
       return { user: null, session: null, error: error.message }
     }
 
-    // Create profile row directly (upsert to avoid conflict if DB trigger also fires)
-    if (authData.user) {
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .upsert({
-          id: authData.user.id,
-          email: email,
-          first_name: firstName || null,
-          last_name: lastName || null,
-          phone: phone || null,
-          username: username || null,
-          studio_name: studioName || null,
-        }, { onConflict: 'id' })
-
-      if (profileError) {
-        console.error('Failed to create profile:', profileError)
-      }
-    }
-
+    // Profile row is created by the handle_new_user database trigger
     return { user: authData.user, session: authData.session, error: null }
   } catch (err) {
     return { 
@@ -230,7 +213,7 @@ export async function updateProfile(
 export async function resetPassword(email: string): Promise<{ error: string | null }> {
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
     })
 
     if (error) {
@@ -290,16 +273,13 @@ export async function deleteAccount(): Promise<{ error: string | null }> {
 export async function checkUsernameAvailable(username: string): Promise<{ available: boolean; error: string | null }> {
   try {
     const { data, error } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('username', username)
-      .maybeSingle()
+      .rpc('is_username_available', { candidate: username })
 
     if (error) {
       return { available: false, error: error.message }
     }
 
-    return { available: data === null, error: null }
+    return { available: data === true, error: null }
   } catch (err) {
     return { 
       available: false, 
@@ -309,10 +289,105 @@ export async function checkUsernameAvailable(username: string): Promise<{ availa
 }
 
 /**
+ * Resend the email verification link
+ */
+export async function resendVerification(email: string): Promise<{ error: string | null }> {
+  try {
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+
+    if (error) {
+      return { error: error.message }
+    }
+
+    return { error: null }
+  } catch (err) {
+    return {
+      error: err instanceof Error ? err.message : 'An unexpected error occurred'
+    }
+  }
+}
+
+/**
+ * Update the current user's password (used after a recovery flow)
+ */
+export async function updatePassword(newPassword: string): Promise<{ error: string | null }> {
+  try {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    })
+
+    if (error) {
+      return { error: error.message }
+    }
+
+    return { error: null }
+  } catch (err) {
+    return {
+      error: err instanceof Error ? err.message : 'An unexpected error occurred'
+    }
+  }
+}
+
+/**
+ * Verify an email link that carries a token_hash (cross-device safe,
+ * unlike PKCE codes which only work in the browser that started the flow)
+ */
+export async function verifyOtpTokenHash(
+  tokenHash: string,
+  type: 'signup' | 'recovery' | 'email_change' | 'magiclink' | 'email'
+): Promise<AuthResult> {
+  try {
+    const { data, error } = await supabase.auth.verifyOtp({
+      token_hash: tokenHash,
+      type,
+    })
+
+    if (error) {
+      return { user: null, session: null, error: error.message }
+    }
+
+    return { user: data.user, session: data.session, error: null }
+  } catch (err) {
+    return {
+      user: null,
+      session: null,
+      error: err instanceof Error ? err.message : 'An unexpected error occurred'
+    }
+  }
+}
+
+/**
+ * Exchange a PKCE auth code (from email links) for a session
+ */
+export async function exchangeCodeForSession(code: string): Promise<AuthResult> {
+  try {
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (error) {
+      return { user: null, session: null, error: error.message }
+    }
+
+    return { user: data.user, session: data.session, error: null }
+  } catch (err) {
+    return {
+      user: null,
+      session: null,
+      error: err instanceof Error ? err.message : 'An unexpected error occurred'
+    }
+  }
+}
+
+/**
  * Subscribe to auth state changes
  */
 export function onAuthStateChange(callback: (user: User | null, session: Session | null) => void) {
-  return supabase.auth.onAuthStateChange((event, session) => {
+  return supabase.auth.onAuthStateChange((_event, session) => {
     callback(session?.user ?? null, session)
   })
 }

@@ -1,4 +1,4 @@
-import { from, isOffline, supabase } from '@/shared/api/supabase/client'
+import { from, isOffline } from '@/shared/api/supabase/client'
 import type { 
   Category, CategoryInsert, CategoryUpdate,
   Exercise, ExerciseInsert, ExerciseUpdate,

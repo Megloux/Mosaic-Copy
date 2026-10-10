@@ -8,7 +8,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 import { useUIStore } from '@/store/uiStore'
 
 export interface AuthHeaderProps {
@@ -18,17 +18,12 @@ export interface AuthHeaderProps {
 
 export const AuthHeader: React.FC<AuthHeaderProps> = ({ className, onNavigate }) => {
   const navigate = useNavigate()
-  const { user, profile, signOut, loading, initialize, initialized } = useAuthStore()
+  const { user, profile, signOut, initialized } = useAuthStore()
   const addToast = useUIStore(state => state.addToast)
   
   // Hooks must be at top level - not inside conditionals
   const [showMenu, setShowMenu] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement>(null)
-
-  // Initialize auth on mount
-  React.useEffect(() => {
-    initialize()
-  }, [initialize])
 
   // Close menu when clicking outside
   React.useEffect(() => {
@@ -56,7 +51,7 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({ className, onNavigate })
   }
 
   // Still loading
-  if (!initialized || loading) {
+  if (!initialized) {
     return (
       <div className={cn('flex items-center gap-4', className)}>
         <div className="h-4 w-24 bg-muted animate-pulse rounded" />

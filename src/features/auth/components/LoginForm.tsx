@@ -10,7 +10,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
 import { PasswordInput } from '@/components/ui/form/PasswordInput'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
 import { useUIStore } from '@/store/uiStore'
 

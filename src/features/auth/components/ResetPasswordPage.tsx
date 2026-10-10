@@ -6,40 +6,24 @@
  * iOS-compliant with proper touch targets and validation.
  */
 
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { supabase } from '@/config/supabase'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../model/authStore'
 import { useUIStore } from '@/store/uiStore'
 import { PasswordInput } from '@/components/ui/form/PasswordInput'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
-import { cn } from '@/shared/lib/utils'
 
-type ResetStatus = 'ready' | 'updating' | 'success' | 'error'
+type ResetStatus = 'ready' | 'updating' | 'success'
 
 export const ResetPasswordPage: React.FC = () => {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const { user, initialized, updatePassword } = useAuthStore()
   const addToast = useUIStore(state => state.addToast)
-  
+
   const [status, setStatus] = useState<ResetStatus>('ready')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-  const [isValidToken, setIsValidToken] = useState(false)
-
-  useEffect(() => {
-    // Check if we have a valid reset token
-    const tokenHash = searchParams.get('token_hash')
-    const type = searchParams.get('type')
-
-    if (!tokenHash || type !== 'recovery') {
-      setStatus('error')
-      setErrorMessage('Invalid or expired reset link. Please request a new password reset.')
-      return
-    }
-
-    setIsValidToken(true)
-  }, [searchParams])
 
   const validateForm = (): boolean => {
     if (!newPassword) {
@@ -69,25 +53,20 @@ export const ResetPasswordPage: React.FC = () => {
     setStatus('updating')
 
     try {
-      // Update the user's password
-      const { error } = await supabase.auth.updateUser({
-        password: newPassword,
-      })
+      const result = await updatePassword(newPassword)
 
-      if (error) throw error
+      if (!result.success) throw new Error(result.error || 'Failed to reset password')
 
       setStatus('success')
       addToast({
         type: 'success',
         title: 'Password reset successful',
-        message: 'Your password has been updated. You can now sign in.',
+        message: 'Your password has been updated.',
         duration: 5000,
       })
 
-      // Redirect to login after 2 seconds
-      setTimeout(() => {
-        navigate('/login')
-      }, 2000)
+      // User is already signed in - send them home
+      navigate('/', { replace: true })
     } catch (error) {
       setStatus('ready')
       setErrorMessage(error instanceof Error ? error.message : 'Failed to reset password')
@@ -100,8 +79,28 @@ export const ResetPasswordPage: React.FC = () => {
     }
   }
 
-  // Error state - invalid token
-  if (status === 'error' || !isValidToken) {
+  // Still restoring the session
+  if (!initialized) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center p-4"
+        style={{ backgroundColor: 'rgb(var(--core-black))' }}
+      >
+        <div className="bg-white rounded-2xl p-8 shadow-xl max-w-md w-full">
+          <div className="text-center">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 flex items-center justify-center">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading</h1>
+            <p className="text-gray-600">Please wait...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Error state - no recovery session
+  if (!user) {
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-4" 
@@ -170,7 +169,7 @@ export const ResetPasswordPage: React.FC = () => {
               Your password has been successfully updated.
             </p>
             <p className="text-sm text-gray-500">
-              Redirecting to sign in...
+              Redirecting...
             </p>
           </div>
         </div>

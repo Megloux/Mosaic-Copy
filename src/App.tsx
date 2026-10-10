@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import ErrorBoundary from './ErrorBoundary'
-import { LoginForm, SignupForm, ForgotPasswordForm, ProtectedRoute, EmailVerificationPage, ResetPasswordPage, useAuthStore } from '@/features/auth'
+import { LoginForm, SignupForm, ForgotPasswordForm, ProtectedRoute, EmailVerificationPage, ResetPasswordPage, AuthCallbackPage, useAuthStore } from '@/features/auth'
 import { PrivacyPolicy } from '@/pages/PrivacyPolicy'
+import { TermsOfService } from '@/pages/TermsOfService'
 import { ToastContainer } from '@/shared/ui/Toast'
 import { ProfilePage } from '@/features/profile'
 import { Card } from '@/shared/ui/Card'
@@ -145,7 +146,9 @@ export default function App() {
             } />
             <Route path="/verify-email" element={<EmailVerificationPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
           </Routes>
         </div>
         )}

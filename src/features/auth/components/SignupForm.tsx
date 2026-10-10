@@ -10,7 +10,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
 import { Input } from '@/shared/ui/form/Input'
 import { PasswordInput } from '@/components/ui/form/PasswordInput'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 import { StandardButton } from '@/shared/ui/buttons/StandardButton'
 import { useUIStore } from '@/store/uiStore'
 import { checkUsernameAvailable } from '../api/authApi'
@@ -137,17 +137,25 @@ export const SignupForm: React.FC<SignupFormProps> = ({ className, onSuccess }) 
     })
     
     if (result.success) {
-      addToast({
-        type: 'success',
-        title: 'Welcome to Mosaic!',
-        message: 'Check your email to confirm your account.',
-        duration: 5000,
-      })
       onSuccess?.()
-      
-      // Redirect to the page they were trying to access, or home
-      const from = (location.state as any)?.from?.pathname || '/'
-      navigate(from, { replace: true })
+
+      if (result.needsEmailConfirmation) {
+        addToast({
+          type: 'success',
+          title: 'Check your email to confirm your account',
+          duration: 5000,
+        })
+        navigate('/verify-email', { state: { email: email.trim().toLowerCase() } })
+      } else {
+        addToast({
+          type: 'success',
+          title: 'Welcome to Mosaic!',
+          duration: 5000,
+        })
+        // Redirect to the page they were trying to access, or home
+        const from = (location.state as any)?.from?.pathname || '/'
+        navigate(from, { replace: true })
+      }
     }
   }
 

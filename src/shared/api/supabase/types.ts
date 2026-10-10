@@ -136,6 +136,80 @@ export interface Database {
           updated_at?: string
         }
       }
+      profiles: {
+        Row: {
+          id: string
+          email: string
+          username: string | null
+          is_pro: boolean
+          studio_id: string | null
+          first_name: string | null
+          last_name: string | null
+          phone: string | null
+          studio_name: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['profiles']['Row'], 'created_at' | 'updated_at'> & {
+          created_at?: string
+          updated_at?: string
+        }
+        Update: Partial<Database['public']['Tables']['profiles']['Insert']>
+      }
+      routines: {
+        Row: {
+          id: string
+          user_id: string | null
+          template_id: string | null
+          name: string
+          description: string | null
+          structure: Json
+          is_public: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['routines']['Row'], 'created_at' | 'updated_at'> & {
+          created_at?: string
+          updated_at?: string
+        }
+        Update: Partial<Database['public']['Tables']['routines']['Insert']>
+      }
+      routine_relationships: {
+        Row: {
+          id: string
+          user_id: string
+          routine_id: string
+          relationship_type: 'owner' | 'shared' | 'favorited'
+          shared_by: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['routine_relationships']['Row'], 'created_at' | 'updated_at'> & {
+          created_at?: string
+          updated_at?: string
+        }
+        Update: Partial<Database['public']['Tables']['routine_relationships']['Insert']>
+      }
+      studios: {
+        Row: {
+          id: string
+          name: string
+          subscription_status: 'active' | 'inactive' | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['studios']['Row'], 'created_at' | 'updated_at'> & {
+          created_at?: string
+          updated_at?: string
+        }
+        Update: Partial<Database['public']['Tables']['studios']['Insert']>
+      }
+    }
+    Functions: {
+      is_username_available: {
+        Args: { candidate: string }
+        Returns: boolean
+      }
     }
   }
 }

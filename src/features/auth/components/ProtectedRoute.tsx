@@ -8,7 +8,7 @@
 import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../model/authStore'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/lib/utils'
 
 export interface ProtectedRouteProps {
   children: React.ReactNode
@@ -20,15 +20,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   fallbackPath = '/login' 
 }) => {
   const location = useLocation()
-  const { user, loading, initialized, initialize } = useAuthStore()
+  const { user, initialized } = useAuthStore()
 
-  // Initialize auth on first render
-  React.useEffect(() => {
-    initialize()
-  }, [initialize])
-
-  // Show loading state while checking auth
-  if (!initialized || loading) {
+  // App.tsx initializes auth; show loading only until that first check completes
+  if (!initialized) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-4">

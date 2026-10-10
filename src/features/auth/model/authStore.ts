@@ -21,10 +21,12 @@ export interface AuthState {
   error: string | null
 
   // Actions
-  signUp: (data: SignupData) => Promise<{ success: boolean; error: string | null }>
+  signUp: (data: SignupData) => Promise<{ success: boolean; error: string | null; needsEmailConfirmation: boolean }>
   signIn: (email: string, password: string) => Promise<{ success: boolean; error: string | null }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ success: boolean; error: string | null }>
+  resendVerification: (email: string) => Promise<{ success: boolean; error: string | null }>
+  updatePassword: (password: string) => Promise<{ success: boolean; error: string | null }>
   deleteAccount: () => Promise<{ success: boolean; error: string | null }>
   updateUsername: (username: string) => Promise<{ success: boolean; error: string | null }>
   checkUsernameAvailable: (username: string) => Promise<boolean>
@@ -53,7 +55,14 @@ export const useAuthStore = create<AuthState>()(
 
         if (result.error) {
           set({ loading: false, error: result.error })
-          return { success: false, error: result.error }
+          return { success: false, error: result.error, needsEmailConfirmation: false }
+        }
+
+        // No session means the user must confirm their email before signing in.
+        // Don't mark them signed in — there is no authenticated session yet.
+        if (!result.session) {
+          set({ user: null, session: null, profile: null, loading: false, error: null })
+          return { success: true, error: null, needsEmailConfirmation: true }
         }
 
         // Fetch the profile after signup (may fail if trigger hasn't completed yet - that's okay)
@@ -76,7 +85,7 @@ export const useAuthStore = create<AuthState>()(
           error: null,
         })
 
-        return { success: true, error: null }
+        return { success: true, error: null, needsEmailConfirmation: false }
       },
 
       /**
@@ -134,6 +143,42 @@ export const useAuthStore = create<AuthState>()(
         set({ loading: true, error: null })
 
         const result = await authApi.resetPassword(email)
+
+        set({ loading: false })
+
+        if (result.error) {
+          set({ error: result.error })
+          return { success: false, error: result.error }
+        }
+
+        return { success: true, error: null }
+      },
+
+      /**
+       * Resend the email verification link
+       */
+      resendVerification: async (email: string) => {
+        set({ loading: true, error: null })
+
+        const result = await authApi.resendVerification(email)
+
+        set({ loading: false })
+
+        if (result.error) {
+          set({ error: result.error })
+          return { success: false, error: result.error }
+        }
+
+        return { success: true, error: null }
+      },
+
+      /**
+       * Update the current user's password
+       */
+      updatePassword: async (password: string) => {
+        set({ loading: true, error: null })
+
+        const result = await authApi.updatePassword(password)
 
         set({ loading: false })
 
@@ -258,7 +303,7 @@ export const useAuthStore = create<AuthState>()(
     {
       name: 'auth-storage',
       // Only persist minimal data - session will be restored from Supabase
-      partialize: (state) => ({
+      partialize: () => ({
         // We don't persist sensitive data - Supabase handles session persistence
         // This is just for UI state like "remember me" preferences in the future
       }),
