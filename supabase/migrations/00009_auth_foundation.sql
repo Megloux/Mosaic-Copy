@@ -28,21 +28,24 @@ ALTER TABLE public.profiles
 -- ============================================================
 -- 2. Row-level security (RLS) policies on profiles
 --
---    Remove old rules that are either duplicated or unsafe:
+--    Remove old rules that are duplicated:
 --      - "Users can insert own profile" / "Users can update own profile"
 --        are older duplicates of the rules recreated below.
---      - "Profiles are viewable by everyone" let ANY visitor read every
---        user's email and phone number — that must go.
+--
+--    NOTE: "Profiles are viewable by everyone" (public read access) is
+--    deliberately KEPT by this script. The currently deployed app still
+--    relies on it for the signup username check. It is removed by the
+--    follow-up script 00010, which must run only after the
+--    auth-foundation code is live.
 --
 --    Then (re)create three simple own-row rules.
 --
 --    Safety net: the block below removes EVERY policy on profiles that
---    is not one of the three we want, whatever it is called. That way
---    nothing unexpected can survive, even a policy we never saw.
+--    is not one of the four allowed names, whatever it is called. That
+--    way nothing unexpected can survive, even a policy we never saw.
 -- ============================================================
 DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
 DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
-DROP POLICY IF EXISTS "Profiles are viewable by everyone" ON public.profiles;
 
 DO $$
 DECLARE
@@ -56,7 +59,8 @@ BEGIN
       AND policyname NOT IN (
         'Users can view their own profile',
         'Users can create their own profile',
-        'Users can update their own profile'
+        'Users can update their own profile',
+        'Profiles are viewable by everyone'
       )
   LOOP
     EXECUTE format('DROP POLICY IF EXISTS %I ON public.profiles', pol.policyname);
